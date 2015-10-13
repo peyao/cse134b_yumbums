@@ -1,0 +1,68 @@
+/*
+*    Font
+*/
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700,300italic,300,700italic);
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+
+/* Apply 'Lato' to all elements. */
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+/*
+*    Utility Classes
+*/
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    float: left;
+}
+
+.text-right {
+    float: right;
+}
+
+/*
+*    Tags
+*/
+body {
+    background-image: url(../img/crossword/crossword.png);
+    margin: 0px 20px;
+}
+
+.logo {
+    font-family: 'Pacifico', cursive;   
+}
+
+/* Use on top of every page as title. */
+.page-header {
+    
+    background-color: #444;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 20px 0px 20px 0px;
+}
+
+.page-header h1 {
+    margin: 0px;
+    display: inline;
+}
+
+.page-header a {
+    color: #fff;
+}
+.page-header a:hover {
+    color: greenyellow;
+}
+
+.tag-section {
+    border-left: 10px solid #444;
+    padding: 5px 5px 15px 15px;
+    margin-left:15px;
+}
+
+.tag-section .header {
+}
