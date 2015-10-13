@@ -27,6 +27,85 @@
     <p><button>Submit order</button></p>
 </form>
 
+<p>Select the songs from that you would like on your Act II Mix Tape:</p>
+<select multiple required name="act2">
+    <option value="s1">It Sucks to Be Me (Reprise)
+    <option value="s2">There is Life Outside Your Apartment
+    <option value="s3">The More You Ruv Someone
+    <option value="s4">Schadenfreude
+    <option value="s5">I Wish I Could Go Back to College
+    <option value="s6">The Money Song
+    <option value="s7">School for Monsters
+    <option value="s8">The Money Song (Reprise)
+    <option value="s9">There's a Fine, Fine Line (Reprise)
+    <option value="s10">What Do You Do With a B.A. in English? (Reprise)
+    <option value="s11">For Now
+</select>
+
+
+<label>
+    Sex:
+    <input name=sex list=sexes>
+</label>
+<datalist id=sexes>
+    <label>
+        or select from the list:
+        <select name=sex>
+            <option value="">
+            <option>Female
+            <option>Male
+        </select>
+    </label>
+</datalist>
+
+<form action="courseselector.dll" method="get">
+    <p>Which course would you like to watch today?
+    <p><label>Course:
+        <select name="c">
+            <optgroup label="8.01 Physics I: Classical Mechanics">
+                <option value="8.01.1">Lecture 01: Powers of Ten
+                <option value="8.01.2">Lecture 02: 1D Kinematics
+                <option value="8.01.3">Lecture 03: Vectors
+                    <optgroup label="8.02 Electricity and Magnestism">
+                        <option value="8.02.1">Lecture 01: What holds our world together?
+                        <option value="8.02.2">Lecture 02: Electric Field
+                        <option value="8.02.3">Lecture 03: Electric Flux
+                            <optgroup label="8.03 Physics III: Vibrations and Waves">
+                                <option value="8.03.1">Lecture 01: Periodic Phenomenon
+                                <option value="8.03.2">Lecture 02: Beats
+                                <option value="8.03.3">Lecture 03: Forced Oscillations with Damping
+        </select>
+    </label>
+    <p><input type=submit value="▶ Play">
+</form>
+
+<form action="processkey.cgi" method="post" enctype="multipart/form-data">
+    <p><keygen name="key"></p>
+    <p><input type=submit value="Submit key..."></p>
+</form>
+
+<form onsubmit="return false" oninput="o.value = a.valueAsNumber + b.valueAsNumber">
+    <input name=a type=number step=any> +
+    <input name=b type=number step=any> =
+    <output name=o for="a b"></output>
+</form>
+
+<section>
+    <h2>Task Progress</h2>
+    <p>Progress: <progress id="p" max=100><span>0</span>%</progress></p>
+    <script>
+        var progressBar = document.getElementById('p');
+        function updateProgress(newValue) {
+            progressBar.value = newValue;
+            progressBar.getElementsByTagName('span')[0].textContent = newValue;
+        }
+    </script>
+</section>
+
+<dl>
+    <dt>Radius: <dd> <meter min=0 max=20 value=12 title="centimeters">12cm</meter>
+    <dt>Height: <dd> <meter min=0 max=10 value=2 title="centimeters">2cm</meter>
+</dl>
 
 
 </body>
@@ -36,14 +115,14 @@ form 8
 label 9
 input 9
 button 27
-select
-datalist
-optgroup
-option
-textarea
-keygen
-output
-progress
+select 33
+datalist 50
+optgroup 65
+option 32
+textarea 26
+keygen 83
+output 90
+progress 95
 meter
 fieldset 12
 legend 13
