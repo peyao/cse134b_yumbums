@@ -53,36 +53,19 @@
                                <option value="3-2">Franz Shubert
                                <option value="3-3">Chopin
        </select>
+    <form oninput="x.value=a.valueAsNumber"><p><label>Music Volume: </label></p>0
+        <input type="range" id="a" value="50">100
+
+        = <output name="x" for="a"></output>
+    </form>
 
     <p><label>Message(optional): <p><textarea></textarea></p></label></p>
 
+    <p>Progress: <progress id ="form-prog" max =" 100.00" value ="10.00" > 10.00 </progress>%</p>
+
+
     <p><button id="final-submission">Submit</button></p>
 </form>
-
-
-<form action="processkey.cgi" method="post" enctype="multipart/form-data">
-    <p><keygen name="key"></p>
-    <p><input type=submit value="Submit key..."></p>
-</form>
-
-<form onsubmit="return false" oninput="o.value = a.valueAsNumber * 50">
-    $100 *
-    <input name=b type=number step=any> =
-    <output name=o for="100 b"></output>
-</form>
-
-<section>
-    <h2>Task Progress</h2>
-    <p>Progress: <progress id="p" max=100><span>0</span>%</progress></p>
-    <script>
-        var progressBar = document.getElementById('p');
-        function updateProgress(newValue) {
-            progressBar.value = newValue;
-            progressBar.getElementsByTagName('span')[0].textContent = newValue;
-        }
-    </script>
-</section>
-
 
 </body>
 </html>
