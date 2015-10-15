@@ -1,0 +1,1 @@
+alert('This alert is from an external script running async');
