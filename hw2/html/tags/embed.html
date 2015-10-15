@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <title>YumBums HW2 - embed</title>
     <meta charset="UTF-8">
     <link href="../../public/css/style.css" rel="stylesheet">
 </head>
@@ -36,8 +37,9 @@
             If the user does not have the correct plugin to the run the embedded file, 
             then the embedded content simply fails to run.
         </p>
-        <embed type="video/quicktime" src="../../public/embed/sample_iTunes.mov">
+        <embed type="video/quicktime" src="../../public/files/sample_iTunes.mov">
     </div>
+    
     <div class="tag-section">
         <h1 class="header">
             embed resize (video/quicktime)
@@ -46,8 +48,9 @@
             The <b>embed</b> tag can use the <b>width</b> and <b>height</b> 
             attributes to customize the size of the embedded element.
         </p>
-        <embed type="video/quicktime" src="../../public/embed/sample_iTunes.mov" width="740" height="480">
+        <embed type="video/quicktime" src="../../public/files/sample_iTunes.mov" width="740" height="480">
     </div>
+    
     <div class="tag-section">
         <h1 class="header">
             embed (application/x-shockwave-flash)
@@ -58,7 +61,17 @@
             the parameter <b>quality</b> is used to set the quality of the
             Flash player to "low".
         </p>
-        <embed type="application/x-shockwave-flash" src="../../public/embed/ClearExternalNoVol.swf" width="740" height="480" quality="low">
+        <embed type="application/x-shockwave-flash" src="../../public/files/ClearExternalNoVol.swf" width="740" height="480" quality="low">
+    </div>
+    
+    <div class="tag-section">
+        <h1 class="header">
+            embed unavailable
+        </h1>
+        <p class="description">
+            Embed with a 404 <b>src</b> field.
+        </p>
+        <embed type="application/x-shockwave-flash" src="../../public/files/notfound.swf" width="740" height="480" quality="low">
     </div>
     <!-- END TAG EXAMPLES -->
 

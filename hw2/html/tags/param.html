@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>YumBums HW2 - param</title>
+    <meta charset="UTF-8">
+    <link href="../../public/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="page-header">
+        <div class="main">
+            <h1>
+                4.7.5 - param
+            </h1>
+            <a href="../index.html">
+                <h1 class="text-right">
+                    index
+                </h1>
+            </a>
+        </div>
+    </div>
+
+    <!-- TAG EXAMPLES -->
+    <div class="tag-section">
+        <h1 class="header">
+            param for object (quality="low")
+        </h1>
+        <p class="description">
+            The <b>param</b> tag serves to provide parameters to <b>object</b> elements. <b>Param</b>
+            tags are nested within <b>object</b> tags.
+        </p>
+        <p class="description">
+            In this example, we give the object plugin the parameter <b>quality="low"</b>.
+            This can be verified by right clicking the object and selecting "Quality" in the
+            context menu.
+        </p>
+        
+        <object type="application/x-shockwave-flash" data="../../public/files/ClearExternalNoVol.swf" width="740" height="480">
+            <param name="quality" value="low">
+        </object>
+    </div>
+    <div class="tag-section">
+        <h1 class="header">
+            param for object (quality="medium")
+        </h1>
+        <p class="description">
+            Just to verify, this time we're giving the object the parameter <b>quality="medium"</b>.
+        </p>
+        
+        <object type="application/x-shockwave-flash" data="../../public/files/ClearExternalNoVol.swf" width="740" height="480">
+            <param name="quality" value="medium">
+        </object>
+    </div>
+    <div class="tag-section">
+        <h1 class="header">
+            param for object (quality="invalid-value")
+        </h1>
+        <p class="description">
+            If we give the object an invalid value, it will revert to its default value.
+        </p>
+        
+        <object type="application/x-shockwave-flash" data="../../public/files/ClearExternalNoVol.swf" width="740" height="480">
+            <param name="quality" value="invalid-value">
+        </object>
+    </div>
+    <!-- END TAG EXAMPLES -->
+
+    <div class="page-footer">
+        <a href="../index.html">
+            <h1 class="text-right">
+                back to index
+            </h1>
+        </a>
+    </div>
+</body>
+
+</html>
