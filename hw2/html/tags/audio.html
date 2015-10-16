@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>YumBums HW2 - audio</title>
+    <meta charset="UTF-8">
+    <link href="../../public/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="page-header">
+        <div class="main">
+            <h1>
+                4.7.7 - audio
+            </h1>
+            <a href="../index.html">
+                <h1 class="text-right">
+                    index
+                </h1>
+            </a>
+        </div>
+    </div>
+
+    <!-- TAG EXAMPLES -->
+    <div class="tag-section">
+        <h1 class="header">
+            audio (.m4a)
+        </h1>
+        <p class="description">
+            This is the most basic implementation of the <b>audio</b> element.
+            It has no attributes, not even controls. This means you will have a
+            hard time trying to start playing it, but the element still exists
+            within this panel.
+        </p>
+        
+        <audio src="../../public/files/audio.m4a">
+            Your browser does not support the <code>audio</code> element.
+        </audio>
+    </div>
+    
+    <div class="tag-section">
+        <h1 class="header">
+            audio with autoplay controls (.m4a)
+        </h1>
+        <p class="description">
+            This is a simple <b>audio</b> element implementation, with controls.
+        </p>
+        
+        <p class="description">
+            In case you were wondering, this is the popular 
+            "Charlie Schmidt's Keyboard Cat! - THE ORIGINAL!" video from YouTube.
+        </p>
+        
+        <audio src="../../public/files/audio.m4a" autoplay controls>
+            Your browser does not support the <code>audio</code> element.
+        </audio>
+    </div>
+    
+    <div class="tag-section">
+        <h1 class="header">
+            audio with controls loop muted (.m4a)
+        </h1>
+        <p class="description">
+            This is the <b>audio</b> element with the following attributes:
+            <b>controls loop muted</b>.
+        </p>
+        
+        <audio src="../../public/files/audio.m4a" controls loop muted>
+            Your browser does not support the <code>audio</code> element.
+        </audio>
+    </div>
+    
+    <!-- END TAG EXAMPLES -->
+
+    <div class="page-footer">
+        <a href="../index.html">
+            <h1 class="text-right">
+                back to index
+            </h1>
+        </a>
+    </div>
+</body>
+
+</html>
