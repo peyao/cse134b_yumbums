@@ -2,112 +2,81 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <title>YumDivas</title>
 </head>
 <body>
-<form>
-    <p><label>Customer name: <input></label></p>
-    <p><label>Telephone: <input type=tel></label></p>
-    <p><label>E-mail address: <input type=email></label></p>
+<form oninput="x.value=parseInt(a.value)">
+    <h1>YumDivas</h1>
+    <p><label>Your Name: <input></label></p>
+    <p><label>Booth Number: <input></label></p>
+    <p><label>
+        Discount:
+        <input name=discount list=discounts>
+        <datalist id=discounts>
+            <option value="Student">Student
+            <option value="Veteran">Veteran
+            <option value="Senior Citizen">Senior Citizen
+        </datalist>
+    </label></p>
+
     <fieldset>
-        <legend> Pizza Size </legend>
-        <p><label> <input type=radio name=size> Small </label></p>
-        <p><label> <input type=radio name=size> Medium </label></p>
-        <p><label> <input type=radio name=size> Large </label></p>
+        <legend> Dancer </legend>
+        <p><label> <input type=radio value="anabelle"> Anabelle </label>
+        <dl>
+            <dt>Popularity: <dd> <meter min=1 max=10 value=8 title="swagimeters"></meter>
+        </dl>
+
+        <p><label> <input type=radio value="nickie"> Nickie </label>
+        <dl>
+            <dt>Popularity: <dd> <meter min=1 max=10 value=6 title="swagimeters">12cmlkj</meter>
+        </dl>
+
+        <p><label> <input type=radio value="mallorie"> Mallorie </label>
+        <dl>
+            <dt>Popularity: <dd> <meter min=1 max=10 value=3 title="swagimeters">12cm</meter>
+        </dl>
+
+        <p><label> <input type=radio value="nicole"> Nicole </label>
+        <dl>
+            <dt>Popularity: <dd> <meter min=1 max=10 value=8 title="swagimeters">12cm</meter>
+        </dl>
+
+        <p><label> <input type=radio value="kelly"> Kelly </label>
+        <dl>
+            <dt>Popularity: <dd> <meter min=1 max=10 value=9 title="swagimeters">12cm</meter>
+        </dl>
     </fieldset>
-    <fieldset>
-        <legend> Pizza Toppings </legend>
-        <p><label> <input type=checkbox> Bacon </label></p>
-        <p><label> <input type=checkbox> Extra Cheese </label></p>
-        <p><label> <input type=checkbox> Onion </label></p>
-        <p><label> <input type=checkbox> Mushroom </label></p>
-    </fieldset>
-    <p><label>Preferred delivery time: <input type=time min="11:00" max="21:00" step="900"></label></p>
-    <p><label>Delivery instructions: <textarea></textarea></label></p>
-    <p><button>Submit order</button></p>
-</form>
 
-<p>Select the songs from that you would like on your Act II Mix Tape:</p>
-<select multiple required name="act2">
-    <option value="s1">It Sucks to Be Me (Reprise)
-    <option value="s2">There is Life Outside Your Apartment
-    <option value="s3">The More You Ruv Someone
-    <option value="s4">Schadenfreude
-    <option value="s5">I Wish I Could Go Back to College
-    <option value="s6">The Money Song
-    <option value="s7">School for Monsters
-    <option value="s8">The Money Song (Reprise)
-    <option value="s9">There's a Fine, Fine Line (Reprise)
-    <option value="s10">What Do You Do With a B.A. in English? (Reprise)
-    <option value="s11">For Now
-</select>
-
-
-<label>
-    Sex:
-    <input name=sex list=sexes>
-</label>
-<datalist id=sexes>
+       <p><label>Choose a song for your dance:</label></p>
     <label>
-        or select from the list:
-        <select name=sex>
-            <option value="">
-            <option>Female
-            <option>Male
-        </select>
+       <select multiple required name="MusicList">
+           <optgroup label="R&amp;B">
+               <option value="1-1">RKelly
+               <option value="1-2">Genuine
+               <option value="1-3">BoysToMen
+                   <optgroup label="Rock'n'Roll">
+                       <option value="2-1">Metallica
+                       <option value="2-2">Green Day
+                       <option value="2-3">Lynyrd Skynyrd
+                           <optgroup label="Classical">
+                               <option value="3-1">Hayden
+                               <option value="3-2">Franz Shubert
+                               <option value="3-3">Chopin
+       </select>
     </label>
-</datalist>
+    <p><label>Music Volume: </label>0
+        <input type="range" id="a" value="50">100
+        = <output name="x" for="a"></output></p>
 
-<form action="courseselector.dll" method="get">
-    <p>Which course would you like to watch today?
-    <p><label>Course:
-        <select name="c">
-            <optgroup label="8.01 Physics I: Classical Mechanics">
-                <option value="8.01.1">Lecture 01: Powers of Ten
-                <option value="8.01.2">Lecture 02: 1D Kinematics
-                <option value="8.01.3">Lecture 03: Vectors
-                    <optgroup label="8.02 Electricity and Magnestism">
-                        <option value="8.02.1">Lecture 01: What holds our world together?
-                        <option value="8.02.2">Lecture 02: Electric Field
-                        <option value="8.02.3">Lecture 03: Electric Flux
-                            <optgroup label="8.03 Physics III: Vibrations and Waves">
-                                <option value="8.03.1">Lecture 01: Periodic Phenomenon
-                                <option value="8.03.2">Lecture 02: Beats
-                                <option value="8.03.3">Lecture 03: Forced Oscillations with Damping
-        </select>
-    </label>
-    <p><input type=submit value="▶ Play">
+
+    <p><label>Message(optional): <textarea></textarea></label></p>
+
+    <p><button id="final-submission">Submit Request!</button></p>
+
 </form>
-
-<form action="processkey.cgi" method="post" enctype="multipart/form-data">
-    <p><keygen name="key"></p>
-    <p><input type=submit value="Submit key..."></p>
-</form>
-
-<form onsubmit="return false" oninput="o.value = a.valueAsNumber + b.valueAsNumber">
-    <input name=a type=number step=any> +
-    <input name=b type=number step=any> =
-    <output name=o for="a b"></output>
-</form>
-
-<section>
-    <h2>Task Progress</h2>
-    <p>Progress: <progress id="p" max=100><span>0</span>%</progress></p>
-    <script>
-        var progressBar = document.getElementById('p');
-        function updateProgress(newValue) {
-            progressBar.value = newValue;
-            progressBar.getElementsByTagName('span')[0].textContent = newValue;
-        }
-    </script>
-</section>
-
-<dl>
-    <dt>Radius: <dd> <meter min=0 max=20 value=12 title="centimeters">12cm</meter>
-    <dt>Height: <dd> <meter min=0 max=10 value=2 title="centimeters">2cm</meter>
-</dl>
-
-
+<h1>Dance Status</h1>
+Time Remaining:
+<progress value="22" max="100"></progress>
 </body>
 </html>
 <!-- LISTofCOMPLETE:
@@ -123,7 +92,7 @@ textarea 26
 keygen 83
 output 90
 progress 95
-meter
+meter103
 fieldset 12
 legend 13
     -->

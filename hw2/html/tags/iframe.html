@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>YumBums HW2 - iframe</title>
+    <meta charset="UTF-8">
+    <link href="../../public/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="page-header">
+        <div class="main">
+            <h1>
+                4.7.2 - iframe
+            </h1>
+            <a href="../index.html">
+                <h1 class="text-right">
+                    index
+                </h1>
+            </a>
+        </div>
+    </div>
+
+    <!-- TAG EXAMPLES -->
+    <div class="tag-section">
+        <h1 class="header">
+            iframe (Google Maps)
+        </h1>
+        <p class="description">
+            This is a standard Google Maps iframe that is copy-pasted from 
+            Google Maps. The <b>src</b> attribute requests a map with various
+            query string parameters so that we get the correct location,
+            and we also set the size of the iframe with <b>width</b> and
+            <b>height</b>.
+        </p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350.6845447198507!2d-117.23620218380711!3d32.88006488602917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dc06c4414caf4f%3A0xefb6aafc89913ea7!2sUniversity+of+California+San+Diego!5e0!3m2!1sen!2sus!4v1444881455498" width="600" height="450" style="border:0" allowfullscreen></iframe>
+    </div>
+    <div class="tag-section">
+        <h1 class="header">
+            iframe (YouTube)
+        </h1>
+        <p class="description">
+            Some <b>iframes</b> like YouTube's embed functionality is 
+            implemented in markup with a <b>div</b> tag and <b>id</b> 
+            attribute, but the JavaScript code YouTube provides will 
+            replace the <b>div</b> tag with an <b>iframe</b>. The Javascript
+            allows for more customizability to the embedded player, allowing 
+            developers to customize the size of the player, whether it starts
+            playing automatically, and more.
+        </p>
+        <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+        <div id="player"></div>
+    </div>
+    <!-- END TAG EXAMPLES -->
+
+    <div class="page-footer">
+        <a href="../index.html">
+            <h1 class="text-right">
+                back to index
+            </h1>
+        </a>
+    </div>
+
+    <script>
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '390',
+                width: '640',
+                videoId: 'M7lc1UVf-VE',
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // 4. The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        // 5. The API calls this function when the player's state changes.
+        //    The function indicates that when playing a video (state=1),
+        //    the player should play for six seconds and then stop.
+        var done = false;
+
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING && !done) {
+                setTimeout(stopVideo, 6000);
+                done = true;
+            }
+        }
+
+        function stopVideo() {
+            player.stopVideo();
+        }
+    </script>
+</body>
+
+</html>

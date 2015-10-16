@@ -2,7 +2,6 @@
 *    Font
 */
 @import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700,300italic,300,700italic);
-@import url(https://fonts.googleapis.com/css?family=Pacifico);
 
 /* Apply 'Lato' to all elements. */
 * {
@@ -25,44 +24,123 @@
 }
 
 /*
-*    Tags
+*    Page
 */
 body {
     background-image: url(../img/crossword/crossword.png);
     margin: 0px 20px;
 }
 
-.logo {
-    font-family: 'Pacifico', cursive;   
-}
+.page-header .main {
 
-/* Use on top of every page as title. */
-.page-header {
-    
     background-color: #444;
     color: white;
-    border-radius: 8px;
+    /* Use this if using in conjunction with .page-header .sub
+    border-radius: 8px 8px 0px 0px;
+    */
+    border-radius: 8px 8px 8px 8px;
     padding: 10px;
-    margin: 20px 0px 20px 0px;
+    margin: 20px 0px 0px 0px;
 }
 
-.page-header h1 {
+.page-header .sub {
+
+    color: white;
+    border-radius: 0px 0px 8px 8px;
+    padding: 10px;
+    margin: 0px 0px 20px 0px;
+    border: 1px solid black;
+}
+
+.page-header h1,
+.page-footer h1{
     margin: 0px;
     display: inline;
 }
 
-.page-header a {
+.page-header .main a {
     color: #fff;
 }
+.page-header .sub a {
+    color: #444;
+}
 .page-header a:hover {
-    color: greenyellow;
+    color: #999;
 }
 
+.page-footer {
+    margin-right: 20px;
+}
+
+.page-footer a {
+    color: #444;
+}
+.page-footer a:hover {
+    color: #999;
+}
+
+ul.square {
+    list-style-type: square;
+    font-size: 120%;
+}
+
+hr {
+    border-top: 1px solid #444;
+}
+
+/*
+*    Tags
+*/
 .tag-section {
+    border: 2px solid #444;
     border-left: 10px solid #444;
-    padding: 5px 5px 15px 15px;
-    margin-left:15px;
+    border-radius: 5px;
+
+    padding: 5px 15px 15px 15px;
+    margin: 50px 15px 50px 15px;
 }
 
 .tag-section .header {
+    border-bottom: 5px dotted #444;
+    padding: 5px;
+}
+
+.tag-section .description {
+    font-size: 120%;
+}
+
+.tag-section pre.code {
+    background-color: #eee;
+    margin: 25px 50px;
+}
+
+/*
+*   Team (Needs to be after PocketGrid)
+*/
+.team-section {
+    border: 2px solid #444;
+    border-top: 10px solid #444;
+    border-radius: 5px;
+
+    padding: 5px 15px 15px 15px;
+    margin: 0px 15px 50px 15px;
+    text-align: center;
+}
+
+.team-section .name {
+    border-bottom: 5px dotted #444;
+    padding: 5px;
+}
+
+.team-section img {
+    border-radius: 8px;
+    max-width: 300px;
+}
+
+.team-section .info {
+    font-size: 120%;
+    border-top: 5px dotted #444;
+    text-align: left;
+    padding: 15px 15px 0px 15px;
+    margin: 15px 15px 15px 15px;
 }
