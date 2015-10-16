@@ -11,7 +11,7 @@
     <p><label>Booth Number: <input></label></p>
     <p><label>
         Discount:
-        <input name=discount list=discounts>
+        <input name="discount" list=discounts>
         <datalist id=discounts>
             <option value="Student">Student
             <option value="Veteran">Veteran
@@ -21,49 +21,52 @@
 
     <fieldset>
         <legend> Dancer </legend>
-        <p><label> <input type=radio value="anabelle"> Anabelle </label>
+        <p><label> <input type=radio name= "group1" value="anabelle"> Anabelle </label>
         <dl>
             <dt>Popularity: <dd> <meter min=1 max=10 value=8 title="swagimeters"></meter>
         </dl>
 
-        <p><label> <input type=radio value="nickie"> Nickie </label>
+        <p><label> <input type=radio name= "group1" value="nickie"> Nickie </label>
         <dl>
             <dt>Popularity: <dd> <meter min=1 max=10 value=6 title="swagimeters">12cmlkj</meter>
         </dl>
 
-        <p><label> <input type=radio value="mallorie"> Mallorie </label>
+        <p><label> <input type=radio name= "group1" value="mallorie"> Mallorie </label>
         <dl>
             <dt>Popularity: <dd> <meter min=1 max=10 value=3 title="swagimeters">12cm</meter>
         </dl>
 
-        <p><label> <input type=radio value="nicole"> Nicole </label>
+        <p><label> <input type=radio name= "group1" value="nicole"> Nicole </label>
         <dl>
             <dt>Popularity: <dd> <meter min=1 max=10 value=8 title="swagimeters">12cm</meter>
         </dl>
 
-        <p><label> <input type=radio value="kelly"> Kelly </label>
+        <p><label> <input type=radio name= "group1" value="kelly"> Kelly </label>
         <dl>
             <dt>Popularity: <dd> <meter min=1 max=10 value=9 title="swagimeters">12cm</meter>
         </dl>
     </fieldset>
 
-       <p><label>Choose a song for your dance:</label></p>
-    <label>
+    <p><label>Choose a song for your dance:</label>
+
        <select multiple required name="MusicList">
            <optgroup label="R&amp;B">
                <option value="1-1">RKelly
                <option value="1-2">Genuine
-               <option value="1-3">BoysToMen
+               <option value="1-3">BoysToMen</optgroup>
                    <optgroup label="Rock'n'Roll">
                        <option value="2-1">Metallica
                        <option value="2-2">Green Day
-                       <option value="2-3">Lynyrd Skynyrd
+                       <option value="2-3">Lynyrd Skynyrd</optgroup>
                            <optgroup label="Classical">
                                <option value="3-1">Hayden
                                <option value="3-2">Franz Shubert
                                <option value="3-3">Chopin
+                           </optgroup>
+
+
        </select>
-    </label>
+    </p>
     <p><label>Music Volume: </label>0
         <input type="range" id="a" value="50">100
         = <output name="x" for="a"></output></p>
