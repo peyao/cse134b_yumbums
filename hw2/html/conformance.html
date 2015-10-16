@@ -123,6 +123,42 @@
                     <li><b>Chrome/Firefox:</b> Loaded up the rest of the page even while the alert box was showing.</li>
                 </ul>
             </li>
+            <li>
+                <b class="html-tag">p</b>
+                <ul>
+                    <li><b>IE11:</b> Didn't show the correct font "Helvetica" set for the font of the paragraph </li>
+                    <li><b>Firefox:</b> Didn't show the correct font "Helvetica" set for the font of the paragraph</li>
+                    <li><b>Chrome:</b> Correct</li>
+                    <li><b>Conclusion:</b> Depends on the formats and fonts that the browser understands </li>
+                </ul>
+            </li>
+            <li>
+                <b class="html-tag">pre</b>
+                <ul>
+                    <li><b>IE11:</b> Didn't display the correct format for the <b class="html-tag">code</b> attribute </li>
+                    <li><b>Firefox:</b> Correct</li>
+                    <li><b>Chrome:</b> Correct</li>
+                    <li><b>Conclusion:</b> Depends on the formats and fonts that the browser understands </li>
+                </ul>
+            </li>
+            <li>
+                <b class="html-tag">col</b>
+                <ul>
+                    <li><b>IE11:</b> sets width of column based on largest string found in that column so no text gets concatenated</li>
+                    <li><b>Firefox:</b> sets width of column based on largest string found in that column so no text gets concatenated</li>
+                    <li><b>Chrome:</b> sets width of column based on the width of it's header and concatenate any wider text in remaining rows</li>
+                    <li><b>Conclusion:</b> Different browsers have different ways of drawing tables </li>
+                </ul>
+            </li>
+            <li>
+                <b class="html-tag">th</b>
+                <ul>
+                    <li><b>IE11:</b> Doesn't automatically bold text in the header </li>
+                    <li><b>Firefox:</b> Automatically bolds text in header </li>
+                    <li><b>Chrome:</b> Automatically bolds text in header </li>
+                    <li><b>Conclusion:</b> Different browsers have different ways of drawing tables </li>
+                </ul>
+            </li>
         </ul>
     </div>
 
