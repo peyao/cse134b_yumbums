@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>&lt;script&gt; Tests</title>
+        <script src="../../public/js/alert.js" type="text/javascript" async>
+            /* All of this is documentation and is valid */
+            // So is this
+        </script>
+        <script>
+            function printWelcome()
+            {
+                // This is a comment
+                document.getElementById('textToChange').innerHTML = 'Your text has been hijacked!';
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Scripting tests</h1>
+        <noscript style="color: red; text-size: 32px;">Please enable scripting to make this page work.</noscript>
+
+        <hr><br>
+        
+        <p id="textToChange">This is a text to change</p>
+        <input type=button value=Change onclick="printWelcome()"/>
+        
+        <hr><br>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template id="row">
+                    <tr><td></td></tr>
+                </template>
+            </tbody>
+        </table>
+        <script>
+            var template = document.querySelector('#row');
+            for(var i = 0; i < 5; i++)
+            {
+                var clone = template.content.cloneNode(true);
+                var cell = clone.querySelectorAll('td');
+                cell[0].textContent = i;
+                template.parentNode.appendChild(clone);
+            }
+        </script>
+        
+        <hr><br>
+        
+        <canvas id="myCanvas" width="300" height="300">This is a fallback comment</canvas>
+        <script>
+            var canvas = document.getElementById('myCanvas');
+            var context = canvas.getContext('2d');
+            context.fillStyle = 'green';
+            context.fillRect(0, 0, 300, 300);
+            context.fillStyle = 'blue';
+            context.fillRect(10, 10, 280, 280);
+        </script>
+    </body>
+</html>
