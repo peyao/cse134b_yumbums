@@ -32,7 +32,7 @@ body {
 }
 
 .page-header .main {
-    
+
     background-color: #444;
     color: white;
     /* Use this if using in conjunction with .page-header .sub
@@ -44,7 +44,7 @@ body {
 }
 
 .page-header .sub {
-    
+
     color: white;
     border-radius: 0px 0px 8px 8px;
     padding: 10px;
@@ -65,7 +65,7 @@ body {
     color: #444;
 }
 .page-header a:hover {
-    color: #999; 
+    color: #999;
 }
 
 .page-footer {
@@ -80,8 +80,12 @@ body {
 }
 
 ul.square {
-    list-style-type: square; 
+    list-style-type: square;
     font-size: 120%;
+}
+
+hr {
+    border-top: 1px solid #444;
 }
 
 /*
@@ -91,7 +95,7 @@ ul.square {
     border: 2px solid #444;
     border-left: 10px solid #444;
     border-radius: 5px;
-    
+
     padding: 5px 15px 15px 15px;
     margin: 50px 15px 50px 15px;
 }
@@ -102,7 +106,7 @@ ul.square {
 }
 
 .tag-section .description {
-    font-size: 120%;   
+    font-size: 120%;
 }
 
 .tag-section pre.code {
