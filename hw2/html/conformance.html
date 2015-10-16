@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YumBums HW2 - index</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+
+    <div class="page-header">
+        <div class="main">
+            <h1>
+                YumBums
+            </h1>
+            <a href="index.html">
+                <h1 class="text-right">
+                    index
+                </h1>
+            </a>
+        </div>
+    </div>
+
+    <div class="tag-section">
+        <h1 class="header">
+            Conformance
+        </h1>
+
+        <ul class="square">
+            <li>
+                <b class="html-tag">a</b>
+                <ul>
+                    <li><b>IE:</b> </li>
+                    <li><b>Firefox:</b> When clicking on an 'a' tag with the download attribute present, it opens up a new browser window that views the file specified in the href.</li>
+                    <li><b>Chrome:</b> When clicking on an 'a' tag with the download attribute present, it downloads the file specified by the href to the user's computer.</li>
+                </ul>
+            </li>
+            <li>
+                <b class="html-tag">abbr</b>
+                <ul>
+                    <li><b>IE:</b></li>
+                    <li><b>Firefox:</b> When a title attribute is specified, it underlines the text of the abbreviation with a dotted line.</li>
+                    <li><b>Chrome:</b> When a title attribute is present, the abbreviation is still displayed the same as without the title.</li>
+                </ul>
+            </li>
+            <li>
+                <b class="html-tag">rtc</b>
+                <ul>
+                    <li><b>IE:</b> </li>
+                    <li><b>Firefox:</b> Text inside the 'rtc' element is positioned above the text of the 'rb' element which corresponds to the examples in the HTML specification.</li>
+                    <li><b>Chrome:</b> Text inside the 'rtc' element is positioned to the side of the text inside the 'rb' element next to it.</li>
+                </ul>
+            </li>
+            <li>
+                <b class="html-tag">embed</b>
+                <ul>
+                    <li><b>IE11:</b> For Quicktime videos, displays a player but does not play content.</li>
+                    <li><b>Edge:</b> For Quicktime videos, nothing displayed at all, not even a 'Plugin missing' box.
+                    <li><b>Firefox:</b> For Quicktime vidoes, 'Plugin missing' box.</li>
+                    <li><b>Chrome:</b> For Quicktime videos, 'Plugin missing' box.</li>
+                </ul>
+            </li>
+            <li>
+                <b class="html-tag">video</b>
+                <ul>
+                    <li><b>IE11:</b> 'Invalid source' and 'Error: Unsupported video type or invalid file path'.</li>
+                    <li><b>Edge:</b> 'Invalid source' and 'Error: Unsupported video type or invalid file path'.</li>
+                    <li><b>Safari:</b> Controls show up but video does not play.</li>
+                    <li><b>Firefox:</b> OK</li>
+                    <li><b>Chrome:</b> OK</li>
+                    <li><b>Conclusion:</b> IE, Edge, and Safari doesn't support WebM.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
