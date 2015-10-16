@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Wbr</title>
+        <style>
+            #longWord {
+                font-size: 25px; 
+            }
+            
+            .addressHeader {
+                color: red;
+            }
+            
+            #city {
+                color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <p><span class="addressHeader">UCSD Address:</span></p>
+        <p>9500 Gilman Dr<br><span id="city">La Jolla</span>, CA, 92093</p>
+        <p id="longWord">This is supposed to be a really long word to show that it wraps to the next line <wbr>Thiswordissuppose<wbr>tobereallylongso<wbr>youcanseewhatwbrdoes<wbr>andineedafewmore<wbr>words</p>
+    </body>
+</html>
