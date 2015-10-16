@@ -144,3 +144,13 @@ hr {
     padding: 15px 15px 0px 15px;
     margin: 15px 15px 15px 15px;
 }
+
+/*
+*   Conformance
+*/
+.html-tag::before {
+    content: '<';
+}
+.html-tag::after {
+    content: '>';
+}
