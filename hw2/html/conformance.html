@@ -61,10 +61,21 @@
             <li>
                 <b class="html-tag">embed</b>
                 <ul>
-                    <li><b>IE:</b> For Quicktime videos, displays a player but does not play content.</li>
+                    <li><b>IE11:</b> For Quicktime videos, displays a player but does not play content.</li>
                     <li><b>Edge:</b> For Quicktime videos, nothing displayed at all, not even a 'Plugin missing' box.
                     <li><b>Firefox:</b> For Quicktime vidoes, 'Plugin missing' box.</li>
                     <li><b>Chrome:</b> For Quicktime videos, 'Plugin missing' box.</li>
+                </ul>
+            </li>
+            <li>
+                <b class="html-tag">video</b>
+                <ul>
+                    <li><b>IE11:</b> 'Invalid source' and 'Error: Unsupported video type or invalid file path'.</li>
+                    <li><b>Edge:</b> 'Invalid source' and 'Error: Unsupported video type or invalid file path'.</li>
+                    <li><b>Safari:</b> Controls show up but video does not play.</li>
+                    <li><b>Firefox:</b> OK</li>
+                    <li><b>Chrome:</b> OK</li>
+                    <li><b>Conclusion:</b> IE, Edge, and Safari doesn't support WebM.</li>
                 </ul>
             </li>
         </ul>
