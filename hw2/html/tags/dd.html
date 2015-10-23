@@ -1,90 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<title>4.4 Grouping Content</title>
 		<style>
 			body {font-family: HelveticaNeue; font-weight: 100}
 		</style>
 	</head>
 	
 	<body>
-		<h1>Grouping Content</h1>
+		<h1>4.4 Grouping Content</h1>
+		<h4>This page covers the following elements:</h4>
+		<ul>
+			<li>4.4.5 &#60;ol&#62;</li>
+			<li>4.4.6 &#60;ul&#62;</li>
+			<li>4.4.7 &#60;li&#62;</li>
+			<li>4.4.8 &#60;dl&#62;</li>
+			<li>4.4.9 &#60;dt&#62;</li>
+			<li>4.4.10 &#60;dd&#62;</li>
+		</ul>
 		<hr>
 		<main>
 			<h3 style="color:rgba(20, 142, 218, 1); font-weight: 100"> This page lists the following (content grouping) elements and give an example for each: </h3>
 			<ul>
-				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;p&#62;</li>
-				<p>This text is written in the <font color =red> p </font> element.</p>
-				
-				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;hr&#62;</li>
-				<p>All the horizontal lines on this page are drawn using the <font color="red">hr</font> element.</p>
-				<hr style="border-color:#4b8bf1; margin-top: -10px;">
-				
-				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;pre&#62;</li>
-				<pre><code>This text is pre-formatted to look like code using the <font color="red">pre</font> element.</code></pre>
-				
-				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;blockquote&#62;</li>
-				
-				<p>The following quote and its author link are written using the <font color="red">blockquote</font> element:</p>
-				<blockquote style= "font-family: Comic Sans MS, cursive, sans-serif">
-					"Simple can be harder than complex: You have to work hard to get your thinking clean to make it simple. But it's worth it in the end because once you get there, you can move mountains."
-					
-					<footer>
-						- <cite><a href="http://www.goodreads.com/quotes/445279-simple-can-be-harder-than-complex-you-have-to-work">Steve Jobs </a></cite>
-					</footer>
-				</blockquote>
-				
-				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;ol&#62;</li>
-				<p>The <font color="red">ol</font> is the ordered-list element. Below, I'm listing my favorite food in order then using the reversed attribute to reverse the list:</p> 
-				<ol>My favorite food [in order]:
+				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;ol&#62;
+				<p>The <span style="color:red"> ol </span> is the ordered-list element. Below, I'm listing my favorite food in order then using the reversed attribute to reverse the list:</p> 
+				<span>My favorite food [in order]:</span>
+				<ol>
 					<li>Burger</li>
 					<li>Pizza</li>
 					<li>Salad</li>
 				</ol>
 				<br>
-				<ol reversed start="3">My favorite food [in reverse order]:
+				<span>My favorite food [in reverse order]:</span>
+				<ol reversed start="3">
 					<li>Salad</li>
 					<li>Pizza</li>
 					<li>Burger</li>
 				</ol>
+				</li>
 				
-				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;ul&#62;</li>
-				<p>The <font color="red">ul</font> is the unordered-list element. This page is using an unordered list to list the html elements discussed:</p> 
-				
-				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;li&#62;</li>
-				<p>The <font color="red">li</font> is the list-item element. Every item in the following list is added to the list using the li element:</p> 
+				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;ul&#62;
+				<p>The <span style="color:red"> ul </span> is the unordered-list element. This page is using an unordered list to list the html elements discussed:</p> 
+				</li>
+				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;li&#62;
+				<p>The <span style="color:red"> li </span> is the list-item element. Every item in the following list is added to the list using the li element:</p> 
 				<ul>
 					<li>red</li>
 					<li>green</li>
 					<li>blue</li>
 				</ul>
-				
-				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;dl&#62;, &#60;dt&#62;, &#60;dd&#62;</li>
-				<p>The <font color="red">dl</font> is the description-list element. So if we have a list of words and their definitions, the list would be a <font color="red">dl</font> element, the terms would be the <font color="red">dt</font> elements, and the definitions would be the <font color="red">dd</font> elements. Here's an example:</p> 
+				</li>
+				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;dl&#62;, &#60;dt&#62;, &#60;dd&#62;
+				<p>The <span style="color:red"> dl </span> is the description-list element. So if we have a list of words and their definitions, the list would be a <span style="color:red"> dl </span> element, the terms would be the <span style="color:red"> dt </span> elements, and the definitions would be the <span style="color:red"> dd </span> elements. Here's an example:</p> 
 				<dl>
 					<dt><dfn>Apple</dfn></dt>
-					<dd>The round fruit of a tree of the rose family, which typically has thin red or green skin and crisp flesh. Also,  Apple Inc. is the most valuable company in the world.</dd>
+					<dd>The round fruit of a tree of the rose family, which typically has thin red or green skin and crisp flesh. Also, Apple Inc. is the most valuable company in the world.</dd>
 					<dt><dfn>crisp</dfn></dt>
 					<dd>(Of a substance) firm, dry, and brittle, especially in a way considered pleasing or attractive</dd>
 				</dl>
-				
-				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;figure&#62;, &#60;figcaption&#62;</li>
-				<p>The <font color="red">figure</font> element is used to present self-contained content with an optional caption in a <font color="red">figcaption</font> element to describe it. Here's an example:</p>
-				<figure>
-					<img src="http://oi61.tinypic.com/15ppkev.jpg">	
-					<figcaption>Fig.1 - Our Team Logo</figcaption>
-				</figure>
-				 
-				 
-				 <li style="margin-top: 20px; margin-bottom: -10px;">&#60;div&#62;</li>
-				 <div>
-					 <p>The <font color="red">div</font> element is used as a generic container to logically group some elements in an html document. For example, this description paragraph is surrounded by div tags </p>
-				 </div>
-				
-				<li style="margin-top: 20px; margin-bottom: -10px;">&#60;main&#62;</li>
-				 <div>
-					 <p>The <font color="red">main</font> element is used to contain the main elements and data to be displayed on a page. For example, all the lists and everything on this age, below the title is contained in the main element. </p>
-				 </div>
-		
+				</li>
 			</ul>	
 				
 		</main>

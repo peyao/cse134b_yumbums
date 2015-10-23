@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>4.9 Tabular data</title>
+		<style>
+			body {font-family: HelveticaNeue; font-weight: 100}
+			table { border-collapse: collapse; border: solid black; }
+			th {color:aqua; background-color: aqua font-weight: 600}
+			colspan {color:aqua;}
+			colgroup, tbody { border: solid black; color:aqua background-color: purple}
+			td { border: solid thin; height: 1.4em; width: 1.4em; text-align: center; padding: 0; }
+		</style>
+	</head>
+	
+	<body>
+		<h1>4.9 Tabular data</h1>
+		<h4>This page covers the following elements:</h4>
+		<ul>
+			<li>4.9.1 &#60;table&#62;</li>
+			<li>4.9.2 &#60;caption&#62;</li>
+			<li>4.9.3 &#60;colgroup&#62;</li>
+			<li>4.9.4 &#60;col&#62;</li>
+			<li>4.9.8 &#60;tr&#62;</li>
+			<li>4.9.9 &#60;td&#62;</li>
+		</ul>
+			
+		<hr>
+		<main>
+			<table>
+				<caption> Tech device expenses </caption>
+				<colgroup>
+					<col span="3" style="background-color:#4b8bf1">
+					<col style="background-color:red">
+				</colgroup>
+				<tr>
+					<td>Item</td>
+					<td>Company</td>
+					<td>Date</td>
+					<td>Price($)</td>
+					
+				</tr>
+				<tr>
+					<td>watch</td>
+					<td>Apple</td>
+					<td>10-10-15</td>
+					<td>499</td>
+				</tr>
+				<tr>
+					<td>laptop</td>
+					<td>dell</td>
+					<td>10-10-15</td>
+					<td>801</td>
+					
+				</tr>
+				<tr>
+					<td colspan="3" style="background-color:red">Total</td>
+					<td style="background-color:red"> 1300 </td>
+				</tr>
+			</table>			
+		</main>
+	</body>
+</html>
