@@ -1,3 +1,7 @@
+/* font */
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+@import url(https://fonts.googleapis.com/css?family=Kaushan+Script|Cardo|Rock+Salt|Boogaloo|Limelight|Six+Caps);
+
 /*
 *    INDEX - index.html
 */
@@ -10,4 +14,28 @@
 */
 #login-page {
     
+}
+
+/* John's sandbox */
+#wrapper {
+    width: auto;
+    height: 45%;
+    background-color: black;
+}
+
+.virtue-text {
+    font-family: "Limelight", sans-serif;
+    color: #CACBCD;
+}
+.vice-text {
+    font-family: "Rock Salt", cursive, italic ;
+    color: white;
+}
+
+#jumbo {
+    width: 70%;
+    height: 70%;
+    border-radius: 0px 0px 8px 8px;
+    padding: 50px;
+    margin: 0px 0px 20px 0px;
 }
