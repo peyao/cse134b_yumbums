@@ -2,18 +2,87 @@
 @import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
 @import url(https://fonts.googleapis.com/css?family=Kaushan+Script|Cardo|Rock+Salt|Boogaloo|Limelight|Six+Caps);
 
+* {
+
+}
+
+/*
+*   UTILITY CLASSES
+*/
+.text-center {
+    text-align: center;
+}
+
 /*
 *    INDEX - index.html
 */
-#index-page .masthead h1 {
-    font-size: 3em;
+h1.index-heading {
+    text-align: center;
+    margin-top: 200px;
+}
+h3.index-quote {
+    margin-top: 50px;
+    padding: 0px 20px;
+    color: #707070;
+}
+button.index-button {
+    margin-top: 250px;
+}
+
+body {
+    background-image: url('../images/shattered/shattered.png');
+}
+/*
+body {
+    background-image: url('../images/footer_lodyas/footer_lodyas.png');
+}
+*/
+
+/* Portrait */
+@media (max-width: 480px) {
+      .panel {
+          min-width: 95% !important;
+      }
+}
+
+.panel {
+    /* Panel Styling */
+    background: #3e3c3e;
+    border-radius: 5px;
+    color: white;
+
+
+    /* Positioning in Center */
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    min-width: 400px;
+    height: 700px;
+}
+
+h1.panel-heading {
+
+}
+
+.button-purple,
+.button-blue {
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button-purple {
+    background: rgb(245, 0, 245);
 }
 
 /*
 *    LOGIN - login.html
 */
 #login-page {
-    
+
 }
 
 /* John's sandbox */
