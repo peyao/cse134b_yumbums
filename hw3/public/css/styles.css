@@ -17,6 +17,18 @@
 }
 
 /* John's sandbox */
+
+
+
+#VvArt {
+    width: 70%;
+    height: 70%;
+    border-radius: 0px 0px 0px 0px;
+    padding: 20px;
+    margin: 0px 0px 0px 0px;
+}
+
+
 #quote {
     font-family: "Kaushan Script", sans-serif;
     color: #CACBCD;
@@ -25,38 +37,13 @@
     padding: 0px;
     margin: 0px 0px 0px 0px;
 }
-body {background-color: #E5E4E3;}
-
-#wrapper {
-    width: auto;
-    height: 45%;
-    background-color: black;
-}
-
-.virtue-text {
-    font-family: "Limelight", sans-serif;
-    color: #CACBCD;
-}
-
-.vice-text {
-    font-family: "Rock Salt", cursive, italic ;
-    color: white;
-}
-
-#jumbo {
-    width: 70%;
-    height: 70%;
-    border-radius: 0px 0px 0px 0px;
-    padding: 20px;
-    margin: 0px 0px 0px 0px;
-}
 
 #add-vice {
     border-top: 1px solid #080808;
     background: #d69265;
     background: -webkit-gradient(linear, left top, left bottom, from(#ff4c05), to(#d69265));
-    background: -webkit-linear-gradient(top, #ff4c05, #d69265);
-    background: -moz-linear-gradient(top, #ff4c05, #d69265);
+    background: -webkit-linear-gradient(top, #ff4c05, #665952);
+    background: -moz-linear-gradient(top, #ff4c05, #665952);
     background: -ms-linear-gradient(top, #ff4c05, #d69265);
     background: -o-linear-gradient(top, #ff4c05, #d69265);
     padding: 17.5px 35px;
@@ -74,14 +61,12 @@ body {background-color: #E5E4E3;}
     vertical-align: middle;
 }
 #add-vice:hover {
-    border-top-color: #d69265;
-    background: #d69265;
-    color: #ccc;
+    box-shadow: inset 0 0 0 1px #27496d,0 5px 15px #193047;
 }
 #add-vice:active {
-    border-top-color: black;
-    background: black;
+    box-shadow: inset 0 0 0 1px #27496d,inset 0 5px 30px #193047;
 }
+
 
 #add-virtue {
     border-top: 1px solid #080808;
@@ -106,14 +91,28 @@ body {background-color: #E5E4E3;}
     vertical-align: middle;
 }
 #add-virtue:hover {
-    border-top-color: #d69265;
-    background: #665952;
-    color: #ccc;
+    box-shadow: inset 0 0 0 1px #27496d,0 5px 15px #193047;
 }
 #add-virtue:active {
-    border-top-color: #050505;
-    background: #050505;
+    -webkit-box-shadow: inset 0 0 30px black;
+    -moz-box-shadow: inset 0 0 30px black;
+    box-shadow: inset 0 0 30px black;
 }
+/*
+.virtue-text {
+    font-family: "Limelight", sans-serif;
+    color: #CACBCD;
+}
+
+.vice-text {
+    font-family: "Rock Salt", cursive, italic ;
+    color: white;
+}
+*/
+/*******
+ *
+ */
+
 
 #viewHabitsContent{
     margin: 25px;
