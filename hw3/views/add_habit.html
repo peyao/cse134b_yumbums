@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add a habit</title>
+        <meta charset="utf-8">
+        <style>
+            body {text-align: center;}
+            ul {list-style-type: none;}
+            ul li {display: inline;}
+            .my_button {
+                margin: 8px;
+                width: 100px;
+                height: 100px;
+                border: 2px solid gray;
+                border-radius: 50%;
+                font-size: 20px;
+            }
+            .day_of_week {
+                margin: 4px;
+                width: 50px;
+                height: 50px;
+            }
+            .times_per_day {
+                margin: 4px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                border: 2px solid gray;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>add a habit</h1>
+        </div>
+        
+        <form>
+            <label for="habit_name">Habit title</label>
+            <input type="text" name="habit_name" autofocus/>
+            
+            <ul class="icons">
+                <li><input type="button" class="my_button" value="Icon"/></li>
+                <li><input type="button" class="my_button" value="Icon 2"/></li>
+                <li><input type="button" class="my_button" value="Icon 3"/></li>
+                <li><input type="button" class="my_button" value="Icon 4"/></li>
+            </ul>
+            
+            <ul class="frequency">
+                <li>Frequency</li><br>
+                <li><input type="button" class="day_of_week" value="Sun"/></li>
+                <li><input type="button" class="day_of_week" value="Mon"/></li>
+                <li><input type="button" class="day_of_week" value="Tues"/></li>
+                <li><input type="button" class="day_of_week" value="Wed"/></li>
+                <li><input type="button" class="day_of_week" value="Thurs"/></li>
+                <li><input type="button" class="day_of_week" value="Fri"/></li>
+                <li><input type="button" class="day_of_week" value="Sat"/></li>
+            </ul>
+            
+            <ul>
+                <li><input type="button" class="times_per_day" value="1"/></li>
+                <li><input type="button" class="times_per_day" value="2"/></li>
+                <li><input type="button" class="times_per_day" value="3"/></li>
+                <li>Times per day</li>
+            </ul>
+            
+            <br><br>
+            <input type="submit" name="submit" value="Save it"/>
+        </form>
+    </body>
+</html>
