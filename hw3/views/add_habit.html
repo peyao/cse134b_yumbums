@@ -8,6 +8,7 @@
             ul {list-style-type: none;}
             ul li {display: inline;}
             .my_button {
+                color: black;
                 margin: 8px;
                 width: 100px;
                 height: 100px;
@@ -16,31 +17,48 @@
                 font-size: 20px;
             }
             .day_of_week {
+                color: black;
                 margin: 4px;
                 width: 50px;
                 height: 50px;
                 border: 2px solid #f5f5f5;
             }
             .times_per_day {
+                color: black;
                 margin: 4px;
                 width: 30px;
                 height: 30px;
                 border-radius: 50%;
                 border: 2px solid #f5f5f5;
             }
-            input[type="button"] {
-                outline: none;
+            input[type="button"]::-moz-focus-inner {
+                border: 0;
             }
         </style>
         <script>
             function onSelect(id) {
                 var button = document.getElementById(id);
-                if(button.style.color == "green") {
-                    button.style.borderColor = "#f5f5f5";
-                    button.style.color = "black";
+                if(button.style.color == 'green') {
+                    button.style.borderColor = '#f5f5f5';
+                    button.style.color = 'black';
                 } else {
-                    button.style.borderColor = "green";
-                    button.style.color = "green";
+                    button.style.borderColor = 'green';
+                    button.style.color = 'green';
+                }
+            }
+            function onSelectIcon(id) {
+                var button = document.getElementById(id);
+                if(button.style.color == 'green') {
+                    button.style.color = 'black';
+                    button.style.borderColor = '#f5f5f5';
+                } else {
+                    for(var i = 1; i <= 4; i++) {
+                        var icon = document.getElementById(i);
+                        icon.style.color = 'black';
+                        icon.style.borderColor = '#f5f5f5';
+                    }
+                    button.style.color = 'green';
+                    button.style.borderColor = 'green';
                 }
             }
         </script>
@@ -54,11 +72,11 @@
             <label for="habit_name">Habit title</label>
             <input type="text" name="habit_name" autofocus/>
             
-            <ul class="icons">
-                <li><input onclick="onSelect(1)" type="button" id="1" class="my_button" value="Icon"/></li>
-                <li><input onclick="onSelect(2)" type="button" id="2" class="my_button" value="Icon 2"/></li>
-                <li><input onclick="onSelect(3)" type="button" id="3" class="my_button" value="Icon 3"/></li>
-                <li><input onclick="onSelect(4)" type="button" id="4" class="my_button" value="Icon 4"/></li>
+            <ul id="icons">
+                <li><input onclick="onSelectIcon(1)" type="button" id="1" class="my_button" value="Icon"/></li>
+                <li><input onclick="onSelectIcon(2)" type="button" id="2" class="my_button" value="Icon 2"/></li>
+                <li><input onclick="onSelectIcon(3)" type="button" id="3" class="my_button" value="Icon 3"/></li>
+                <li><input onclick="onSelectIcon(4)" type="button" id="4" class="my_button" value="Icon 4"/></li>
             </ul>
             
             <ul class="frequency">
