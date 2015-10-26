@@ -13,6 +13,19 @@
     text-align: center;
 }
 
+.text-left {
+    text-align: left;
+}
+
+.container {
+    padding: 25px;
+}
+
+.left-header {
+    text-align: left;
+    margin-left: 32px;
+}
+
 /*
 *    INDEX - index.html
 */
@@ -86,6 +99,30 @@ h1.panel-heading {
 
 }
 
+/*
+ * ADD HABIT
+ */
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    display: inline;
+}
+
+.days-of-week button {
+}
+
+/*
+.day_of_week {
+    font-size: 12px;
+    color: black;
+    margin: 4px;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #f5f5f5;   
+}
+*/
 /* John's sandbox */
 
 
