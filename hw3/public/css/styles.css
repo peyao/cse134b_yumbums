@@ -15,6 +15,10 @@ a:hover {
     color: #ccc;
 }
 
+body {
+    background-image: url('../images/shattered/shattered.png');
+}
+
 /*
 *   UTILITY CLASSES
 */
@@ -60,8 +64,21 @@ a.index-button {
     margin-top: 45%;
 }
 
-body {
-    background-image: url('../images/shattered/shattered.png');
+/* Index Text */
+#vice-text {
+	font-family: 'Fredericka the Great', cursive; font-size: 2em; padding-left: 12px;
+}
+
+#virtue-text {
+	font-family: Helvetica Light, Helvetica, sans-serif; font-weight: 100; font-size: 2em;
+}
+
+.flat-text {
+	font-family: Helvetica Light, Helvetica, sans-serif; font-weight: 100;
+}
+
+.icon-adder {
+    display: inline-block;
 }
 
 /*
@@ -159,23 +176,6 @@ ul li {
 .thumbs-down {
     padding-right: 15px;
     width: 85px;
-}
-
-/* Index Text */
-#vice-text {
-	font-family: 'Fredericka the Great', cursive; font-size: 2em; padding-left: 12px;
-}
-
-#virtue-text {
-	font-family: Helvetica Light, Helvetica, sans-serif; font-weight: 100; font-size: 2em;
-}
-
-.flat-text {
-	font-family: Helvetica Light, Helvetica, sans-serif; font-weight: 100;
-}
-
-.icon-adder {
-    display: inline-block;
 }
 
 /*
@@ -389,5 +389,8 @@ input {
     }
     a.index-button {
         margin-bottom: 40px;
+    }
+    #progress-meter {
+        width: 95%;
     }
 }
