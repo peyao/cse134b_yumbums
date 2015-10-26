@@ -1,6 +1,7 @@
 /* font */
 @import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
 @import url(https://fonts.googleapis.com/css?family=Kaushan+Script|Cardo|Rock+Salt|Boogaloo|Limelight|Six+Caps);
+@import url(https://fonts.googleapis.com/css?family=Fredericka+the+Great|Architects+Daughter);
 
 * {
 
@@ -31,15 +32,16 @@
 */
 h1.index-heading {
     text-align: center;
-    margin-top: 200px;
+    margin-top: 120px;
 }
 h3.index-quote {
+	font-family: Architects Daughter, cursive; font-weight: lighter;
     margin-top: 50px;
     padding: 0px 20px;
-    color: #707070;
+    color: white;
 }
 button.index-button {
-    margin-top: 225px;
+    margin-top: 180px;
 }
 
 body {
@@ -124,7 +126,17 @@ ul li {
 }
 */
 /* John's sandbox */
+#vice-text {
+	font-family: 'Fredericka the Great', cursive; font-size: 2em; padding-left: 12px;
+}
 
+#virtue-text {
+	font-family: Helvetica Light, Helvetica, sans-serif; font-weight: 100; font-size: 2em;
+}
+
+.flat-text {
+	font-family: Helvetica Light, Helvetica, sans-serif; font-weight: 100;
+}
 
 
 #VvArt {
