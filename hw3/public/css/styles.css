@@ -60,7 +60,7 @@ h3.index-quote {
     color: white;
 }
 button.index-button {
-    margin-top: 180px;
+    margin-top: 45%;
 }
 
 body {
@@ -73,10 +73,15 @@ body {
 */
 
 /* Portrait */
+@media only screen and (max-width: 320px) {
+    body h1 {
+        font-size: 1.5em;
+    }
+}
 @media (max-width: 480px) {
-      .panel {
-          min-width: 95% !important;
-      }
+    .panel {
+        min-width: 100% !important;
+    }
 }
 
 .panel {
@@ -224,9 +229,6 @@ ul li {
 
 .icon-wrapper i {
     margin-top: 28px;
-}
-button.index-button {
-    margin-top: 180px;
 }
 
 /*
