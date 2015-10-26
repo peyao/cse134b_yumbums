@@ -1,7 +1,4 @@
-/* font
-@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
-@import url(https://fonts.googleapis.com/css?family=Kaushan+Script|Cardo|Rock+Salt|Boogaloo|Limelight|Six+Caps);
-*/
+/* font */
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 @import url(https://fonts.googleapis.com/css?family=Fredericka+the+Great|Architects+Daughter);
@@ -66,11 +63,6 @@ a.index-button {
 body {
     background-image: url('../images/shattered/shattered.png');
 }
-/*
-body {
-    background-image: url('../images/footer_lodyas/footer_lodyas.png');
-}
-*/
 
 /* Portrait */
 @media only screen and (max-width: 320px) {
@@ -106,7 +98,7 @@ ul li {
     margin-bottom: 5px;
 }
 
-.icon-wrapper {
+.icon-wrapper, .icon-wrapper-clickable {
     height: 100px;
     width: 100px;
     border-radius: 50%;
@@ -132,11 +124,11 @@ ul li {
     border-left: 1px solid #fff;
 }
 
-.icon-wrapper:hover {
+.icon-wrapper-clickable:hover {
     cursor: pointer;
 }
 
-.icon-wrapper i {
+.icon-wrapper i, .icon-wrapper-clickable i {
     margin-top: 28px;
 }
 
