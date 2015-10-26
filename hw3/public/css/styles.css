@@ -100,7 +100,7 @@ body {
 
     min-width: 400px;
     max-width: 450px;
-    height: 650px;
+    height: 660px;
 }
 
 .panel-header {
@@ -127,11 +127,19 @@ body {
 }
 
 .subpanel {
+    position: relative;
     background: #1f1e1f;
     border-radius: 5px;
     color: white;
-    padding: 10px 10px 7px 10px;
+    padding: 10px 10px 10px 10px;
     margin-bottom: 15px;
+}
+
+.subpanel-bottom-right-icon {
+    position: absolute;
+    color: white;
+    bottom: 0px;
+    right: 15px;
 }
 
 .subpanel-header {
@@ -227,8 +235,37 @@ ul li {
     color: black;
 }
 
+.icon-wrapper-none {
+    height: 100px;
+    width: 100px;
+}
+
+.icon-wrapper-none i {
+    margin-top: 28px;
+}
+
+.icon-border-left {
+    border-left: 1px solid #fff;
+}
+
+.icon-wrapper:hover {
+    cursor: pointer;
+}
+
 .icon-wrapper i {
     margin-top: 28px;
+}
+
+.times-per-day {
+    background-color: #fff;
+    border-radius: 50%;
+    color: #000;
+    height: 20px;
+    width: 25px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0px 0px 7px 0px;
 }
 
 /*
@@ -241,6 +278,19 @@ ul li {
     border: 2px solid #f5f5f5;
 }
 */
+
+/*
+*   Habits
+*/
+.thumbs-up {
+    padding-left: 40px;
+    width: 85px;
+}
+.thumbs-down {
+    padding-right: 15px;
+    width: 85px;
+}
+
 /* John's sandbox */
 #vice-text {
 	font-family: 'Fredericka the Great', cursive; font-size: 2em; padding-left: 12px;
@@ -255,95 +305,11 @@ ul li {
 }
 
 
-#VvArt {
-    width: 70%;
-    height: 70%;
-    border-radius: 0px 0px 0px 0px;
-    padding: 20px;
-    margin: 0px 0px 0px 0px;
-}
-
-
-#quote {
-    font-family: "Kaushan Script", sans-serif;
-    color: #CACBCD;
-    bottom: 0px;
-    border: 0px;
-    padding: 0px;
-    margin: 0px 0px 0px 0px;
-}
-
-#add-vice {
-    border-top: 1px solid #080808;
-    background: #d69265;
-    background: -webkit-gradient(linear, left top, left bottom, from(#ff4c05), to(#d69265));
-    background: -webkit-linear-gradient(top, #ff4c05, #665952);
-    background: -moz-linear-gradient(top, #ff4c05, #665952);
-    background: -ms-linear-gradient(top, #ff4c05, #d69265);
-    background: -o-linear-gradient(top, #ff4c05, #d69265);
-    padding: 17.5px 35px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    box-shadow: rgba(0,0,0,1) 0 1px 0;
-    text-shadow: rgba(0,0,0,.4) 0 1px 0;
-    color: white;
-    font-size: 20px;
-    font-family: Georgia, serif;
-    text-decoration: none;
-    vertical-align: middle;
-}
-#add-vice:hover {
-    box-shadow: inset 0 0 0 1px #27496d,0 5px 15px #193047;
-}
-#add-vice:active {
-    box-shadow: inset 0 0 0 1px #27496d,inset 0 5px 30px #193047;
-}
-
-
-#add-virtue {
-    border-top: 1px solid #080808;
-    background: #d69265;
-    background: -webkit-gradient(linear, left top, left bottom, from(#29ab43), to(#d69265));
-    background: -webkit-linear-gradient(top, #29ab43, #665952);
-    background: -moz-linear-gradient(top, #29ab43, #665952);
-    background: -ms-linear-gradient(top, #29ab43, #d69265);
-    background: -o-linear-gradient(top, #29ab43, #d69265);
-    padding: 17.5px 35px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    box-shadow: rgba(0,0,0,1) 0 1px 0;
-    text-shadow: rgba(0,0,0,.4) 0 1px 0;
-    color: white;
-    font-size: 20px;
-    font-family: Georgia, serif;
-    text-decoration: none;
-    vertical-align: middle;
-}
-#add-virtue:hover {
-    box-shadow: inset 0 0 0 1px #27496d,0 5px 15px #193047;
+.icon-adder {
+    display: inline-block;
 }
 #add-virtue:active {
     -webkit-box-shadow: inset 0 0 30px black;
     -moz-box-shadow: inset 0 0 30px black;
     box-shadow: inset 0 0 30px black;
 }
-/*
-.virtue-text {
-    font-family: "Limelight", sans-serif;
-    color: #CACBCD;
-}
-
-.vice-text {
-    font-family: "Rock Salt", cursive, italic ;
-    color: white;
-}
-*/
-/*******
- *
- */

@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>View Habits</title>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+        <link rel="stylesheet" href="../public/css/styles.css" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <style>
+            #viewHabitContainer {
+                padding: 15px;
+            }
+            .viewHabit {
+            }
+
+            .viewHabitContent {
+                margin-top: 15px;
+            }
+
+            .viewHabitIcon {
+                border-radius: 50%;
+                width: 100px;
+                height: 100px;
+                vertical-align: middle;
+                display: inline-block;
+            }
+
+            .thumbsIcon {
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                margin-left: 30px;
+                vertical-align: middle;
+                display: inline-block;
+            }
+
+            .habitStreakDiv {
+                vertical-align: middle;
+                margin-left: 30px;
+                max-height: 100px;
+                display: inline-block;
+                text-align: left
+            }
+
+            .habitStreakDiv progress {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                border: none;
+                width: 150px;
+                height: 20px;
+                display: block;
+                color: dodgerblue;
+            }
+
+            .habitStreakDiv progress::-webkit-progress-bar {
+                background-color: #eee;
+                border-radius: 2px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+            }
+
+            .habitStreakDiv progress::-moz-progress-bar {
+                background-color: dodgerblue;
+                border-radius: 2px;
+            }
+
+            .habitStreakDiv progress::-webkit-progress-value {
+                background-color: dodgerblue;
+            }
+
+            .percentageStreak {
+                font-size: 32px;
+            }
+
+            .addHabitIconButton {
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+            }
+
+            .addHabitButtonContainer {
+                text-align: center;
+                margin-top: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <main class="pure-g">
+            <!-- Responsive left Offset -->
+            <div class="pure-u-1-5 pure-u-md-1-3">&nbsp;</div>
+
+
+            <div class="pure-u-3-5 pure-u-md-1-3 panel">
+                <div class="panel-header text-center">
+                    Habits
+                </div>
+                <div class="container text-center">
+                    <section class="subpanel">
+                        <div class="subpanel-header text-left">
+                            Spend less money!
+                            <span class="pull-right">
+                                <span class="times-per-day">1</span>
+                            </span>
+                        </div>
+                        <div class="pure-g text-center">
+                            <div class="pure-u-1-3 icon-wrapper icon-wrapper-hover">
+                                <i class="fa fa-money fa-3x"></i>
+                            </div>
+                            <div class="pure-u-1-3 icon-wrapper-none thumbs-up">
+                                <i class="fa fa-thumbs-o-up fa-3x"></i>
+                            </div>
+                            <div class="pure-u-1-3 icon-wrapper-none thumbs-down">
+                                <i class="fa fa-thumbs-o-down fa-3x"></i>
+                            </div>
+                            <a href="habits-options.html">
+                                <i class="fa fa-ellipsis-h fa-2x subpanel-bottom-right-icon"></i>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="subpanel">
+                        <div class="subpanel-header text-left">
+                            Go to the gym
+                            <span class="pull-right">
+                                <span class="times-per-day">1</span>
+                                <span class="times-per-day">2</span>
+                                <span class="times-per-day">3</span>
+                            </span>
+                        </div>
+                        <div class="pure-g text-center">
+                            <div class="pure-u-1-3 icon-wrapper">
+                                <i class="fa fa-heartbeat fa-3x"></i>
+                            </div>
+                            <div class="pure-u-1-3 icon-wrapper-none thumbs-up">
+                                <i class="fa fa-thumbs-o-up fa-3x"></i>
+                            </div>
+                            <div class="pure-u-1-3 icon-wrapper-none thumbs-down">
+                                <i class="fa fa-thumbs-o-down fa-3x"></i>
+                            </div>
+                            <a href="habits-options.html">
+                                <i class="fa fa-ellipsis-h fa-2x subpanel-bottom-right-icon"></i>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="subpanel">
+                        <div class="subpanel-header text-left">
+                            Recycle cans
+                            <span class="pull-right">
+                                <span class="times-per-day">1</span>
+                                <span class="times-per-day">2</span>
+                            </span>
+                        </div>
+                        <div class="pure-g text-center">
+                            <div class="pure-u-1-3 icon-wrapper">
+                                <i class="fa fa-recycle fa-3x"></i>
+                            </div>
+                            <div class="pure-u-1-3 icon-wrapper-none thumbs-up">
+                                <i class="fa fa-thumbs-o-up fa-3x"></i>
+                            </div>
+                            <div class="pure-u-1-3 icon-wrapper-none thumbs-down">
+                                <i class="fa fa-thumbs-o-down fa-3x"></i>
+                            </div>
+                            <a href="habits-options.html">
+                                <i class="fa fa-ellipsis-h fa-2x subpanel-bottom-right-icon"></i>
+                            </a>
+                        </div>
+                    </section>
+
+                    <button class="panel-bottom-button button-large button-purple pure-button">
+                        <i class="fa fa-plus"></i> Add Habit
+                    </button>
+                </div>
+            </div>
+             <!-- Responsive right Offset -->
+            <div class="pure-u-1-5 pure-u-md-1-3">&nbsp;</div>
+        </main>
+    </body>
+</html>
