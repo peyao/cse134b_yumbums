@@ -26,7 +26,7 @@ h3.index-quote {
     color: #707070;
 }
 button.index-button {
-    margin-top: 250px;
+    margin-top: 225px;
 }
 
 body {
@@ -61,7 +61,8 @@ body {
     left: 0;
 
     min-width: 400px;
-    height: 700px;
+    max-width: 450px;
+    height: 650px;
 }
 
 h1.panel-heading {
