@@ -132,7 +132,9 @@ ul li {
     margin-top: 28px;
 }
 
-.times-per-day {
+.times-per-day,
+.times-per-day-success,
+.times-per-day-fail {
     background-color: #fff;
     border-radius: 50%;
     color: #000;
@@ -142,6 +144,16 @@ ul li {
     text-align: center;
     vertical-align: middle;
     padding: 0px 0px 7px 0px;
+}
+
+.times-per-day-success {
+    background-color: rgb(28, 184, 65);
+    color: white;
+}
+
+.times-per-day-fail {
+    background: rgb(202, 60, 60); /* this is a maroon */
+    color: white;
 }
 
 /*
