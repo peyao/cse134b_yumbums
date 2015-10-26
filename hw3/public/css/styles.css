@@ -1,11 +1,21 @@
-/* font */
+/* font
 @import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
 @import url(https://fonts.googleapis.com/css?family=Kaushan+Script|Cardo|Rock+Salt|Boogaloo|Limelight|Six+Caps);
+*/
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Fredericka+the+Great|Architects+Daughter);
 
 * {
     font-family: 'Source Sans Pro', sans-serif;
+}
+
+a {
+    color: #fff;
+}
+
+a:hover {
+    color: #ccc;
 }
 
 /*
@@ -28,20 +38,29 @@
     margin-left: 32px;
 }
 
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
 /*
 *    INDEX - index.html
 */
 h1.index-heading {
     text-align: center;
-    margin-top: 200px;
+    margin-top: 120px;
 }
 h3.index-quote {
+	font-family: Architects Daughter, cursive; font-weight: lighter;
     margin-top: 50px;
     padding: 0px 20px;
-    color: #707070;
+    color: white;
 }
 button.index-button {
-    margin-top: 225px;
+    margin-top: 180px;
 }
 
 body {
@@ -85,6 +104,8 @@ body {
     font-family: 'Raleway', sans-serif;
     color: #fff;
     padding: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .panel-section {
@@ -94,6 +115,10 @@ body {
 .panel-section .panel-section-header {
     color: red;
     font-size: 150%;
+}
+
+.panel-section .panel-bottom-button {
+    margin-bottom: 0px;
 }
 
 .subpanel {
@@ -200,6 +225,9 @@ ul li {
 .icon-wrapper i {
     margin-top: 28px;
 }
+button.index-button {
+    margin-top: 180px;
+}
 
 /*
 .day_of_week {
@@ -212,7 +240,17 @@ ul li {
 }
 */
 /* John's sandbox */
+#vice-text {
+	font-family: 'Fredericka the Great', cursive; font-size: 2em; padding-left: 12px;
+}
 
+#virtue-text {
+	font-family: Helvetica Light, Helvetica, sans-serif; font-weight: 100; font-size: 2em;
+}
+
+.flat-text {
+	font-family: Helvetica Light, Helvetica, sans-serif; font-weight: 100;
+}
 
 
 #VvArt {
