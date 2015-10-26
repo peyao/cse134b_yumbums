@@ -105,7 +105,7 @@
             }
             function onSelectIcon(id) {
                 var div = document.getElementById(id);
-                if(div.style.backgroundColor == 'white') {
+                if(div.style.backgroundColor == 'white' || div.style.backgroundColor == '') {
                     for(var i = 1; i <= 3; i++) {
                         var icon = document.getElementById(i);
                         icon.style.color = 'black';
