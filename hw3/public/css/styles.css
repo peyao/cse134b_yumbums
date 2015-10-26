@@ -156,6 +156,11 @@ ul li {
     color: white;
 }
 
+.center {
+    margin: auto;
+    width: 100%;
+}
+
 /*
 *   Habits
 */
