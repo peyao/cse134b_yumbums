@@ -64,11 +64,11 @@
                             </div>
                             <div class="days-of-week">
                                 <button id="10" onclick="onSelect(10)" class="pure-button">S</button>
-                                <button id="11" onclick="onSelect(11)" class="pure-button">M</button>
-                                <button id="12" onclick="onSelect(12)" class="pure-button">T</button>
-                                <button id="13" onclick="onSelect(13)" class="pure-button">W</button>
-                                <button id="14" onclick="onSelect(14)" class="pure-button">T</button>
-                                <button id="15" onclick="onSelect(15)" class="pure-button">F</button>
+                                <button style="color: white; background-color: rgb(28, 184, 65);" id="11" onclick="onSelect(11)" class="pure-button">M</button>
+                                <button style="color: white; background-color: rgb(28, 184, 65);" id="12" onclick="onSelect(12)" class="pure-button">T</button>
+                                <button style="color: white; background-color: rgb(28, 184, 65);" id="13" onclick="onSelect(13)" class="pure-button">W</button>
+                                <button style="color: white; background-color: rgb(28, 184, 65);" id="14" onclick="onSelect(14)" class="pure-button">T</button>
+                                <button style="color: white; background-color: rgb(28, 184, 65);" id="15" onclick="onSelect(15)" class="pure-button">F</button>
                                 <button id="16" onclick="onSelect(16)" class="pure-button">S</button>
                             </div>
                         </section>
@@ -78,9 +78,9 @@
                                 Times Per Day
                             </div>
                             <div class="days-of-week">
-                                <button id="20" onclick="onSelect(20)" class="button-large pure-button">1</button>
-                                <button id="21" onclick="onSelect(21)" class="button-large pure-button">2</button>
-                                <button id="22" onclick="onSelect(22)" class="button-large pure-button">3</button>
+                                <button style="color: white; background-color: rgb(28, 184, 65);" id="20" onclick="onSelectDay(20)" class="button-large pure-button">1</button>
+                                <button id="21" onclick="onSelectDay(21)" class="button-large pure-button">2</button>
+                                <button id="22" onclick="onSelectDay(22)" class="button-large pure-button">3</button>
                             </div>
                         </section>
 
@@ -116,6 +116,21 @@
                 } else {
                     div.style.color = 'black';
                     div.style.backgroundColor = 'white';
+                }
+            }
+            function onSelectDay(id) {
+                var button = document.getElementById(id);
+                if(button.style.color == '' || button.style.color == 'black') {
+                    for(var i = 20; i < 23; i++) {
+                        var tmp = document.getElementById(i);
+                        tmp.style.color = 'black';
+                        tmp.style.backgroundColor = '#e6e6e6';
+                    }
+                    button.style.color = 'white';
+                    button.style.backgroundColor = 'rgb(28, 184, 65)';
+                }  else {
+                    button.style.color = 'black';
+                    button.style.backgroundColor = '#e6e6e6';
                 }
             }
         </script>

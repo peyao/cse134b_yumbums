@@ -156,14 +156,14 @@ ul li {
     color: white;
 }
 
+/*
+*   Habits
+*/
 .center {
     margin: auto;
     width: 100%;
 }
 
-/*
-*   Habits
-*/
 .thumbs-up {
     padding-left: 40px;
     width: 85px;
