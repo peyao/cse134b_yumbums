@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     </head>
     <body>
-
         <div class="pure-g">
             <div class="pure-u-1-5 pure-u-md-1-3">&nbsp;</div>
             <div class="pure-u-3-5 pure-u-md-1-3 panel text-center">
@@ -34,6 +33,7 @@
                             </div>
                             <input id="habit-title" type="text" placeholder="Habit" autofocus>
                         </section>
+                    </form>
 
                         <section class="subpanel">
                             <div class="subpanel-header text-left">
@@ -41,44 +41,35 @@
                             </div>
                             <div class="pure-g">
                                 <div class="pure-u-1-3">
-                                    <div class="icon-wrapper">
+                                    <div id="1" class="icon-wrapper" onclick="onSelectIcon(1)">
                                         <i class="fa fa-amazon fa-3x"></i>
                                     </div>
                                 </div>
                                 <div class="pure-u-1-3">
-                                    <div class="icon-wrapper">
+                                    <div id="2" class="icon-wrapper" onclick="onSelectIcon(2)">
                                         <i class="fa fa-bed fa-3x"></i>
                                     </div>
                                 </div>
                                 <div class="pure-u-1-3">
-                                    <div class="icon-wrapper">
+                                    <div id="3" class="icon-wrapper" onclick="onSelectIcon(3)">
                                         <i class="fa fa-beer fa-3x"></i>
                                     </div>
                                 </div>
                             <div>
                         </section>
 
-                        <!--
-                        <ul id="icons">
-                            <li><input onclick="onSelectIcon(1)" type="button" id="1" class="my_button" value="Icon"/></li>
-                            <li><input onclick="onSelectIcon(2)" type="button" id="2" class="my_button" value="Icon 2"/></li>
-                            <li><input onclick="onSelectIcon(3)" type="button" id="3" class="my_button" value="Icon 3"/></li>
-                            <li><input onclick="onSelectIcon(4)" type="button" id="4" class="my_button" value="Icon 4"/></li>
-                        </ul>
-                        -->
-
                         <section class="subpanel">
                             <div class="subpanel-header text-left">
                                 Frequency
                             </div>
                             <div class="days-of-week">
-                                <button class="pure-button">S</button>
-                                <button class="pure-button">M</button>
-                                <button class="pure-button">T</button>
-                                <button class="pure-button">W</button>
-                                <button class="pure-button">T</button>
-                                <button class="pure-button">F</button>
-                                <button class="pure-button">S</button>
+                                <button id="10" onclick="onSelect(10)" class="pure-button">S</button>
+                                <button id="11" onclick="onSelect(11)" class="pure-button">M</button>
+                                <button id="12" onclick="onSelect(12)" class="pure-button">T</button>
+                                <button id="13" onclick="onSelect(13)" class="pure-button">W</button>
+                                <button id="14" onclick="onSelect(14)" class="pure-button">T</button>
+                                <button id="15" onclick="onSelect(15)" class="pure-button">F</button>
+                                <button id="16" onclick="onSelect(16)" class="pure-button">S</button>
                             </div>
                         </section>
 
@@ -87,69 +78,47 @@
                                 Times Per Day
                             </div>
                             <div class="days-of-week">
-                                <button class="button-large button-success pure-button">1</button>
-                                <button class="button-large button-warning pure-button">2</button>
-                                <button class="button-large button-error pure-button">3</button>
+                                <button id="20" onclick="onSelect(20)" class="button-large pure-button">1</button>
+                                <button id="21" onclick="onSelect(21)" class="button-large pure-button">2</button>
+                                <button id="22" onclick="onSelect(22)" class="button-large pure-button">3</button>
                             </div>
                         </section>
 
                         <button class="panel-bottom-button button-large button-purple pure-button">
                             Save <i class="fa fa-check"></i>
                         </button>
-
-                        <!--
-                        <ul class="frequency">
-                            <li>Frequency</li><br>
-                            <li><input onclick="onSelect(5)" type="button" id="5" class="day_of_week" value="Sun"/></li>
-                            <li><input onclick="onSelect(6)" type="button" id="6" class="day_of_week" value="Mon"/></li>
-                            <li><input onclick="onSelect(7)" type="button" id="7" class="day_of_week" value="Tues"/></li>
-                            <li><input onclick="onSelect(8)" type="button" id="8" class="day_of_week" value="Wed"/></li>
-                            <li><input onclick="onSelect(9)" type="button" id="9" class="day_of_week" value="Thurs"/></li>
-                            <li><input onclick="onSelect(10)" type="button" id="10" class="day_of_week" value="Fri"/></li>
-                            <li><input onclick="onSelect(11)" type="button" id="11" class="day_of_week" value="Sat"/></li>
-                        </ul>
-
-                        <ul >
-                            <li><input onclick="onSelect(12)" type="button" id="12" class="times_per_day" value="1"/></li>
-                            <li><input onclick="onSelect(13)" type="button" id="13" class="times_per_day" value="2"/></li>
-                            <li><input onclick="onSelect(14)" type="button" id="14" class="times_per_day" value="3"/></li>
-                            <li>Times per day</li>
-                        </ul>
-                        <input type="submit" name="submit" value="Save it"/>
-                        -->
-                    </form>
                 </div>
             </div>
             <div class="pure-u-1-5 pure-u-md-1-3">&nbsp;</div>
         </div>
-        <!--
+        
         <script>
             function onSelect(id) {
                 var button = document.getElementById(id);
-                if(button.style.color == 'green') {
-                    button.style.borderColor = '#f5f5f5';
-                    button.style.color = 'black';
+                if(button.style.color == '' || button.style.color == 'black') {
+                    button.style.color = 'white';
+                    button.style.backgroundColor = 'rgb(28, 184, 65)';
                 } else {
-                    button.style.borderColor = 'green';
-                    button.style.color = 'green';
+                    button.style.color = 'black';
+                    button.style.backgroundColor = '#e6e6e6';
                 }
             }
             function onSelectIcon(id) {
-                var button = document.getElementById(id);
-                if(button.style.color == 'green') {
-                    button.style.color = 'black';
-                    button.style.borderColor = '#f5f5f5';
-                } else {
-                    for(var i = 1; i <= 4; i++) {
+                var div = document.getElementById(id);
+                if(div.style.backgroundColor == 'white') {
+                    for(var i = 1; i <= 3; i++) {
                         var icon = document.getElementById(i);
                         icon.style.color = 'black';
-                        icon.style.borderColor = '#f5f5f5';
+                        icon.style.backgroundColor = 'white';
                     }
-                    button.style.color = 'green';
-                    button.style.borderColor = 'green';
+                    div.style.color = 'white';
+                    div.style.backgroundColor = 'rgb(28, 184, 65)';
+                } else {
+                    div.style.color = 'black';  
+                    div.style.backgroundColor = 'white';
                 }
             }
         </script>
-    -->
+    
     </body>
 </html>

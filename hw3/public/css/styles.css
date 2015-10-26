@@ -187,6 +187,10 @@ body {
     background: rgb(66, 184, 221); /* this is a light blue */
 }
 
+.pure-button {
+    color: black;
+}
+
 input {
     color: #000;
     width: 100%;
@@ -220,6 +224,10 @@ ul li {
     border-radius: 50%;
     background-color: white;
     color: black;
+}
+
+.icon-wrapper:hover {
+    cursor: pointer;
 }
 
 .icon-wrapper i {
