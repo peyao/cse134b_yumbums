@@ -10,7 +10,7 @@
 
 		<div class="forms">
 			<h2>Add A Habit</h2>
-			<form id="formADD" action="list.html">
+			<form id="formADD" onsubmit="return validateForm()" action="list.html" method="post">
 				<p><label><span id="title_text">Habit Title</span></label></p>
 				<p><input id="title" type="text" name="fullname" placeholder="Enter habit here"></p>
 				<p><label>Habit Icon</label></p>
@@ -37,7 +37,7 @@
 				</div>
 				<p><label><span id="others_text">Others: </span>
 					<input id="others" type="number" step="1" min="1" max="100" name="day"
-						   placeholder="Enter custom frequency"></label></p>
+						   placeholder="Enter custom frequency" onclick="uncheckradio()"></label></p>
 				<p id="save_p"><input id="save" type="submit" value="Save It"></p>
 				
 			</form>
@@ -51,6 +51,29 @@
 				document.getElementById('icon3').style.border = "none";
 				var image = document.getElementById(name);
 				image.style.border = "5px solid #42A5F5";
+			}
+			function uncheckradio() {
+				document.getElementsByName("day").uncheck();
+			}
+			function validateForm() {
+				var checkboxes = document.getElementsByName("date");
+				var checkedweekly = false;
+				for (var i = 0; i < checkboxes.length ; i ++){
+					if(checkboxes[i].checked){
+						checkedweekly = true;
+						break;
+					}
+				}
+				if (!checkedweekly){
+					alert("Enter weekly frequency");
+					return false;
+				}
+				var daily = document.forms["formADD"]["day"].checked;
+				var dailyOther = document.forms["formADD"]["others"].value;
+				if(!daily && dailyOther == null) {
+					alert("Enter daily frequency");
+					return false;
+				}
 			}
 		</script>
 	</body>
