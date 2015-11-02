@@ -11,8 +11,8 @@
 		<div class="forms">
 			<h2>Add A Habit</h2>
 			<form id="formADD" onsubmit="return validateForm()" action="list.html" method="post">
-				<p><label><span id="title_text">Habit Title</span></label></p>
-				<p><input id="title" type="text" name="fullname" placeholder="Enter habit here"></p>
+				<p><label for="title"><span id="title_text">Habit Title</span></label></p>
+				<p><input id="title" type="text" name="fullname" placeholder="Enter habit here" required></p>
 				<p><label>Habit Icon</label></p>
 				<img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/sleep.jpg" alt="sleep image"/>
 				<img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/salad.jpg" alt="eat image"/>
@@ -30,9 +30,9 @@
 				</div>
 				<p><label>Daily Frequency</label></p>
 				<div id="daily-button" >
-					<label> <input type="radio" name="day" value="one"><span>1</span></label>
-					<label> <input type="radio" name="day" value="two"><span>2</span></label>
-					<label> <input type="radio" name="day" value="three"><span>3</span></label>
+					<label> <input type="radio" name="day" value="one" onclick="clearOther()"><span>1</span></label>
+					<label> <input type="radio" name="day" value="two" onclick="clearOther()"><span>2</span></label>
+					<label> <input type="radio" name="day" value="three" onclick="clearOther()"><span>3</span></label>
 					<span id="times">times</span>
 				</div>
 				<p><label><span id="others_text">Others: </span>
@@ -53,12 +53,21 @@
 				image.style.border = "5px solid #42A5F5";
 			}
 			function uncheckradio() {
-				document.getElementsByName("day").uncheck();
+				var unradio = document.getElementsByName("day");
+				for (var i = 0; i < unradio.length - 1; i++) {
+					unradio[i].checked = false;
+				}
+			}
+			function clearOther() {
+				document.getElementById("others").value = null;
 			}
 			function validateForm() {
+
+				// checkbox validation
 				var checkboxes = document.getElementsByName("date");
 				var checkedweekly = false;
-				for (var i = 0; i < checkboxes.length ; i ++){
+				var i;
+				for (i = 0; i < checkboxes.length ; i ++){
 					if(checkboxes[i].checked){
 						checkedweekly = true;
 						break;
@@ -68,12 +77,22 @@
 					alert("Enter weekly frequency");
 					return false;
 				}
-				var daily = document.forms["formADD"]["day"].checked;
-				var dailyOther = document.forms["formADD"]["others"].value;
-				if(!daily && dailyOther == null) {
+
+				// radio button and others validation
+				var daily = document.getElementsByName("day");
+				var dailyOther = document.getElementById("others");
+				var selectedradio = false;
+				for (i = 0; i < daily.length - 1; i++){
+					if (daily[i].checked) {
+						selectedradio = true;
+						break;
+					}
+				}
+				if(!selectedradio || !dailyOther) {
 					alert("Enter daily frequency");
 					return false;
 				}
+
 			}
 		</script>
 	</body>
