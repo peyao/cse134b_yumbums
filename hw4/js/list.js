@@ -29,6 +29,13 @@ function listHabits() {
     }
 }
 
+var pageFadeOut = function(location) {
+    document.body.classList.add("anim-slide-out-right");
+    prefixedEvent(document.body, "AnimationEnd", function() {
+        window.location.href = location;
+    });
+};
+
 var pfx = ["webkit", "moz", "MS", "o", ""];
 function prefixedEvent(element, type, callback) {
     for (var p = 0; p < pfx.length; p++) {
