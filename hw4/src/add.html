@@ -10,7 +10,7 @@
 
 		<div class="forms">
 			<h2>Add A Habit</h2>
-			<form id="formADD" onsubmit="return validateForm()" action="list.html" method="post">
+			<form id="formADD" onsubmit="return validateForm()" action="mailto:johnwishon83@gmail.com" method="post">
 				<p><label for="title"><span id="title_text">Habit Title</span></label></p>
 				<p><input id="title" type="text" name="fullname" placeholder="Enter habit here" required></p>
 				<p><label>Habit Icon</label></p>
@@ -35,7 +35,7 @@
 					<label> <input type="radio" name="day" value="three" onclick="clearOther()"><span>3</span></label>
 					<span id="times">times</span>
 				</div>
-				<p><label><span id="others_text">Others: </span>
+				<p><label for="others"><span id="others_text">Others: </span>
 					<input id="others" type="number" step="1" min="1" max="100" name="day"
 						   placeholder="Enter custom frequency" onclick="uncheckradio()"></label></p>
 				<p id="save_p"><input id="save" type="submit" value="Save It"></p>
@@ -44,13 +44,16 @@
 
 		</div>
 		<script>
+			var imageSelect = null;
 			function selectImage(name) {
 				//Clear all the other effects
 				document.getElementById('icon1').style.border = "none";
 				document.getElementById('icon2').style.border = "none";
 				document.getElementById('icon3').style.border = "none";
+				imageSelect = null;
 				var image = document.getElementById(name);
 				image.style.border = "5px solid #42A5F5";
+				imageSelect = name;
 			}
 			function uncheckradio() {
 				var unradio = document.getElementsByName("day");
@@ -62,6 +65,13 @@
 				document.getElementById("others").value = null;
 			}
 			function validateForm() {
+
+				//icon select validation
+				if(imageSelect == null){
+					alert("Choose an icon");
+					return false;
+				}
+
 
 				// checkbox validation
 				var checkboxes = document.getElementsByName("date");
@@ -80,7 +90,7 @@
 
 				// radio button and others validation
 				var daily = document.getElementsByName("day");
-				var dailyOther = document.getElementById("others");
+				var dailyOther = document.getElementById("others").value;
 				var selectedradio = false;
 				for (i = 0; i < daily.length - 1; i++){
 					if (daily[i].checked) {
@@ -88,11 +98,10 @@
 						break;
 					}
 				}
-				if(!selectedradio || !dailyOther) {
+				if(!selectedradio && !dailyOther) {
 					alert("Enter daily frequency");
 					return false;
 				}
-
 			}
 		</script>
 	</body>
