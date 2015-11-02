@@ -1,7 +1,6 @@
 /**************************************************************************************
                             Function Definitions
 **************************************************************************************/
-
 function showMsg(element) {
     var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
     msgElement.style.visibility="visible";
@@ -210,7 +209,6 @@ function listHabits(){
         currentStreak: 48,
         bestStreak: 60
     });
-    
     for(var i = 0; i<habits.length; i++){
         var currentHabit = habits[i];
         createHabitElement(currentHabit);
@@ -225,7 +223,6 @@ function prefixedEvent(element, type, callback) {
         element.addEventListener(pfx[p] + type, callback, false);
     }
 }
-
 /**************************************************************************************
                             Executed On Load of Page
 **************************************************************************************/
