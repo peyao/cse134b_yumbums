@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/list.css">
+    <link rel="stylesheet" type="text/css" href="../css/animations.css">
 </head>
-<body>
+<body class="anim-fade-in">
     <section>
         <h1>Habit List</h1>
         <ul id="habit-list">
-            <li>
+            <li class="anim-slide-in-right-1">
                 <ul class="habit-info">
                     <li><div class="habit-name">Sleep 8 hours</div></li>
                     <li><img class="habit-icon" src="../img/sleep.jpg" alt="habit icon"></li>
@@ -38,7 +39,7 @@
                 </div>
             </li>
 
-            <li>
+            <li class="anim-slide-in-right-2">
                 <ul class="habit-info">
                     <li><div class="habit-name">Eat Healthy</div></li>
                     <li><img class="habit-icon" src="../img/salad.jpg" alt="habit icon"></li>
@@ -66,7 +67,7 @@
                 </div>
             </li>
 
-            <li>
+            <li class="anim-slide-in-right-3">
                 <ul class="habit-info">
                     <li><div class="habit-name">Exercise 30 minutes</div></li>
                     <li><img class="habit-icon" src="../img/run.jpg" alt="habit icon"></li>
@@ -97,20 +98,10 @@
         </ul>
     </section>
 
-    <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
-
-    <script type="text/javascript">
-        function showMsg(element){
-            var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
-            // alert(msgElement.innerHTML);
-            msgElement.style.visibility="visible";
-        }
-
-        function deleteHabit(element){
-            var child = element.parentNode.parentNode;
-            var parent = child.parentNode;
-            parent.removeChild(child);
-        }
-    </script>
+    <!--
+        <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
+    -->
+    <button type="button" id="addHabit" onclick="pageFadeOut('add.html')" title="add habit">+</button>
+    <script src="../js/list.js"></script>
 </body>
 </html>

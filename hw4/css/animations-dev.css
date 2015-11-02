@@ -1,0 +1,110 @@
+/* animations */
+.anim-fade-in {
+    animation-duration: 0.5s;
+    animation-name: fade-in;
+}
+
+.anim-fade-out {
+    animation-duration: 0.5s;
+    animation-name: fade-out;
+}
+
+/* Different delay for staggered slide-in effect */
+.anim-slide-in-right-1 {
+    transform: translateX(300%);
+    animation:
+        slide-in-right .5s .6s cubic-bezier(0.14, 0.25, 0.52, 1.56) forwards;
+}
+.anim-slide-in-right-2 {
+    transform: translateX(300%);
+    animation:
+        slide-in-right .5s .8s cubic-bezier(0.14, 0.25, 0.52, 1.56) forwards;
+}
+.anim-slide-in-right-3 {
+    transform: translateX(300%);
+    animation:
+        slide-in-right .5s 1.0s cubic-bezier(0.14, 0.25, 0.52, 1.56) forwards;
+}
+
+
+.anim-slide-out-right-240-5 {
+    animation: slide-out-right-240-5 1s;
+}
+
+.anim-shrink-away {
+    animation: shrink-away .8s cubic-bezier(.55, -0.04, 0.91, 0.94) forwards;
+}
+
+.transition-ease {
+    -webkit-transition: all 1s ease-in;
+    -moz-transition: all 1s ease-in;
+    -o-transition: all 1s ease-in;
+    transition: all 1s ease-in;
+}
+
+@keyframes slide-in-right {
+    0% {
+        opacity: 0;
+        transform: translateX(300px);
+    }
+    70% {
+        opacity: 1;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-out-right-240-5 {
+    0% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+    30% {
+        opacity: 1;
+        transform: translateX(-50px);
+    }
+    60% {
+        opacity: 0;
+        transform: translateX(300%);
+        height: 240px;
+        margin-bottom: 5px;
+    }
+    100% {
+        height: 0;
+        margin-bottom: 0;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes shrink-away {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+        height: 0;
+        margin-bottom: 0;
+    }
+}
