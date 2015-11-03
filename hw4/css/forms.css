@@ -15,11 +15,12 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
+  overflow-x: hidden; /* Required for animations slide in so horizontal scrollbar doesn't appear */
 }
 p{
 	color:#6c6c6c;
 	font-size: medium;
-}	
+}
 div.forms {
 	position: relative;
 	margin: 0 auto;
@@ -80,12 +81,12 @@ img.icon{
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
   }
-  
+
   p{
 	color:#6c6c6c;
 	font-size: small;
-	}	
-  
+	}
+
 }
 
 h2{
@@ -129,7 +130,7 @@ input#save{
 	background-color: #48BA87;
 	-webkit-border-radius: 5px; /*For Safari, etc. */
 	-moz-border-radius: 5px; /* For Mozilla, etc. */
-	border-radius: 5px; /* CSS3 Feature */	
+	border-radius: 5px; /* CSS3 Feature */
 	opacity: 1.0;
 	font-size: medium;
 	-webkit-box-sizing: border-box;
@@ -151,7 +152,7 @@ div label input {
    margin-right:100px;
 }
 
-#ck-button {  
+#ck-button {
     overflow:auto;
 }
 
@@ -179,7 +180,7 @@ div label input {
 }
 
 #ck-button input:checked + span {
-    background-color:#9c9696; 
+    background-color:#9c9696;
     border-radius:5px;
     color:#fff;
 }
@@ -187,7 +188,7 @@ div label input {
     cursor: pointer;
 }
 
-#daily-button {  
+#daily-button {
     overflow:auto;
 }
 
@@ -220,12 +221,10 @@ span#times{
 }
 
 #daily-button input:checked + span {
-    background-color:#9c9696; 
+    background-color:#9c9696;
     border-radius:25px;
     color:#fff;
 }
 #daily-button input:hover + span {
     cursor: pointer;
 }
-
-

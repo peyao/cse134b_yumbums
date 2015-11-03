@@ -37,7 +37,7 @@ function createHabitIconListElement(currentHabit){
 }
 
 /*
- * Function that generates the html for the title of the habit and 
+ * Function that generates the html for the title of the habit and
  * the icon for the habit
 */
 function createHabitInfoElement(currentHabit){
@@ -52,7 +52,7 @@ function createHabitInfoElement(currentHabit){
 
 function createMessageTotalSpan(currentHabit){
     var shadeWidth = calculateShadeWidth(currentHabit);
-    
+
     var messageTotalSpan = document.createElement("SPAN");
     messageTotalSpan.setAttribute("class", "message-total");
     var currentStreakStrong = document.createElement("STRONG");
@@ -63,8 +63,8 @@ function createMessageTotalSpan(currentHabit){
     var bestStreakText = document.createTextNode(currentHabit.bestStreak);
     bestStreakStrong.appendChild(bestStreakText);
     var breakElement = document.createElement("BR");
-        
-        
+
+
     var NS = "http://www.w3.org/2000/svg";
     var svg = document.createElementNS(NS, "svg");
     svg.setAttribute("width", 150);
@@ -82,10 +82,10 @@ function createMessageTotalSpan(currentHabit){
     bottomLine.setAttribute("x2", 150);
     bottomLine.setAttribute("y2", 0);
     bottomLine.setAttribute('stroke', "rgba(171,171,171,0.6)");
-    bottomLine.setAttribute('stroke-width', 25)
+    bottomLine.setAttribute('stroke-width', 25);
     svg.appendChild(topLine);
     svg.appendChild(bottomLine);
-                    
+
     messageTotalSpan.appendChild(currentStreakStrong);
     messageTotalSpan.appendChild(messageTotalText);
     messageTotalSpan.appendChild(bestStreakStrong);
@@ -130,7 +130,7 @@ function createHabitMessageElement(currentHabit){
 function createHabitOpElement(currentHabit){
     var habitOpDiv = document.createElement("DIV");
     habitOpDiv.setAttribute("class", "habit-op");
-    
+
     var doneButton = document.createElement("BUTTON");
     doneButton.setAttribute("class", "op op-done");
     doneButton.setAttribute("type", "button");
@@ -139,7 +139,7 @@ function createHabitOpElement(currentHabit){
     doneImage.setAttribute("src", "../img/done.svg");
     doneImage.setAttribute("alt", "Done");
     doneButton.appendChild(doneImage);
-        
+
     var editButton = document.createElement("BUTTON");
     editButton.setAttribute("class", "op op-edit");
     editButton.setAttribute("type", "button");
@@ -148,7 +148,7 @@ function createHabitOpElement(currentHabit){
     editImage.setAttribute("src", "../img/edit.svg");
     editImage.setAttribute("alt", "Edit");
     editButton.appendChild(editImage);
-        
+
     var deleteButton = document.createElement("BUTTON");
     deleteButton.setAttribute("class", "op op-del");
     deleteButton.setAttribute("type", "button");
@@ -157,7 +157,7 @@ function createHabitOpElement(currentHabit){
     deleteImage.setAttribute("src", "../img/delete.svg");
     deleteImage.setAttribute("alt", "Del");
     deleteButton.appendChild(deleteImage);
-    
+
     habitOpDiv.appendChild(doneButton);
     habitOpDiv.appendChild(editButton);
     habitOpDiv.appendChild(deleteButton);
@@ -229,9 +229,33 @@ function calculateShadeWidth(currentHabit){
     return shadeWidth;
 }
 
-var pageFadeOut = function(location) {
+function attachClickListeners(){
+    var completedButtons = document.getElementsByClassName("op-done");
+    for(var i = 0; i<completedButtons.length; i++){
+        completedButtons[i].onclick = function(){
+            showMsg(this);
+        };
+    }
+
+    var completedButtons = document.getElementsByClassName("op-edit");
+    for(var i = 0; i<completedButtons.length; i++){
+        completedButtons[i].onclick = function(){
+            location.href='edit.html';
+        };
+    }
+
+    var completedButtons = document.getElementsByClassName("op-del");
+    for(var i = 0; i<completedButtons.length; i++){
+        completedButtons[i].onclick = function(){
+            deleteHabit(this);
+        };
+    }
+}
+
+var pageTransitionOut = function(location) {
     document.body.classList.add("anim-slide-out-right");
     prefixedEvent(document.body, "AnimationEnd", function() {
+        document.getElementById('anim-wrapper').style.display = 'none';
         window.location.href = location;
     });
 };
@@ -245,28 +269,6 @@ function prefixedEvent(element, type, callback) {
     }
 }
 
-function attachClickListeners(){
-    var completedButtons = document.getElementsByClassName("op-done");
-    for(var i = 0; i<completedButtons.length; i++){
-        completedButtons[i].onclick = function(){
-            showMsg(this);
-        }
-    }
-    
-    var completedButtons = document.getElementsByClassName("op-edit");
-    for(var i = 0; i<completedButtons.length; i++){
-        completedButtons[i].onclick = function(){
-            location.href='edit.html';
-        }
-    }
-    
-    var completedButtons = document.getElementsByClassName("op-del");
-    for(var i = 0; i<completedButtons.length; i++){
-        completedButtons[i].onclick = function(){
-            deleteHabit(this);
-        }
-    }
-}
 /**************************************************************************************
                             Executed On Load of Page
 **************************************************************************************/
