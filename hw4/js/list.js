@@ -51,6 +51,8 @@ function createHabitInfoElement(currentHabit){
 }
 
 function createMessageTotalSpan(currentHabit){
+    var shadeWidth = calculateShadeWidth(currentHabit);
+    
     var messageTotalSpan = document.createElement("SPAN");
     messageTotalSpan.setAttribute("class", "message-total");
     var currentStreakStrong = document.createElement("STRONG");
@@ -63,23 +65,23 @@ function createMessageTotalSpan(currentHabit){
     var breakElement = document.createElement("BR");
         
         
-    var NS="http://www.w3.org/2000/svg";
-    var svg = document.createElementNS(NS,"svg");
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
     svg.setAttribute("width", 150);
     svg.setAttribute("height", 25);
-    var topLine = document.createElementNS(NS, "LINE");
+    var topLine = document.createElementNS(NS, "line");
     topLine.setAttribute("x1", 0);
     topLine.setAttribute("y1", 0);
-    topLine.setAttribute("x2", 60);
+    topLine.setAttribute("x2", shadeWidth);
     topLine.setAttribute("y2", 0);
-    topLine.setAttribute('stroke', "red");
+    topLine.setAttribute('stroke', "rgba(65, 131, 215, 0.8)");
     topLine.setAttribute('stroke-width', 25);
-    var bottomLine = document.createElementNS(NS, "LINE");
-    bottomLine.setAttribute("x1", 60);
+    var bottomLine = document.createElementNS(NS, "line");
+    bottomLine.setAttribute("x1", shadeWidth);
     bottomLine.setAttribute("y1", 0);
     bottomLine.setAttribute("x2", 150);
     bottomLine.setAttribute("y2", 0);
-    bottomLine.setAttribute('stroke', "red");
+    bottomLine.setAttribute('stroke', "rgba(171,171,171,0.6)");
     bottomLine.setAttribute('stroke-width', 25)
     svg.appendChild(topLine);
     svg.appendChild(bottomLine);
@@ -165,8 +167,9 @@ function createHabitOpElement(currentHabit){
 /*
 * Function that generates the contents for a single habit
 */
-function createHabitElement(currentHabit){
+function createHabitElement(currentHabit, index){
     var habit = document.createElement("LI");
+    habit.setAttribute("class", "anim-slide-in-right-" + (index+1));
     var habitInfo = createHabitInfoElement(currentHabit);
     var messageDiv = createHabitMessageElement(currentHabit);
     var habitOpDiv = createHabitOpElement(currentHabit);
@@ -189,30 +192,41 @@ function listHabits(){
         otherFrequency: 0,
         currentStreak: 2,
         bestStreak: 5,
-        completedToday: 0
+        completedToday: 1
     });
     habits.push({
         title: "Eat Healthy",
         icon: "../img/salad.jpg",
         weekFrequency: 0,
-        dayFrequency: 1,
+        dayFrequency: 3,
         otherFrequency: 0,
         currentStreak: 10,
-        bestStreak: 20
+        bestStreak: 20,
+        completedToday: 1
     });
     habits.push({
         title: "Exercise 30 minutes",
         icon: "../img/run.jpg",
         weekFrequency: 0,
-        dayFrequency: 1,
+        dayFrequency: 2,
         otherFrequency: 0,
         currentStreak: 48,
-        bestStreak: 60
+        bestStreak: 60,
+        completedToday: 1
     });
     for(var i = 0; i<habits.length; i++){
         var currentHabit = habits[i];
-        createHabitElement(currentHabit);
+        createHabitElement(currentHabit, i);
     }
+}
+
+function calculateShadeWidth(currentHabit){
+    var percentageCompleted = currentHabit.completedToday/currentHabit.dayFrequency;
+    var shadeWidth = Math.floor(percentageCompleted * 150);
+    if(shadeWidth > 150){
+        shadeWidth = 150;
+    }
+    return shadeWidth;
 }
 
 var pageFadeOut = function(location) {
@@ -230,7 +244,31 @@ function prefixedEvent(element, type, callback) {
         element.addEventListener(pfx[p] + type, callback, false);
     }
 }
+
+function attachClickListeners(){
+    var completedButtons = document.getElementsByClassName("op-done");
+    for(var i = 0; i<completedButtons.length; i++){
+        completedButtons[i].onclick = function(){
+            showMsg(this);
+        }
+    }
+    
+    var completedButtons = document.getElementsByClassName("op-edit");
+    for(var i = 0; i<completedButtons.length; i++){
+        completedButtons[i].onclick = function(){
+            location.href='edit.html';
+        }
+    }
+    
+    var completedButtons = document.getElementsByClassName("op-del");
+    for(var i = 0; i<completedButtons.length; i++){
+        completedButtons[i].onclick = function(){
+            deleteHabit(this);
+        }
+    }
+}
 /**************************************************************************************
                             Executed On Load of Page
 **************************************************************************************/
 listHabits();
+attachClickListeners();
