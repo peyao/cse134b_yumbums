@@ -183,37 +183,8 @@ function createHabitElement(currentHabit, index){
 * Function that generates the list of habits on the page
 */
 function listHabits(){
-    var habits = [];  //mock data to use until adding habits is implemented
-    habits.push({
-        title: "Sleep 8 Hours",
-        icon: "../img/sleep.jpg",
-        weekFrequency: 0,
-        dayFrequency: 1,
-        otherFrequency: 0,
-        currentStreak: 2,
-        bestStreak: 5,
-        completedToday: 1
-    });
-    habits.push({
-        title: "Eat Healthy",
-        icon: "../img/salad.jpg",
-        weekFrequency: 0,
-        dayFrequency: 3,
-        otherFrequency: 0,
-        currentStreak: 10,
-        bestStreak: 20,
-        completedToday: 1
-    });
-    habits.push({
-        title: "Exercise 30 minutes",
-        icon: "../img/run.jpg",
-        weekFrequency: 0,
-        dayFrequency: 2,
-        otherFrequency: 0,
-        currentStreak: 48,
-        bestStreak: 60,
-        completedToday: 1
-    });
+    var habits = JSON.parse(localStorage.getItem("habitList"));
+
     for(var i = 0; i<habits.length; i++){
         var currentHabit = habits[i];
         createHabitElement(currentHabit, i);

@@ -10,7 +10,7 @@
 <body>
 	<div id="anim-wrapper" class="forms anim-fade-in">
 		<h2>Add A Habit</h2>
-		<form id="formADD" onsubmit="return validateForm()" action="mailto:johnwishon83@gmail.com" method="post">
+		<form id="formADD" onsubmit="return validateForm()" action="testList.html" method="post">
 			<p><label for="title"><span id="title_text">Habit Title</span></label></p>
 			<p><input id="title" type="text" name="fullname" placeholder="Enter habit here" required></p>
 			<p><label>Habit Icon</label></p>
@@ -28,8 +28,7 @@
 					<img id="icon3" class="icon" onclick="selectImage('icon3');" src="../img/run.jpg" alt="run image"/>
 				</label>
 
-					<img id="icon4" class="icon" src="../img/add.png" alt="find an image"/>
-
+				<img id="icon4" class="icon" src="../img/add.png" alt="find an image"/>
 			</div>
 			<p><label>Weekly Frequency</label></p>
 			<div id="ck-button">
@@ -52,9 +51,7 @@
 				<input id="others" type="number" step="1" min="1" max="100" name="day"
 					   placeholder="Enter custom frequency" onclick="uncheckradio()"></label></p>
 			<p id="save_p"><input id="save" type="submit" value="Save It"></p>
-
 		</form>
-
 	</div>
 	<script>
 		var imageSelect = null;
@@ -66,7 +63,7 @@
 			imageSelect = null;
 			var image = document.getElementById(name);
 			image.style.border = "5px solid #42A5F5";
-			imageSelect = name;
+			imageSelect = image.getAttribute("src");
 		}
 		function uncheckradio() {
 			var unradio = document.getElementsByName("day");
@@ -78,14 +75,11 @@
 			document.getElementById("others").value = null;
 		}
 		function validateForm() {
-
 			//icon select validation
 			if(imageSelect == null){
 				alert("Choose an icon");
 				return false;
 			}
-
-
 			// checkbox validation
 			var checkboxes = document.getElementsByName("date");
 			var checkedweekly = false;
@@ -100,7 +94,6 @@
 				alert("Enter weekly frequency");
 				return false;
 			}
-
 			// radio button and others validation
 			var daily = document.getElementsByName("day");
 			var dailyOther = document.getElementById("others").value;
@@ -115,6 +108,19 @@
 				alert("Enter daily frequency");
 				return false;
 			}
+			var habit = [{
+				title: document.getElementById("title").value,
+				icon: imageSelect,
+				weekFrequency: 3,
+				dayFrequency: 3,
+				otherFrequency: 0,
+				currentStreak: 10,
+				bestStreak: 20,
+				completedToday: 1
+			}];
+			var stringHabit = JSON.stringify(habit);
+			localStorage.setItem("habitList", stringHabit);
+
 		}
 	</script>
 </body>
