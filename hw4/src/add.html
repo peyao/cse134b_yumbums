@@ -10,7 +10,7 @@
 
 		<div class="forms">
 			<h2>Add A Habit</h2>
-			<form id="formADD" onsubmit="return validateForm()" action="mailto:johnwishon83@gmail.com" method="post">
+			<form id="formADD" onsubmit="return validateForm()" action="testList.html" method="post">
 				<p><label for="title"><span id="title_text">Habit Title</span></label></p>
 				<p><input id="title" type="text" name="fullname" placeholder="Enter habit here" required></p>
 				<p><label>Habit Icon</label></p>
@@ -71,7 +71,7 @@
 				imageSelect = null;
 				var image = document.getElementById(name);
 				image.style.border = "5px solid #42A5F5";
-				imageSelect = name;
+				imageSelect = image.getAttribute("src");
 			}
 			function uncheckradio() {
 				var unradio = document.getElementsByName("day");
@@ -119,8 +119,23 @@
 				if(!selectedradio && !dailyOther) {
 					alert("Enter daily frequency");
 					return false;
+
 				}
-			}
+                var habit = [{
+                    title: document.getElementById("title").value,
+                    icon: imageSelect,
+                    weekFrequency: 3,
+                    dayFrequency: 3,
+                    otherFrequency: 0,
+                    currentStreak: 10,
+                    bestStreak: 20,
+                    completedToday: 1
+                }];
+                var stringHabit = JSON.stringify(habit);
+                localStorage.setItem("habitList", stringHabit);
+  
+
+            }
 		</script>
 	</body>
 </html>
