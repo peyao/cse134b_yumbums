@@ -1,44 +1,105 @@
-<form id="formADD" onsubmit="return validateForm()" action="testList.html" method="post">
-<p><label for="title"><span id="title_text">Habit Title</span></label></p>
-<p><input id="title" type="text" name="fullname" placeholder="Enter habit here" required></p>
-<p><label>Habit Icon</label></p>
-<div id="image-button">
-<label>
-<input id="imgRadio1" type="radio" name="imgRadio">
-<img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/virtue.png" alt="sleep image"/>
-</label>
-<label>
-<input id="imgRadio2" type="radio" name="imgRadio">
-<img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/greyvice.png" alt="eat image"/>
-</label>
-<label>
-<input id="imgRadio3" type="radio" name="imgRadio">
-<img id="icon3" class="icon" onclick="selectImage('icon3');" src="../img/hollow.png" alt="run image"/>
-</label>
-<label>
-<input id="iconFile" type="file" accept=".png, .gif, .jpg" onclick="setIcon()">
-<img id="icon4" class="icon" src="../img/add.png" alt="find an image"/>
-</label>
-</div>
-<p><label>Weekly Frequency</label></p>
-<div id="ck-button">
-<label> <input type="checkbox" name="date" value="sunday"><span>Sun</span></label>
-<label> <input type="checkbox" name="date" value="monday"><span>Mon</span></label>
-<label> <input type="checkbox" name="date" value="tuesday"><span>Tues</span></label>
-<label> <input type="checkbox" name="date" value="wednesday"><span>Wed</span></label>
-<label> <input type="checkbox" name="date" value="thursday"><span>Thur</span></label>
-<label> <input type="checkbox" name="date" value="friday"><span>Fri</span></label>
-<label> <input type="checkbox" name="date" value="saturday"><span>Sat</span></label>
-</div>
-<p><label>Daily Frequency</label></p>
-<div id="daily-button" >
-<label> <input type="radio" name="day" value="1" onclick="clearOther()"><span>1</span></label>
-<label> <input type="radio" name="day" value="2" onclick="clearOther()"><span>2</span></label>
-<label> <input type="radio" name="day" value="3" onclick="clearOther()"><span>3</span></label>
-<span id="times">Times</span>
-</div>
-<p><label for="others"><span id="others_text">Others: </span>
-<input id="others" type="number" step="1" min="1" max="100" name="day"
-placeholder="Enter custom frequency" onclick="uncheckradio()"></label></p>
-<p id="save_p"><input id="save" type="submit" value="Save It"></p>
-</form>
+var pageTransitionOut = function(location) {
+    document.body.classList.add("anim-slide-out-right");
+    prefixedEvent(document.body, "AnimationEnd", function() {
+        document.getElementById('anim-wrapper').style.display = 'none';
+        window.location.href = location;
+    });
+};
+
+var pfx = ["webkit", "moz", "MS", "o", ""];
+function prefixedEvent(element, type, callback) {
+    for (var p = 0; p < pfx.length; p++) {
+        if (!pfx[p])
+            type = type.toLowerCase();
+        element.addEventListener(pfx[p] + type, callback, false);
+    }
+}
+
+
+// global variables
+var imageSelect;
+var weeklySchedule = [];
+var dayFreq = 0;
+
+//upload personal image
+function setIcon() {
+    //open the open file dialog
+    document.getElementById('iconFile').click();
+    document.getElementById('iconFile').onchange = function() {
+        var file = this.files[0];
+        var url = window.URL.createObjectURL(file);
+        document.getElementById('icon3').src = url;
+    };
+}
+
+function selectImage(name) {
+    //Clear all the other effects
+    document.getElementById('icon1').style.border = "none";
+    document.getElementById('icon2').style.border = "none";
+    document.getElementById('icon3').style.border = "none";
+    imageSelect = null;
+    var image = document.getElementById(name);
+    image.style.border = "5px solid #42A5F5";
+    imageSelect = image.getAttribute("src");
+}
+function uncheckradio() {
+    var unradio = document.getElementsByName("day");
+    for (var i = 0; i < unradio.length - 1; i++) {
+        unradio[i].checked = false;
+    }
+}
+function clearOther() {
+    document.getElementById("others").value = null;
+}
+function validateForm() {
+    //icon select validation
+    if(imageSelect == null){
+        alert("Choose an icon");
+        return false;
+    }
+    // checkbox validation
+    var checkboxes = document.getElementsByName("date");
+    var checkedweekly = false;
+    var i;
+    for (i = 0; i < checkboxes.length ; i ++){
+        if(checkboxes[i].checked){
+            checkedweekly = true;
+            weeklySchedule.push(checkboxes[i].value);
+        }
+    }
+    if (!checkedweekly){
+        alert("Enter weekly frequency");
+        return false;
+    }
+    // radio button and others validation
+    var daily = document.getElementsByName("day");
+    var dailyOther = document.getElementById("others").value;
+    var selectedradio = false;
+    for (i = 0; i < daily.length - 1; i++){
+        if (daily[i].checked) {
+            selectedradio = true;
+            dayFreq = daily[i].value;
+            break;
+        }
+    }
+    if(!selectedradio){
+        dayFreq = dailyOther;
+    }
+    if(!selectedradio && !dailyOther) {
+        alert("Enter daily frequency");
+        return false;
+    }
+    var habit = [{
+        title: document.getElementById("title").value,
+        icon: imageSelect,
+        weekFrequency: weeklySchedule,
+        dayFrequency: dayFreq,
+        otherFrequency: 0,
+        currentStreak: 0,
+        bestStreak: 0,
+        completedToday: 0
+    }];
+    var stringHabit = JSON.stringify(habit);
+    localStorage.setItem("habitList", stringHabit);
+
+}
