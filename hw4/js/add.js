@@ -21,6 +21,17 @@ var imageSelect;
 var weeklySchedule = [];
 var dayFreq = 0;
 
+//upload personal image
+function setIcon() {
+    //open the open file dialog
+    document.getElementById('iconFile').click();
+    document.getElementById('iconFile').onchange = function() {
+        var file = this.files[0];
+        var url = window.URL.createObjectURL(file);
+        document.getElementById('icon3').src = url;
+    };
+}
+
 function selectImage(name) {
     //Clear all the other effects
     document.getElementById('icon1').style.border = "none";
