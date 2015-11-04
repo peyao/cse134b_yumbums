@@ -42,9 +42,9 @@
 			</div>
 			<p><label>Daily Frequency</label></p>
 			<div id="daily-button" >
-				<label> <input type="radio" name="day" value="one" onclick="clearOther()"><span>1</span></label>
-				<label> <input type="radio" name="day" value="two" onclick="clearOther()"><span>2</span></label>
-				<label> <input type="radio" name="day" value="three" onclick="clearOther()"><span>3</span></label>
+				<label> <input type="radio" name="day" value="1" onclick="clearOther()"><span>1</span></label>
+				<label> <input type="radio" name="day" value="2" onclick="clearOther()"><span>2</span></label>
+				<label> <input type="radio" name="day" value="3" onclick="clearOther()"><span>3</span></label>
 				<span id="times">Times</span>
 			</div>
 			<p><label for="others"><span id="others_text">Others: </span>
@@ -53,75 +53,6 @@
 			<p id="save_p"><input id="save" type="submit" value="Save It"></p>
 		</form>
 	</div>
-	<script>
-		var imageSelect = null;
-		function selectImage(name) {
-			//Clear all the other effects
-			document.getElementById('icon1').style.border = "none";
-			document.getElementById('icon2').style.border = "none";
-			document.getElementById('icon3').style.border = "none";
-			imageSelect = null;
-			var image = document.getElementById(name);
-			image.style.border = "5px solid #42A5F5";
-			imageSelect = image.getAttribute("src");
-		}
-		function uncheckradio() {
-			var unradio = document.getElementsByName("day");
-			for (var i = 0; i < unradio.length - 1; i++) {
-				unradio[i].checked = false;
-			}
-		}
-		function clearOther() {
-			document.getElementById("others").value = null;
-		}
-		function validateForm() {
-			//icon select validation
-			if(imageSelect == null){
-				alert("Choose an icon");
-				return false;
-			}
-			// checkbox validation
-			var checkboxes = document.getElementsByName("date");
-			var checkedweekly = false;
-			var i;
-			for (i = 0; i < checkboxes.length ; i ++){
-				if(checkboxes[i].checked){
-					checkedweekly = true;
-					break;
-				}
-			}
-			if (!checkedweekly){
-				alert("Enter weekly frequency");
-				return false;
-			}
-			// radio button and others validation
-			var daily = document.getElementsByName("day");
-			var dailyOther = document.getElementById("others").value;
-			var selectedradio = false;
-			for (i = 0; i < daily.length - 1; i++){
-				if (daily[i].checked) {
-					selectedradio = true;
-					break;
-				}
-			}
-			if(!selectedradio && !dailyOther) {
-				alert("Enter daily frequency");
-				return false;
-			}
-			var habit = [{
-				title: document.getElementById("title").value,
-				icon: imageSelect,
-				weekFrequency: 3,
-				dayFrequency: 3,
-				otherFrequency: 0,
-				currentStreak: 10,
-				bestStreak: 20,
-				completedToday: 1
-			}];
-			var stringHabit = JSON.stringify(habit);
-			localStorage.setItem("habitList", stringHabit);
-
-		}
-	</script>
+	<script src="../js/add.js"></script>
 </body>
 </html>
