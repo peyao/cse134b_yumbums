@@ -89,17 +89,29 @@ function validateForm() {
         alert("Enter daily frequency");
         return false;
     }
-    var habit = [{
+    var habit = {
         title: document.getElementById("title").value,
         icon: imageSelect,
         weekFrequency: weeklySchedule,
         dayFrequency: dayFreq,
-        otherFrequency: 0,
         currentStreak: 0,
         bestStreak: 0,
         completedToday: 0
-    }];
-    var stringHabit = JSON.stringify(habit);
+    };
+    
+    //need to retrieve the list of habits or create a list
+    //of habits if the list is empty
+    var habitList = JSON.parse(localStorage.getItem("habitList"));
+    if(!habitList || habitList.length == 0){
+        habitList = [];
+    }
+    
+    //adds the habit to the end of the list and stores the list back
+    //in local storage
+    habitList.push(habit);
+    var stringHabit = JSON.stringify(habitList);
     localStorage.setItem("habitList", stringHabit);
+    window.location = "/src/testList.html";
+    return false;
 
 }

@@ -20,6 +20,7 @@ function prefixedEvent(element, type, callback) {
 var imageSelect;
 var weeklySchedule = [];
 var dayFreq = 0;
+var currentIndex;
 
 //upload personal image
 function setIcon() {
@@ -89,7 +90,7 @@ function validateForm() {
         alert("Enter daily frequency");
         return false;
     }
-    var habit = [{
+    var habit = {
         title: document.getElementById("title").value,
         icon: imageSelect,
         weekFrequency: weeklySchedule,
@@ -98,8 +99,80 @@ function validateForm() {
         currentStreak: 0,
         bestStreak: 0,
         completedToday: 0
-    }];
-    var stringHabit = JSON.stringify(habit);
+    };
+    
+    var habitList = JSON.parse(localStorage.getItem("habitList"));
+    if(!habitList || habitList.length == 0){
+        return false;
+    }
+    habitList[currentIndex] = habit;
+    var stringHabit = JSON.stringify(habitList);
     localStorage.setItem("habitList", stringHabit);
+    localStorage.setItem("currentIndex", null);
+    window.location = "/src/testList.html";
+    return false;
 
 }
+
+function initializeFields(){
+    var habitList = JSON.parse(localStorage.getItem("habitList"));
+    currentIndex = localStorage.getItem("currentIndex");
+    var currentHabit;
+    if(!habitList || habitList.length == 0 || currentIndex == null){
+        return false;
+    }else{
+        var currentHabit = habitList[currentIndex];
+        console.log(JSON.stringify(currentHabit, null, 2));
+    }
+    
+    document.getElementById("title").value = currentHabit.title;
+    
+    if(currentHabit.icon === "../img/virtue.png"){
+        selectImage('icon1');
+    }else if(currentHabit.icon === "../img/greyvice.png"){
+        selectImage('icon2');
+    }else{
+        document.getElementById('icon3').src = currentHabit.icon;
+        selectImage('icon3');
+    }
+    
+    var dateCheckboxes = document.getElementsByName("date");
+    for(var i = 0; i<currentHabit.weekFrequency.length; i++){
+        var weekDate = currentHabit.weekFrequency[i];
+        if(weekDate === "sunday"){
+            dateCheckboxes[0].checked = true;
+        }
+        if(weekDate === "monday"){
+            dateCheckboxes[1].checked = true;
+        }
+        if(weekDate === "tuesday"){
+            dateCheckboxes[2].checked = true;
+        }
+        if(weekDate === "wednesday"){
+            dateCheckboxes[3].checked = true;
+        }
+        if(weekDate === "thursday"){
+            dateCheckboxes[4].checked = true;
+        }
+        if(weekDate === "friday"){
+            dateCheckboxes[5].checked = true;
+        }
+        if(weekDate === "saturday"){
+            dateCheckboxes[6].checked = true;
+        }
+    }
+    
+    var dayRadioBoxes = document.getElementsByName("day");
+    var currentDayFrequency = currentHabit.dayFrequency;
+    if(currentDayFrequency == 1){
+        dayRadioBoxes[0].checked = true;
+    }else if(currentDayFrequency == 2){
+        dayRadioBoxes[1].checked = true;
+    }else if(currentDayFrequency == 3){
+        dayRadioBoxes[2].checked = true;
+    }else{
+        document.getElementById("others").value = currentDayFrequency;
+    }
+}
+
+initializeFields();

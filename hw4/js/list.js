@@ -6,14 +6,40 @@ function showMsg(element) {
     msgElement.style.visibility="visible";
 }
 
+/*
+* Function that removes a habit from the array of habits that is stored in local storage
+* This method needs to remove the habit at the proper index and also subtract 1 from the data-index 
+* attribute on all habits after the one getting deleted.  This is because deleting an element from an
+* array forces all indeces after it to shift forward by 1.
+*/
+function deleteHabitInStorage(index){
+    var habitList = JSON.parse(localStorage.getItem("habitList"));
+    var habitListElement = document.querySelectorAll("#habit-list > li");
+    for(var i = index + 1; i<habitListElement.length; i++){
+        var habitElement = habitListElement[i];
+        var habitIndex = habitElement.setAttribute("data-index", i - 1);
+    }
+    habitList.splice(index, 1);
+    localStorage.setItem("habitList", JSON.stringify(habitList));
+    return true;
+}
+
 function deleteHabit(element) {
     var child = element.parentNode.parentNode;
-    var parent = child.parentNode;
-    child.classList.add("anim-slide-out-right-240-5");
+    var habitIndex = parseInt(child.getAttribute("data-index"));
+    if(habitIndex == null){
+        return false;
+    }
+    //only remove the habit from the page if it is successfully removed
+    //from storage
+    if(deleteHabitInStorage(habitIndex)){
+        var parent = child.parentNode;
+        child.classList.add("anim-slide-out-right-240-5");
 
-    prefixedEvent(child, "AnimationEnd", function() {
-        parent.removeChild(child);
-    });
+        prefixedEvent(child, "AnimationEnd", function() {
+            parent.removeChild(child);
+        });
+    }
 }
 
 function createHabitNameListElement(currentHabit){
@@ -170,6 +196,7 @@ function createHabitOpElement(currentHabit){
 function createHabitElement(currentHabit, index){
     var habit = document.createElement("LI");
     habit.setAttribute("class", "anim-slide-in-right-" + (index+1));
+    habit.setAttribute("data-index", index);
     var habitInfo = createHabitInfoElement(currentHabit);
     var messageDiv = createHabitMessageElement(currentHabit);
     var habitOpDiv = createHabitOpElement(currentHabit);
@@ -184,10 +211,11 @@ function createHabitElement(currentHabit, index){
 */
 function listHabits(){
     var habits = JSON.parse(localStorage.getItem("habitList"));
-
-    for(var i = 0; i<habits.length; i++){
-        var currentHabit = habits[i];
-        createHabitElement(currentHabit, i);
+    if(habits && habits.length != 0){
+        for(var i = 0; i<habits.length; i++){
+            var currentHabit = habits[i];
+            createHabitElement(currentHabit, i);
+        }
     }
 }
 
@@ -210,7 +238,16 @@ function attachClickListeners(){
 
     var completedButtons = document.getElementsByClassName("op-edit");
     for(var i = 0; i<completedButtons.length; i++){
+        //When trying to edit the habit, the index of the habit being edited
+        //needs to be set in local storage so that edit.js can retrieve the
+        //value and no which habit in the habitList to edit.
         completedButtons[i].onclick = function(){
+            var child = this.parentNode.parentNode;
+            var habitIndex = parseInt(child.getAttribute("data-index"));
+            if(habitIndex == null){
+                return false;
+            }
+            localStorage.setItem("currentIndex", habitIndex);
             location.href='edit.html';
         };
     }
