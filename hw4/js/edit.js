@@ -43,15 +43,41 @@ function selectImage(name) {
     image.style.border = "5px solid #42A5F5";
     imageSelect = image.getAttribute("src");
 }
+
 function uncheckradio() {
     var unradio = document.getElementsByName("day");
     for (var i = 0; i < unradio.length - 1; i++) {
         unradio[i].checked = false;
     }
 }
+
 function clearOther() {
     document.getElementById("others").value = null;
 }
+
+function updateHabitInStorage(){
+    var habit = {
+        title: document.getElementById("title").value,
+        icon: imageSelect,
+        weekFrequency: weeklySchedule,
+        dayFrequency: dayFreq,
+        otherFrequency: 0,
+        currentStreak: 0,
+        bestStreak: 0,
+        completedToday: 0
+    };
+    
+    var habitList = JSON.parse(localStorage.getItem("habitList"));
+    if(!habitList || habitList.length == 0){
+        return false;
+    }
+    habitList[currentIndex] = habit;
+    var stringHabit = JSON.stringify(habitList);
+    localStorage.setItem("habitList", stringHabit);
+    localStorage.setItem("currentIndex", null);
+    return true;
+}
+
 function validateForm() {
     //icon select validation
     if(imageSelect == null){
@@ -90,31 +116,22 @@ function validateForm() {
         alert("Enter daily frequency");
         return false;
     }
-    var habit = {
-        title: document.getElementById("title").value,
-        icon: imageSelect,
-        weekFrequency: weeklySchedule,
-        dayFrequency: dayFreq,
-        otherFrequency: 0,
-        currentStreak: 0,
-        bestStreak: 0,
-        completedToday: 0
-    };
     
-    var habitList = JSON.parse(localStorage.getItem("habitList"));
-    if(!habitList || habitList.length == 0){
+    if(!updateHabitInStorage()){
         return false;
     }
-    habitList[currentIndex] = habit;
-    var stringHabit = JSON.stringify(habitList);
-    localStorage.setItem("habitList", stringHabit);
-    localStorage.setItem("currentIndex", null);
+    
     window.location = "/src/testList.html";
     return false;
 
 }
 
+/*
+ * initializes the values of the inputs in the form to the values
+ * selected when creating a habit.
+*/
 function initializeFields(){
+    //get the habit that the user wants to edit
     var habitList = JSON.parse(localStorage.getItem("habitList"));
     currentIndex = localStorage.getItem("currentIndex");
     var currentHabit;
@@ -122,11 +139,12 @@ function initializeFields(){
         return false;
     }else{
         var currentHabit = habitList[currentIndex];
-        console.log(JSON.stringify(currentHabit, null, 2));
     }
     
+    //set the value of the title input field
     document.getElementById("title").value = currentHabit.title;
     
+    //set which icon to be selected by default
     if(currentHabit.icon === "../img/virtue.png"){
         selectImage('icon1');
     }else if(currentHabit.icon === "../img/greyvice.png"){
@@ -136,6 +154,8 @@ function initializeFields(){
         selectImage('icon3');
     }
     
+    //check all day of the week checkboxes that the user selected 
+    //when creating the habit
     var dateCheckboxes = document.getElementsByName("date");
     for(var i = 0; i<currentHabit.weekFrequency.length; i++){
         var weekDate = currentHabit.weekFrequency[i];
@@ -162,17 +182,21 @@ function initializeFields(){
         }
     }
     
-    var dayRadioBoxes = document.getElementsByName("day");
+    //set the default value of the day frequency either by 
+    //checking one of the radio buttons or by setting the
+    //value in the 'other' input field
+    var dayRadioButtons = document.getElementsByName("day");
     var currentDayFrequency = currentHabit.dayFrequency;
     if(currentDayFrequency == 1){
-        dayRadioBoxes[0].checked = true;
+        dayRadioButtons[0].checked = true;
     }else if(currentDayFrequency == 2){
-        dayRadioBoxes[1].checked = true;
+        dayRadioButtons[1].checked = true;
     }else if(currentDayFrequency == 3){
-        dayRadioBoxes[2].checked = true;
+        dayRadioButtons[2].checked = true;
     }else{
         document.getElementById("others").value = currentDayFrequency;
     }
 }
 
+/********************** functions called on load of page ***************/
 initializeFields();

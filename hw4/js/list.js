@@ -1,8 +1,49 @@
 /**************************************************************************************
                             Function Definitions
 **************************************************************************************/
+
+/*
+ * Function that gets called when clicking the complete habit button, updates
+ * the html on the page and also the values in the local storage
+*/
+function updateMessageDiv(msgElement, habitIndex){
+    //get the current habit from local storage
+    var habitList = JSON.parse(localStorage.getItem("habitList"));
+    var currentHabit = habitList[habitIndex];
+    
+    //update the message showing how close the user is to reaching the daily goal
+    currentHabit.completedToday += 1;
+    var newMessage = "Completed <strong>" + currentHabit.completedToday + "/" + currentHabit.dayFrequency + "</strong> for today!";
+    msgElement.getElementsByClassName("message-today")[0].innerHTML = newMessage;
+    
+    //if the user reached their goal for the day, then update their current and best streak,
+    //along with redraw the progress bar
+    if(currentHabit.completedToday == currentHabit.dayFrequency){
+        var streaks = msgElement.querySelectorAll(".message-total strong");
+        currentHabit.currentStreak += 1;
+        streaks[0].innerHTML = currentHabit.currentStreak;
+        if(currentHabit.currentStreak > currentHabit.bestStreak){
+            currentHabit.bestStreak = currentHabit.currentStreak;
+            streaks[1].innerHTML = currentHabit.bestStreak;
+        }
+        var shadeWidth = calculateShadeWidth(currentHabit);
+        var lines = msgElement.querySelectorAll("line");
+        lines[0].setAttribute("x2", shadeWidth);
+        lines[1].setAttribute("x1", shadeWidth);
+    }
+    
+    //commit the changes back to local storage
+    localStorage.setItem("habitList", JSON.stringify(habitList));
+}
+
 function showMsg(element) {
-    var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
+    var listElement = element.parentNode.parentNode;
+    var habitIndex = listElement.getAttribute("data-index");
+    if(habitIndex === null){
+        return false;
+    }
+    var msgElement = (listElement.getElementsByClassName("message"))[0];
+    updateMessageDiv(msgElement, parseInt(habitIndex));
     msgElement.style.visibility="visible";
 }
 
@@ -211,6 +252,7 @@ function createHabitElement(currentHabit, index){
 */
 function listHabits(){
     var habits = JSON.parse(localStorage.getItem("habitList"));
+    console.log(JSON.stringify(habits, null, 2));
     if(habits && habits.length != 0){
         for(var i = 0; i<habits.length; i++){
             var currentHabit = habits[i];
@@ -219,8 +261,15 @@ function listHabits(){
     }
 }
 
+/*
+ * Function that calculates the values that the lines in the svg element
+ * need to be drawn with based off the user's current and best streak
+*/
 function calculateShadeWidth(currentHabit){
-    var percentageCompleted = currentHabit.completedToday/currentHabit.dayFrequency;
+    if(currentHabit.bestStreak === 0){
+        return 0;
+    }
+    var percentageCompleted = currentHabit.currentStreak/currentHabit.bestStreak;
     var shadeWidth = Math.floor(percentageCompleted * 150);
     if(shadeWidth > 150){
         shadeWidth = 150;

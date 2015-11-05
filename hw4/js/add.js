@@ -42,15 +42,43 @@ function selectImage(name) {
     image.style.border = "5px solid #42A5F5";
     imageSelect = image.getAttribute("src");
 }
+
 function uncheckradio() {
     var unradio = document.getElementsByName("day");
     for (var i = 0; i < unradio.length - 1; i++) {
         unradio[i].checked = false;
     }
 }
+
 function clearOther() {
     document.getElementById("others").value = null;
 }
+
+function addHabitInStorage(){
+    var habit = {
+        title: document.getElementById("title").value,
+        icon: imageSelect,
+        weekFrequency: weeklySchedule,
+        dayFrequency: dayFreq,
+        currentStreak: 0,
+        bestStreak: 0,
+        completedToday: 0
+    };
+    
+    //need to retrieve the list of habits or create a list
+    //of habits if the list is empty
+    var habitList = JSON.parse(localStorage.getItem("habitList"));
+    if(!habitList || habitList.length == 0){
+        habitList = [];
+    }
+    
+    //adds the habit to the end of the list and stores the list back
+    //in local storage
+    habitList.push(habit);
+    var stringHabit = JSON.stringify(habitList);
+    localStorage.setItem("habitList", stringHabit);
+}
+
 function validateForm() {
     //icon select validation
     if(imageSelect == null){
@@ -89,28 +117,9 @@ function validateForm() {
         alert("Enter daily frequency");
         return false;
     }
-    var habit = {
-        title: document.getElementById("title").value,
-        icon: imageSelect,
-        weekFrequency: weeklySchedule,
-        dayFrequency: dayFreq,
-        currentStreak: 0,
-        bestStreak: 0,
-        completedToday: 0
-    };
     
-    //need to retrieve the list of habits or create a list
-    //of habits if the list is empty
-    var habitList = JSON.parse(localStorage.getItem("habitList"));
-    if(!habitList || habitList.length == 0){
-        habitList = [];
-    }
+    addHabitInStorage();
     
-    //adds the habit to the end of the list and stores the list back
-    //in local storage
-    habitList.push(habit);
-    var stringHabit = JSON.stringify(habitList);
-    localStorage.setItem("habitList", stringHabit);
     window.location = "/src/testList.html";
     return false;
 
