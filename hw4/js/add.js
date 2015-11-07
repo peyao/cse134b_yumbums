@@ -119,8 +119,6 @@ function validateForm() {
     }
     
     addHabitInStorage();
-    
-    window.location = "/src/testList.html";
-    return false;
+
 
 }

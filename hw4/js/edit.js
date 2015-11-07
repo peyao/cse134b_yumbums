@@ -138,7 +138,7 @@ function initializeFields(){
     if(!habitList || habitList.length == 0 || currentIndex == null){
         return false;
     }else{
-        var currentHabit = habitList[currentIndex];
+        currentHabit = habitList[currentIndex];
     }
     
     //set the value of the title input field
