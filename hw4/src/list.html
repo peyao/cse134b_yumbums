@@ -14,12 +14,12 @@
             <ul id="habit-list">
                 <li class="anim-slide-in-right-1">
                     <ul class="habit-info">
-                        <li><div class="habit-name">Sleep 8 hours</div></li>
-                        <li><img class="habit-icon" src="../img/sleep.jpg" alt="habit icon"></li>
+                        <li><div class="habit-name">default</div></li>
+                        <li><img class="habit-icon" src="../img/hollow.png" alt="habit icon"></li>
                     </ul>
                     <div class="message">
                         <span class="message-total">
-                            <strong>2</strong> days in a row! Best Record: <strong>5</strong><br>
+                            <strong>1</strong> days in a row! Best Record: <strong>1</strong><br>
                             <svg height="25" width="150">
                                 <line x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
                                 <line x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
@@ -31,63 +31,7 @@
                         <button type="button" class="op op-done" onclick="showMsg(this);" title="done">
                             <img src="../img/done.svg" alt="Done">
                         </button>
-                        <button type="button" class="op op-edit" onclick="location.href='edit.html'" title="edit habit">
-                            <img src="../img/edit.svg" alt="Edit">
-                        </button>
-                        <button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit">
-                            <img src="../img/delete.svg" alt="Del">
-                        </button>
-                    </div>
-                </li>
-
-                <li class="anim-slide-in-right-2">
-                    <ul class="habit-info">
-                        <li><div class="habit-name">Eat Healthy</div></li>
-                        <li><img class="habit-icon" src="../img/salad.jpg" alt="habit icon"></li>
-                    </ul>
-                    <div class="message">
-                        <span class="message-total">
-                            <strong>10</strong> days in a row! Best Record: <strong>20</strong><br>
-                            <svg height="25" width="150">
-                                <line x1="0" y1="0" x2="75" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
-                                <line x1="75" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
-                            </svg>
-                        </span><br>
-                        <span class="message-today">Completed <strong>1/3</strong> for today!</span>
-                    </div>
-                    <div class="habit-op">
-                        <button type="button" class="op op-done" onclick="showMsg(this);" title="done">
-                            <img src="../img/done.svg" alt="Done">
-                        </button>
-                        <button type="button" class="op op-edit" onclick="location.href='edit.html'" title="edit habit">
-                            <img src="../img/edit.svg" alt="Edit">
-                        </button>
-                        <button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit">
-                            <img src="../img/delete.svg" alt="Del">
-                        </button>
-                    </div>
-                </li>
-
-                <li class="anim-slide-in-right-3">
-                    <ul class="habit-info">
-                        <li><div class="habit-name">Exercise 30 minutes</div></li>
-                        <li><img class="habit-icon" src="../img/run.jpg" alt="habit icon"></li>
-                    </ul>
-                    <div class="message">
-                        <span class="message-total">
-                            <strong>48</strong> days in a row! Best Record: <strong>60</strong><br>
-                            <svg height="25" width="150">
-                                <line x1="0" y1="0" x2="120" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
-                                <line x1="120" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
-                            </svg>
-                        </span><br>
-                        <span class="message-today">Completed <strong>1/2</strong> for today!</span>
-                    </div>
-                    <div class="habit-op">
-                        <button type="button" class="op op-done" onclick="showMsg(this);" title="done">
-                            <img src="../img/done.svg" alt="Done">
-                        </button>
-                        <button type="button" class="op op-edit" onclick="location.href='edit.html'" title="edit habit">
+                        <button type="button" class="op op-edit" onclick="editHabit(this)" title="edit habit">
                             <img src="../img/edit.svg" alt="Edit">
                         </button>
                         <button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit">
