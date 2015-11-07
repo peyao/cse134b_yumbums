@@ -120,9 +120,8 @@ function validateForm() {
     if(!updateHabitInStorage()){
         return false;
     }
-    
-    window.location = "/src/testList.html";
-    return false;
+
+
 
 }
 
