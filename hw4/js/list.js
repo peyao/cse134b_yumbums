@@ -330,5 +330,8 @@ function prefixedEvent(element, type, callback) {
 /**************************************************************************************
                             Executed On Load of Page
 **************************************************************************************/
+document.body.onunload = function() {
+    location.reload(true);
+};
 listHabits();
 attachClickListeners();

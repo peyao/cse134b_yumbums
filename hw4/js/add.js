@@ -123,3 +123,7 @@ function validateForm() {
         pageTransitionOut('list.html');
     });
 }
+
+document.body.onunload = function() {
+    location.reload(true);
+};

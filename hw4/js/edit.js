@@ -198,4 +198,7 @@ function initializeFields(){
 }
 
 /********************** functions called on load of page ***************/
+document.body.onunload = function() {
+    location.reload(true);
+};
 initializeFields();
