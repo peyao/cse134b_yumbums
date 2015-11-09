@@ -16,6 +16,14 @@ function updateMessageDiv(msgElement, habitKey, callback){
     var newMessage = "Completed <strong>" + currentHabit.completedToday + "/" + currentHabit.dayFrequency + "</strong> for today!";
     msgElement.getElementsByClassName("message-today")[0].innerHTML = newMessage;
 
+
+    //update the progress bar
+    var shadeWidth = calculateShadeWidth(currentHabit);
+    var lines = msgElement.querySelectorAll("line");
+    lines[0].setAttribute("x2", shadeWidth);
+    lines[1].setAttribute("x1", shadeWidth);
+
+
     //if the user reached their goal for the day, then update their current and best streak,
     //along with redraw the progress bar
     if(currentHabit.completedToday == currentHabit.dayFrequency){
@@ -26,15 +34,18 @@ function updateMessageDiv(msgElement, habitKey, callback){
             currentHabit.bestStreak = currentHabit.currentStreak;
             streaks[1].innerHTML = currentHabit.bestStreak;
         }
-        var shadeWidth = calculateShadeWidth(currentHabit);
-        var lines = msgElement.querySelectorAll("line");
-        lines[0].setAttribute("x2", shadeWidth);
-        lines[1].setAttribute("x1", shadeWidth);
     }
 
     //commit the changes back to local storage
     //localStorage.setItem("habitList", JSON.stringify(habitList));
     $firebase.updateHabit(currentHabit, habitKey, callback);
+}
+
+function hideMessageAfter3Secs(element, habitIndex){
+	var listElement = element.parentNode.parentNode;
+	var msgElement = (listElement.getElementsByClassName("message"))[0];
+    updateMessageDiv(msgElement, parseInt(habitIndex));
+    msgElement.style.visibility="hidden";
 }
 
 function showMsg(element) {
@@ -47,6 +58,7 @@ function showMsg(element) {
     var msgElement = (listElement.getElementsByClassName("message"))[0];
     updateMessageDiv(msgElement, habitKey, function() {
         msgElement.style.visibility="visible";
+        setTimeout( function () {hideMessageAfter3Secs(element, habitKey);}, 3000);
     });
 }
 
@@ -223,6 +235,15 @@ function createHabitOpElement(currentHabit){
     doneImage.setAttribute("alt", "Done");
     doneButton.appendChild(doneImage);
 
+    var failedButton = document.createElement("BUTTON");
+    failedButton.setAttribute("class", "op op-failed");
+    failedButton.setAttribute("type", "button");
+    failedButton.setAttribute("title", "failed");
+    var failedImage = document.createElement("IMG");
+    failedImage.setAttribute("src", "../img/x.svg");
+    failedImage.setAttribute("alt", "failed");
+    failedButton.appendChild(failedImage);
+
     var editButton = document.createElement("BUTTON");
     editButton.setAttribute("class", "op op-edit");
     editButton.setAttribute("type", "button");
@@ -236,13 +257,13 @@ function createHabitOpElement(currentHabit){
     deleteButton.setAttribute("class", "op op-del");
     deleteButton.setAttribute("type", "button");
     deleteButton.setAttribute("title", "delete habit");
-
     var deleteImage = document.createElement("IMG");
     deleteImage.setAttribute("src", "../img/delete.svg");
     deleteImage.setAttribute("alt", "Del");
     deleteButton.appendChild(deleteImage);
 
     habitOpDiv.appendChild(doneButton);
+    habitOpDiv.appendChild(failedButton);
     habitOpDiv.appendChild(editButton);
     habitOpDiv.appendChild(deleteButton);
     return habitOpDiv;
@@ -305,10 +326,8 @@ function listHabits(callback){
  * need to be drawn with based off the user's current and best streak
 */
 function calculateShadeWidth(currentHabit){
-    if(currentHabit.bestStreak === 0){
-        return 0;
-    }
-    var percentageCompleted = currentHabit.currentStreak/currentHabit.bestStreak;
+
+    var percentageCompleted = currentHabit.completedToday/currentHabit.dayFrequency;
     var shadeWidth = Math.floor(percentageCompleted * 150);
     if(shadeWidth > 150){
         shadeWidth = 150;

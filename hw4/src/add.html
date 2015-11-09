@@ -50,14 +50,24 @@
 				<label> <input type="radio" name="day" value="3" onclick="clearOther()"><span>3</span></label>
 				<span id="times">Times</span>
 			</div>
-			<p><label for="others"><span id="others_text">Others: </span>
+			<p><label for="others"><span id="others_text">Other: </span>
 			<input id="others" type="number" step="1" min="1" max="100" name="day"
 				   placeholder="Enter custom frequency" onclick="uncheckradio()"></label></p>
-            <label>Notification</label>
-            <div id="notification-button">
-                <label><input type="radio" name="notification" value="ON"><span>ON</span></label>
-                <label><input type="radio" name="notification" value="OFF"><span>OFF</span></label>
-            </div>
+            <p><label>Notifications Frequency</label></p>
+			<div id="nt-list">
+				<p>Interval: <select id="selectNotification" style="bottom:100%;">
+					<option name="time" value="None" selected>None</option>
+					<option name="time" value="15">15 Minutes</option>
+					<option name="time" value="30">30 Minutes</option>
+					<option name="time" value="45">45 Minutes</option>
+					<option name="time" value="1"> 1 Hour</option>
+					<option name="time" value="2"> 2 Hours</option>
+					<option name="time" value="4"> 4 Hours</option>
+					<option name="time" value="8"> 8 Hours</option>
+					<option name="time" value="12">12 Hours</option>
+					<option name="time" value="time">Specific Time</option>
+				</select></p>
+			</div>
 			<p id="save_p">
 				<input id="save" type="button" value="Save It" onclick="return validateForm()">
 			</p>
