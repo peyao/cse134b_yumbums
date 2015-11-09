@@ -220,6 +220,7 @@ function createHabitOpElement(currentHabit){
     deleteButton.setAttribute("class", "op op-del");
     deleteButton.setAttribute("type", "button");
     deleteButton.setAttribute("title", "delete habit");
+
     var deleteImage = document.createElement("IMG");
     deleteImage.setAttribute("src", "../img/delete.svg");
     deleteImage.setAttribute("alt", "Del");
@@ -252,11 +253,25 @@ function createHabitElement(currentHabit, index){
 */
 function listHabits(){
     var habits = JSON.parse(localStorage.getItem("habitList"));
-    console.log(JSON.stringify(habits, null, 2));
     if(habits && habits.length != 0){
         for(var i = 0; i<habits.length; i++){
             var currentHabit = habits[i];
+            var currentDate = new Date();
+            currentDate.setHours(0);
+            var currentTime = currentDate.getTime();
+            
+            //if it is a new day, then reset some values back to zero for some habits
+            if(currentTime > currentHabit.timeCheck){
+                //if the habit was not completed, then set the current streak back to zero
+                if(currentHabit.completedToday < currentHabit.dayFrequency){
+                    currentHabit.currentStreak = 0;
+                }
+                currentHabit.completedToday = 0;
+            }
             createHabitElement(currentHabit, i);
+            
+            //values may have been reset if a new day occured, to reset stuff in local storage
+            localStorage.setItem("habitList", JSON.stringify(habits));
         }
     }
 }
@@ -284,13 +299,12 @@ function attachClickListeners(){
             showMsg(this);
         };
     }
-
-    var completedButtons = document.getElementsByClassName("op-edit");
-    for(var i = 0; i<completedButtons.length; i++){
+    var editButtons = document.getElementsByClassName("op-edit");
+    for(var i = 0; i<editButtons.length; i++){
         //When trying to edit the habit, the index of the habit being edited
         //needs to be set in local storage so that edit.js can retrieve the
         //value and no which habit in the habitList to edit.
-        completedButtons[i].onclick = function(){
+        editButtons[i].onclick = function(){
             var child = this.parentNode.parentNode;
             var habitIndex = parseInt(child.getAttribute("data-index"));
             if(habitIndex == null){
@@ -302,10 +316,12 @@ function attachClickListeners(){
         };
     }
 
-    var completedButtons = document.getElementsByClassName("op-del");
-    for(var i = 0; i<completedButtons.length; i++){
-        completedButtons[i].onclick = function(){
-            deleteHabit(this);
+    var deleteButtons = document.getElementsByClassName("op-del");
+    for(var i = 0; i<deleteButtons.length; i++){
+        deleteButtons[i].onclick = function(){
+            if (window.confirm("Are you sure you want to delete this habit?")) {
+                deleteHabit(this);
+            }
         };
     }
 }

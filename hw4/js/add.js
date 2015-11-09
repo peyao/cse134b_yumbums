@@ -30,6 +30,10 @@ function uncheckradio() {
     for (var i = 0; i < unradio.length - 1; i++) {
         unradio[i].checked = false;
     }
+    unradio = document.getElementsByName("notification");
+    for (var i = 0; i < unradio.length - 1; i++) {
+        unradio[i].checked = false;
+    }
 }
 
 function clearOther() {
@@ -37,6 +41,9 @@ function clearOther() {
 }
 
 function addHabitInStorage(callback){
+    var currentDate = new Date();
+    currentDate.setHours(0);
+    var startOfDay = currentDate.getTime();
     var habit = {
         title: document.getElementById("title").value,
         icon: imageSelect,
@@ -44,7 +51,8 @@ function addHabitInStorage(callback){
         dayFrequency: dayFreq,
         currentStreak: 0,
         bestStreak: 0,
-        completedToday: 0
+        completedToday: 0,
+        timeCheck: startOfDay
     };
 
     //need to retrieve the list of habits or create a list
