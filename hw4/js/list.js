@@ -220,6 +220,7 @@ function createHabitOpElement(currentHabit){
     deleteButton.setAttribute("class", "op op-del");
     deleteButton.setAttribute("type", "button");
     deleteButton.setAttribute("title", "delete habit");
+
     var deleteImage = document.createElement("IMG");
     deleteImage.setAttribute("src", "../img/delete.svg");
     deleteImage.setAttribute("alt", "Del");
@@ -285,8 +286,8 @@ function attachClickListeners(){
         };
     }
 
-    var completedButtons = document.getElementsByClassName("op-edit");
-    for(var i = 0; i<completedButtons.length; i++){
+     completedButtons = document.getElementsByClassName("op-edit");
+    for( i = 0; i<completedButtons.length; i++){
         //When trying to edit the habit, the index of the habit being edited
         //needs to be set in local storage so that edit.js can retrieve the
         //value and no which habit in the habitList to edit.
@@ -302,10 +303,12 @@ function attachClickListeners(){
         };
     }
 
-    var completedButtons = document.getElementsByClassName("op-del");
-    for(var i = 0; i<completedButtons.length; i++){
+    completedButtons = document.getElementsByClassName("op-del");
+    for( i = 0; i<completedButtons.length; i++){
         completedButtons[i].onclick = function(){
-            deleteHabit(this);
+             if (window.confirm("Are you sure you want to delete this habit?")) {
+                deleteHabit(this);
+            }
         };
     }
 }
