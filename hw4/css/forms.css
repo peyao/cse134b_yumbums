@@ -231,7 +231,7 @@ span#times{
 
 #notification-button {
     overflow: auto;
-};
+}
 #notification-button label {
     margin:4px;
     border-radius:25px;
