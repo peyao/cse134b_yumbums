@@ -4,12 +4,13 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Edit a habit</title>
-		<link rel="stylesheet" href="../css/forms.css">
+		<link rel="stylesheet" type="text/css" href="../css/forms.css">
+	    <link rel="stylesheet" type="text/css" href="../css/animations.css">
 	</head>
 	<body>
-		<div class="forms">
+		<div id="anim-wrapper" class="forms anim-fade-in">
 			<h2>Edit A Habit</h2>
-			<form id="formEDIT" onsubmit="return validateForm()" action="list.html" method="post">
+			<form id="formEDIT">
 				<p><label for="title"><span id="title_text">Habit Title</span></label></p>
 				<p><input id="title" type="text" name="fullname" placeholder="Enter habit here" required></p>
 				<p><label>Habit Icon</label></p>
@@ -51,7 +52,9 @@
 				<p><label for="others"><span id="others_text">Others: </span>
 					<input id="others" type="number" step="1" min="1" max="100" name="day"
 						   placeholder="Enter custom frequency" onclick="uncheckradio()"></label></p>
-				<p id="save_p"><input id="save" type="submit" value="Save It"></p>
+				<p id="save_p">
+					<input id="save" type="button" value="Save It" onclick="return validateForm()">
+				</p>
 			</form>
 
 		</div>
