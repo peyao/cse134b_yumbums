@@ -2,7 +2,7 @@
 var imageSelect;
 var weeklySchedule = [];
 var dayFreq = 0;
-var currentIndex;
+var currentKey = localStorage.getItem("currentKey");
 
 //upload personal image
 function setIcon() {
@@ -37,7 +37,7 @@ function clearOther() {
     document.getElementById("others").value = null;
 }
 
-function updateHabitInStorage(callback){
+function updateHabit(callback){
     var habit = {
         title: document.getElementById("title").value,
         icon: imageSelect,
@@ -49,6 +49,7 @@ function updateHabitInStorage(callback){
         completedToday: 0
     };
 
+    /*
     var habitList = JSON.parse(localStorage.getItem("habitList"));
     if(!habitList || habitList.length == 0){
         return false;
@@ -56,27 +57,13 @@ function updateHabitInStorage(callback){
     habitList[currentIndex] = habit;
     var stringHabit = JSON.stringify(habitList);
     localStorage.setItem("habitList", stringHabit);
-    localStorage.setItem("currentIndex", null);
-    callback();
-    return true;
-}
+    */
 
-function pageTransitionOut(location) {
-    console.log("hello!");
-    document.body.classList.add("anim-slide-out-right");
-    prefixedEvent(document.body, "AnimationEnd", function() {
-        document.getElementById('anim-wrapper').style.display = 'none';
-        window.location.href = location;
+    $firebase.updateHabit(habit, currentKey, function() {
+        callback();
+        localStorage.setItem("currentKey", null);
+        return true;
     });
-}
-
-var pfx = ["webkit", "moz", "MS", "o", ""];
-function prefixedEvent(element, type, callback) {
-    for (var p = 0; p < pfx.length; p++) {
-        if (!pfx[p])
-            type = type.toLowerCase();
-        element.addEventListener(pfx[p] + type, callback, false);
-    }
 }
 
 function validateForm() {
@@ -118,7 +105,7 @@ function validateForm() {
         return false;
     }
 
-    if(!updateHabitInStorage(function() {
+    if(!updateHabit(function() {
         pageTransitionOut('list.html');
     })){
         return false;
@@ -129,16 +116,16 @@ function validateForm() {
  * initializes the values of the inputs in the form to the values
  * selected when creating a habit.
 */
-function initializeFields(){
+function initializeFields(currentHabit){
     //get the habit that the user wants to edit
-    var habitList = JSON.parse(localStorage.getItem("habitList"));
-    currentIndex = localStorage.getItem("currentIndex");
-    var currentHabit;
+    //var habitList = JSON.parse(localStorage.getItem("habitList"));
+    /*
     if(!habitList || habitList.length == 0 || currentIndex == null){
         return false;
     }else{
         currentHabit = habitList[currentIndex];
     }
+    */
 
     //set the value of the title input field
     document.getElementById("title").value = currentHabit.title;
@@ -197,8 +184,28 @@ function initializeFields(){
     }
 }
 
+function pageTransitionOut(location) {
+    console.log("hello!");
+    document.body.classList.add("anim-slide-out-right");
+    prefixedEvent(document.body, "AnimationEnd", function() {
+        document.getElementById('anim-wrapper').style.display = 'none';
+        window.location.href = location;
+    });
+}
+
+var pfx = ["webkit", "moz", "MS", "o", ""];
+function prefixedEvent(element, type, callback) {
+    for (var p = 0; p < pfx.length; p++) {
+        if (!pfx[p])
+            type = type.toLowerCase();
+        element.addEventListener(pfx[p] + type, callback, false);
+    }
+}
+
 /********************** functions called on load of page ***************/
 document.body.onunload = function() {
     location.reload(true);
 };
-initializeFields();
+$firebase.getHabit(currentKey, function(habit) {
+    initializeFields(habit);
+});

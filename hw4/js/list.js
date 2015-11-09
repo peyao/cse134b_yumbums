@@ -41,15 +41,13 @@ function updateMessageDiv(msgElement, habitKey, callback){
     $firebase.updateHabit(currentHabit, habitKey, callback);
 }
 
-function hideMessageAfter3Secs(element, habitIndex){
+function hideMessageAfter3Secs(element, habitKey){
 	var listElement = element.parentNode.parentNode;
 	var msgElement = (listElement.getElementsByClassName("message"))[0];
-    updateMessageDiv(msgElement, parseInt(habitIndex));
     msgElement.style.visibility="hidden";
 }
 
 function showMsg(element) {
-    console.log('In showMsg...');
     var listElement = element.parentNode.parentNode;
     var habitKey = listElement.getAttribute("data-key");
     if(habitKey === null){
@@ -58,7 +56,7 @@ function showMsg(element) {
     var msgElement = (listElement.getElementsByClassName("message"))[0];
     updateMessageDiv(msgElement, habitKey, function() {
         msgElement.style.visibility="visible";
-        setTimeout( function () {hideMessageAfter3Secs(element, habitKey);}, 3000);
+        setTimeout(function () {hideMessageAfter3Secs(element, habitKey);}, 3000);
     });
 }
 
@@ -189,7 +187,6 @@ function createMessageTotalSpan(currentHabit){
 }
 
 function createMessageTodaySpan(currentHabit){
-    console.log('In createMessageTodaySpan()...');
     var messageTodaySpan = document.createElement("SPAN");
     messageTodaySpan.setAttribute("class", "message-today");
     var tempTextNode = document.createTextNode("Completed ");
@@ -292,7 +289,6 @@ function listHabits(callback){
     //var habits = JSON.parse(localStorage.getItem("habitList"));
     $firebase.getHabits(function(habits) {
         allHabits = habits;
-        console.log('habits: ', habits);
         if(habits && habits.length != 0){
             //for(var i = 0; i<habits.length; i++){
             var i = 0;
@@ -336,7 +332,6 @@ function calculateShadeWidth(currentHabit){
 }
 
 function attachClickListeners(){
-    console.log('In attachClickListeners()...');
     var completedButtons = document.getElementsByClassName("op-done");
     for(var i = 0; i<completedButtons.length; i++){
         completedButtons[i].onclick = function(){
@@ -350,12 +345,11 @@ function attachClickListeners(){
         //value and no which habit in the habitList to edit.
         editButtons[i].onclick = function(){
             var child = this.parentNode.parentNode;
-            var habitKey = parseInt(child.getAttribute("data-key"));
+            var habitKey = child.getAttribute("data-key");
             if(habitKey == null){
                 return false;
             }
             localStorage.setItem("currentKey", habitKey);
-            //location.href='edit.html';
             pageTransitionOut('edit.html');
         };
     }

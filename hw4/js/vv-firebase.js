@@ -30,6 +30,16 @@ var $firebase = {
             return pushRef.key();
         });
     },
+    getHabit: function(habitKey, callback) {
+        this.setUser(function(userId) {
+            var habitRef = firebaseRef.child('users/' + userId + '/habits/' + habitKey);
+            habitRef.once('value', function(snapshot) {
+                return callback(snapshot.val());
+            }, function (err) {
+                console.log("Err: " + err);
+            });
+        });
+    },
     getHabits: function(callback) {
         this.setUser(function(userId) {
             var habitsRef = firebaseRef.child('users/' + userId + '/habits');
