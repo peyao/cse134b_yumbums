@@ -16,6 +16,14 @@ function updateMessageDiv(msgElement, habitIndex){
     var newMessage = "Completed <strong>" + currentHabit.completedToday + "/" + currentHabit.dayFrequency + "</strong> for today!";
     msgElement.getElementsByClassName("message-today")[0].innerHTML = newMessage;
 
+    
+    //update the progress bar
+    var shadeWidth = calculateShadeWidth(currentHabit);
+    var lines = msgElement.querySelectorAll("line");
+    lines[0].setAttribute("x2", shadeWidth);
+    lines[1].setAttribute("x1", shadeWidth);
+    
+
     //if the user reached their goal for the day, then update their current and best streak,
     //along with redraw the progress bar
     if(currentHabit.completedToday == currentHabit.dayFrequency){
@@ -26,14 +34,17 @@ function updateMessageDiv(msgElement, habitIndex){
             currentHabit.bestStreak = currentHabit.currentStreak;
             streaks[1].innerHTML = currentHabit.bestStreak;
         }
-        var shadeWidth = calculateShadeWidth(currentHabit);
-        var lines = msgElement.querySelectorAll("line");
-        lines[0].setAttribute("x2", shadeWidth);
-        lines[1].setAttribute("x1", shadeWidth);
     }
 
     //commit the changes back to local storage
     localStorage.setItem("habitList", JSON.stringify(habitList));
+}
+
+function hideMessageAfter3Secs(element, habitIndex){
+	var listElement = element.parentNode.parentNode;
+	var msgElement = (listElement.getElementsByClassName("message"))[0];
+    updateMessageDiv(msgElement, parseInt(habitIndex));
+    msgElement.style.visibility="hidden";
 }
 
 function showMsg(element) {
@@ -45,6 +56,8 @@ function showMsg(element) {
     var msgElement = (listElement.getElementsByClassName("message"))[0];
     updateMessageDiv(msgElement, parseInt(habitIndex));
     msgElement.style.visibility="visible";
+    setTimeout( function () {hideMessageAfter3Secs(element, habitIndex);}, 3000);
+    
 }
 
 /*
@@ -281,10 +294,8 @@ function listHabits(){
  * need to be drawn with based off the user's current and best streak
 */
 function calculateShadeWidth(currentHabit){
-    if(currentHabit.bestStreak === 0){
-        return 0;
-    }
-    var percentageCompleted = currentHabit.currentStreak/currentHabit.bestStreak;
+	
+    var percentageCompleted = currentHabit.completedToday/currentHabit.dayFrequency;
     var shadeWidth = Math.floor(percentageCompleted * 150);
     if(shadeWidth > 150){
         shadeWidth = 150;
