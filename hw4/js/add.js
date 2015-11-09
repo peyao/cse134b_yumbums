@@ -49,7 +49,7 @@ function addHabitInStorage(callback){
         icon: imageSelect,
         weekFrequency: weeklySchedule,
         dayFrequency: dayFreq,
-        notification: document.getElementById("nt-checkboxes").childNodes[1].value,
+        notification: document.getElementById("selectNotification").value,
         currentStreak: 0,
         bestStreak: 0,
         completedToday: 0,
