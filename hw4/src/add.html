@@ -50,8 +50,13 @@
 				<span id="times">Times</span>
 			</div>
 			<p><label for="others"><span id="others_text">Others: </span>
-				<input id="others" type="number" step="1" min="1" max="100" name="day"
-					   placeholder="Enter custom frequency" onclick="uncheckradio()"></label></p>
+			<input id="others" type="number" step="1" min="1" max="100" name="day"
+				   placeholder="Enter custom frequency" onclick="uncheckradio()"></label></p>
+            <label>Notification</label>
+            <div id="notification-button">
+                <label><input type="radio" name="notification" value="ON"><span>ON</span></label>
+                <label><input type="radio" name="notification" value="OFF"><span>OFF</span></label>
+            </div>
 			<p id="save_p">
 				<input id="save" type="button" value="Save It" onclick="return validateForm()">
 			</p>

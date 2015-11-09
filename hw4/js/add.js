@@ -30,6 +30,10 @@ function uncheckradio() {
     for (var i = 0; i < unradio.length - 1; i++) {
         unradio[i].checked = false;
     }
+    unradio = document.getElementsByName("notification");
+    for (var i = 0; i < unradio.length - 1; i++) {
+        unradio[i].checked = false;
+    }
 }
 
 function clearOther() {
