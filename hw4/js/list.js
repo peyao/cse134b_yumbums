@@ -16,6 +16,14 @@ function updateMessageDiv(msgElement, habitIndex){
     var newMessage = "Completed <strong>" + currentHabit.completedToday + "/" + currentHabit.dayFrequency + "</strong> for today!";
     msgElement.getElementsByClassName("message-today")[0].innerHTML = newMessage;
 
+    
+    //update the progress bar
+    var shadeWidth = calculateShadeWidth(currentHabit);
+    var lines = msgElement.querySelectorAll("line");
+    lines[0].setAttribute("x2", shadeWidth);
+    lines[1].setAttribute("x1", shadeWidth);
+    
+
     //if the user reached their goal for the day, then update their current and best streak,
     //along with redraw the progress bar
     if(currentHabit.completedToday == currentHabit.dayFrequency){
@@ -26,14 +34,17 @@ function updateMessageDiv(msgElement, habitIndex){
             currentHabit.bestStreak = currentHabit.currentStreak;
             streaks[1].innerHTML = currentHabit.bestStreak;
         }
-        var shadeWidth = calculateShadeWidth(currentHabit);
-        var lines = msgElement.querySelectorAll("line");
-        lines[0].setAttribute("x2", shadeWidth);
-        lines[1].setAttribute("x1", shadeWidth);
     }
 
     //commit the changes back to local storage
     localStorage.setItem("habitList", JSON.stringify(habitList));
+}
+
+function hideMessageAfter3Secs(element, habitIndex){
+	var listElement = element.parentNode.parentNode;
+	var msgElement = (listElement.getElementsByClassName("message"))[0];
+    updateMessageDiv(msgElement, parseInt(habitIndex));
+    msgElement.style.visibility="hidden";
 }
 
 function showMsg(element) {
@@ -45,6 +56,8 @@ function showMsg(element) {
     var msgElement = (listElement.getElementsByClassName("message"))[0];
     updateMessageDiv(msgElement, parseInt(habitIndex));
     msgElement.style.visibility="visible";
+    setTimeout( function () {hideMessageAfter3Secs(element, habitIndex);}, 3000);
+    
 }
 
 /*
@@ -253,11 +266,25 @@ function createHabitElement(currentHabit, index){
 */
 function listHabits(){
     var habits = JSON.parse(localStorage.getItem("habitList"));
-    console.log(JSON.stringify(habits, null, 2));
     if(habits && habits.length != 0){
         for(var i = 0; i<habits.length; i++){
             var currentHabit = habits[i];
+            var currentDate = new Date();
+            currentDate.setHours(0);
+            var currentTime = currentDate.getTime();
+            
+            //if it is a new day, then reset some values back to zero for some habits
+            if(currentTime > currentHabit.timeCheck){
+                //if the habit was not completed, then set the current streak back to zero
+                if(currentHabit.completedToday < currentHabit.dayFrequency){
+                    currentHabit.currentStreak = 0;
+                }
+                currentHabit.completedToday = 0;
+            }
             createHabitElement(currentHabit, i);
+            
+            //values may have been reset if a new day occured, to reset stuff in local storage
+            localStorage.setItem("habitList", JSON.stringify(habits));
         }
     }
 }
@@ -267,10 +294,8 @@ function listHabits(){
  * need to be drawn with based off the user's current and best streak
 */
 function calculateShadeWidth(currentHabit){
-    if(currentHabit.bestStreak === 0){
-        return 0;
-    }
-    var percentageCompleted = currentHabit.currentStreak/currentHabit.bestStreak;
+	
+    var percentageCompleted = currentHabit.completedToday/currentHabit.dayFrequency;
     var shadeWidth = Math.floor(percentageCompleted * 150);
     if(shadeWidth > 150){
         shadeWidth = 150;
@@ -285,13 +310,12 @@ function attachClickListeners(){
             showMsg(this);
         };
     }
-
-     completedButtons = document.getElementsByClassName("op-edit");
-    for( i = 0; i<completedButtons.length; i++){
+    var editButtons = document.getElementsByClassName("op-edit");
+    for(var i = 0; i<editButtons.length; i++){
         //When trying to edit the habit, the index of the habit being edited
         //needs to be set in local storage so that edit.js can retrieve the
         //value and no which habit in the habitList to edit.
-        completedButtons[i].onclick = function(){
+        editButtons[i].onclick = function(){
             var child = this.parentNode.parentNode;
             var habitIndex = parseInt(child.getAttribute("data-index"));
             if(habitIndex == null){
@@ -303,10 +327,10 @@ function attachClickListeners(){
         };
     }
 
-    completedButtons = document.getElementsByClassName("op-del");
-    for( i = 0; i<completedButtons.length; i++){
-        completedButtons[i].onclick = function(){
-             if (window.confirm("Are you sure you want to delete this habit?")) {
+    var deleteButtons = document.getElementsByClassName("op-del");
+    for(var i = 0; i<deleteButtons.length; i++){
+        deleteButtons[i].onclick = function(){
+            if (window.confirm("Are you sure you want to delete this habit?")) {
                 deleteHabit(this);
             }
         };
@@ -333,5 +357,8 @@ function prefixedEvent(element, type, callback) {
 /**************************************************************************************
                             Executed On Load of Page
 **************************************************************************************/
+document.body.onunload = function() {
+    location.reload(true);
+};
 listHabits();
 attachClickListeners();
