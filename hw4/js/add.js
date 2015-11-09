@@ -1,21 +1,3 @@
-var pageTransitionOut = function(location) {
-    document.body.classList.add("anim-slide-out-right");
-    prefixedEvent(document.body, "AnimationEnd", function() {
-        document.getElementById('anim-wrapper').style.display = 'none';
-        window.location.href = location;
-    });
-};
-
-var pfx = ["webkit", "moz", "MS", "o", ""];
-function prefixedEvent(element, type, callback) {
-    for (var p = 0; p < pfx.length; p++) {
-        if (!pfx[p])
-            type = type.toLowerCase();
-        element.addEventListener(pfx[p] + type, callback, false);
-    }
-}
-
-
 // global variables
 var imageSelect;
 var weeklySchedule = [];
@@ -54,7 +36,7 @@ function clearOther() {
     document.getElementById("others").value = null;
 }
 
-function addHabitInStorage(){
+function addHabitInStorage(callback){
     var currentDate = new Date();
     currentDate.setHours(0);
     var startOfDay = currentDate.getTime();
@@ -68,19 +50,38 @@ function addHabitInStorage(){
         completedToday: 0,
         timeCheck: startOfDay
     };
-    
+
     //need to retrieve the list of habits or create a list
     //of habits if the list is empty
     var habitList = JSON.parse(localStorage.getItem("habitList"));
     if(!habitList || habitList.length == 0){
         habitList = [];
     }
-    
+
     //adds the habit to the end of the list and stores the list back
     //in local storage
     habitList.push(habit);
     var stringHabit = JSON.stringify(habitList);
     localStorage.setItem("habitList", stringHabit);
+    callback();
+}
+
+function pageTransitionOut(location) {
+    console.log("hello!");
+    document.body.classList.add("anim-slide-out-right");
+    prefixedEvent(document.body, "AnimationEnd", function() {
+        document.getElementById('anim-wrapper').style.display = 'none';
+        window.location.href = location;
+    });
+}
+
+var pfx = ["webkit", "moz", "MS", "o", ""];
+function prefixedEvent(element, type, callback) {
+    for (var p = 0; p < pfx.length; p++) {
+        if (!pfx[p])
+            type = type.toLowerCase();
+        element.addEventListener(pfx[p] + type, callback, false);
+    }
 }
 
 function validateForm() {
@@ -121,8 +122,8 @@ function validateForm() {
         alert("Enter daily frequency");
         return false;
     }
-    
-    addHabitInStorage();
 
-
+    addHabitInStorage(function() {
+        pageTransitionOut('list.html');
+    });
 }
