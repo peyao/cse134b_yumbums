@@ -219,6 +219,15 @@ function createHabitOpElement(currentHabit){
     doneImage.setAttribute("src", "../img/done.svg");
     doneImage.setAttribute("alt", "Done");
     doneButton.appendChild(doneImage);
+    
+    var failedButton = document.createElement("BUTTON");
+    failedButton.setAttribute("class", "op op-failed");
+    failedButton.setAttribute("type", "button");
+    failedButton.setAttribute("title", "failed");
+    var failedImage = document.createElement("IMG");
+    failedImage.setAttribute("src", "../img/x.svg");
+    failedImage.setAttribute("alt", "failed");
+    failedButton.appendChild(failedImage);
 
     var editButton = document.createElement("BUTTON");
     editButton.setAttribute("class", "op op-edit");
@@ -233,13 +242,13 @@ function createHabitOpElement(currentHabit){
     deleteButton.setAttribute("class", "op op-del");
     deleteButton.setAttribute("type", "button");
     deleteButton.setAttribute("title", "delete habit");
-
     var deleteImage = document.createElement("IMG");
     deleteImage.setAttribute("src", "../img/delete.svg");
     deleteImage.setAttribute("alt", "Del");
     deleteButton.appendChild(deleteImage);
 
     habitOpDiv.appendChild(doneButton);
+    habitOpDiv.appendChild(failedButton);
     habitOpDiv.appendChild(editButton);
     habitOpDiv.appendChild(deleteButton);
     return habitOpDiv;
