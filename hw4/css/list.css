@@ -39,6 +39,7 @@ body{
 .op:hover{box-shadow: 0 0 5px gray;}
 .op:active{box-shadow: 0 0 10px gray;}
 .op:focus{outline-style:none;}
+.op::-moz-focus-inner{border: 0;}
 
 .op-done{background:rgba(0, 177, 106, 0.8); border:2px solid rgba(0, 128, 0, 0.3);}
 .op-done:hover{background:#00B16A;}

@@ -1,28 +1,28 @@
 /**************************************************************************************
                             Function Definitions
 **************************************************************************************/
+var allHabits;
 
 /*
  * Function that gets called when clicking the complete habit button, updates
  * the html on the page and also the values in the local storage
 */
-function updateMessageDiv(msgElement, habitIndex){
+function updateMessageDiv(msgElement, habitKey, callback){
     //get the current habit from local storage
-    var habitList = JSON.parse(localStorage.getItem("habitList"));
-    var currentHabit = habitList[habitIndex];
+    var currentHabit = allHabits[habitKey];
 
     //update the message showing how close the user is to reaching the daily goal
     currentHabit.completedToday += 1;
     var newMessage = "Completed <strong>" + currentHabit.completedToday + "/" + currentHabit.dayFrequency + "</strong> for today!";
     msgElement.getElementsByClassName("message-today")[0].innerHTML = newMessage;
 
-    
+
     //update the progress bar
     var shadeWidth = calculateShadeWidth(currentHabit);
     var lines = msgElement.querySelectorAll("line");
     lines[0].setAttribute("x2", shadeWidth);
     lines[1].setAttribute("x1", shadeWidth);
-    
+
 
     //if the user reached their goal for the day, then update their current and best streak,
     //along with redraw the progress bar
@@ -37,56 +37,58 @@ function updateMessageDiv(msgElement, habitIndex){
     }
 
     //commit the changes back to local storage
-    localStorage.setItem("habitList", JSON.stringify(habitList));
+    //localStorage.setItem("habitList", JSON.stringify(habitList));
+    $firebase.updateHabit(currentHabit, habitKey, callback);
 }
 
-function hideMessageAfter3Secs(element, habitIndex){
+function hideMessageAfter3Secs(element, habitKey){
 	var listElement = element.parentNode.parentNode;
 	var msgElement = (listElement.getElementsByClassName("message"))[0];
-    updateMessageDiv(msgElement, parseInt(habitIndex));
     msgElement.style.visibility="hidden";
 }
 
 function showMsg(element) {
     var listElement = element.parentNode.parentNode;
-    var habitIndex = listElement.getAttribute("data-index");
-    if(habitIndex === null){
+    var habitKey = listElement.getAttribute("data-key");
+    if(habitKey === null){
         return false;
     }
     var msgElement = (listElement.getElementsByClassName("message"))[0];
-    updateMessageDiv(msgElement, parseInt(habitIndex));
-    msgElement.style.visibility="visible";
-    setTimeout( function () {hideMessageAfter3Secs(element, habitIndex);}, 3000);
-    
+    updateMessageDiv(msgElement, habitKey, function() {
+        msgElement.style.visibility="visible";
+        setTimeout(function () {hideMessageAfter3Secs(element, habitKey);}, 3000);
+    });
 }
 
 /*
 * Function that removes a habit from the array of habits that is stored in local storage
-* This method needs to remove the habit at the proper index and also subtract 1 from the data-index
+* This method needs to remove the habit at the proper index and also subtract 1 from the data-key
 * attribute on all habits after the one getting deleted.  This is because deleting an element from an
 * array forces all indeces after it to shift forward by 1.
 */
-function deleteHabitInStorage(index){
-    var habitList = JSON.parse(localStorage.getItem("habitList"));
+function deleteHabitFromDB(habitKey, callback){
+    /*
+    var habitList = N.parse(localStorage.getItem("habitList"));
     var habitListElement = document.querySelectorAll("#habit-list > li");
     for(var i = index + 1; i<habitListElement.length; i++){
         var habitElement = habitListElement[i];
-        var habitIndex = habitElement.setAttribute("data-index", i - 1);
+        var habitIndex = habitElement.setAttribute("data-key", i - 1);
     }
     habitList.splice(index, 1);
     localStorage.setItem("habitList", JSON.stringify(habitList));
-    return true;
+    $firebase.deleteHabit(habitKey, callback);
+    */
 }
 
 function deleteHabit(element) {
     var child = element.parentNode.parentNode;
-    var habitIndex = parseInt(child.getAttribute("data-index"));
-    if(habitIndex == null){
+    var habitKey = child.getAttribute("data-key");
+    if(habitKey == null){
         return false;
     }
     //only remove the habit from the page if it is successfully removed
     //from storage
-    if(deleteHabitInStorage(habitIndex)){
+    if(deleteHabitFromDB(habitKey)){
         var parent = child.parentNode;
         child.classList.add("anim-slide-out-right-240-5");
 
@@ -94,6 +96,16 @@ function deleteHabit(element) {
             parent.removeChild(child);
         });
     }
+
+    $firebase.deleteHabit(habitKey, function() {
+        delete allHabits[habitKey];
+        var parent = child.parentNode;
+        child.classList.add("anim-slide-out-right-240-5");
+
+        prefixedEvent(child, "AnimationEnd", function() {
+            parent.removeChild(child);
+        });
+    });
 }
 
 function createHabitNameListElement(currentHabit){
@@ -219,7 +231,7 @@ function createHabitOpElement(currentHabit){
     doneImage.setAttribute("src", "../img/done.svg");
     doneImage.setAttribute("alt", "Done");
     doneButton.appendChild(doneImage);
-    
+
     var failedButton = document.createElement("BUTTON");
     failedButton.setAttribute("class", "op op-failed");
     failedButton.setAttribute("type", "button");
@@ -257,10 +269,10 @@ function createHabitOpElement(currentHabit){
 /*
 * Function that generates the contents for a single habit
 */
-function createHabitElement(currentHabit, index){
+function createHabitElement(currentHabit, habitKey, index){
     var habit = document.createElement("LI");
     habit.setAttribute("class", "anim-slide-in-right-" + (index+1));
-    habit.setAttribute("data-index", index);
+    habit.setAttribute("data-key", habitKey);
     var habitInfo = createHabitInfoElement(currentHabit);
     var messageDiv = createHabitMessageElement(currentHabit);
     var habitOpDiv = createHabitOpElement(currentHabit);
@@ -273,29 +285,36 @@ function createHabitElement(currentHabit, index){
 /*
 * Function that generates the list of habits on the page
 */
-function listHabits(){
-    var habits = JSON.parse(localStorage.getItem("habitList"));
-    if(habits && habits.length != 0){
-        for(var i = 0; i<habits.length; i++){
-            var currentHabit = habits[i];
-            var currentDate = new Date();
-            currentDate.setHours(0);
-            var currentTime = currentDate.getTime();
-            
-            //if it is a new day, then reset some values back to zero for some habits
-            if(currentTime > currentHabit.timeCheck){
-                //if the habit was not completed, then set the current streak back to zero
-                if(currentHabit.completedToday < currentHabit.dayFrequency){
-                    currentHabit.currentStreak = 0;
+function listHabits(callback){
+    //var habits = JSON.parse(localStorage.getItem("habitList"));
+    $firebase.getHabits(function(habits) {
+        allHabits = habits;
+        if(habits && habits.length != 0){
+            //for(var i = 0; i<habits.length; i++){
+            var i = 0;
+            for (var h in habits) {
+                var currentHabit = habits[h];
+                var currentDate = new Date();
+                currentDate.setHours(0);
+                var currentTime = currentDate.getTime();
+
+                //if it is a new day, then reset some values back to zero for some habits
+                if(currentTime > currentHabit.timeCheck){
+                    //if the habit was not completed, then set the current streak back to zero
+                    if(currentHabit.completedToday < currentHabit.dayFrequency){
+                        currentHabit.currentStreak = 0;
+                    }
+                    currentHabit.completedToday = 0;
                 }
-                currentHabit.completedToday = 0;
+                createHabitElement(currentHabit, h, i);
+
+                //values may have been reset if a new day occured, to reset stuff in local storage
+                //localStorage.setItem("habitList", JSON.stringify(habits));
+                i = i + 1;
             }
-            createHabitElement(currentHabit, i);
-            
-            //values may have been reset if a new day occured, to reset stuff in local storage
-            localStorage.setItem("habitList", JSON.stringify(habits));
         }
-    }
+        callback();
+    });
 }
 
 /*
@@ -303,7 +322,7 @@ function listHabits(){
  * need to be drawn with based off the user's current and best streak
 */
 function calculateShadeWidth(currentHabit){
-	
+
     var percentageCompleted = currentHabit.completedToday/currentHabit.dayFrequency;
     var shadeWidth = Math.floor(percentageCompleted * 150);
     if(shadeWidth > 150){
@@ -326,12 +345,11 @@ function attachClickListeners(){
         //value and no which habit in the habitList to edit.
         editButtons[i].onclick = function(){
             var child = this.parentNode.parentNode;
-            var habitIndex = parseInt(child.getAttribute("data-index"));
-            if(habitIndex == null){
+            var habitKey = child.getAttribute("data-key");
+            if(habitKey == null){
                 return false;
             }
-            localStorage.setItem("currentIndex", habitIndex);
-            //location.href='edit.html';
+            localStorage.setItem("currentKey", habitKey);
             pageTransitionOut('edit.html');
         };
     }
@@ -369,5 +387,6 @@ function prefixedEvent(element, type, callback) {
 document.body.onunload = function() {
     location.reload(true);
 };
-listHabits();
-attachClickListeners();
+listHabits(function() {
+    attachClickListeners();
+});

@@ -58,6 +58,8 @@ function addHabitInStorage(callback){
 
     //need to retrieve the list of habits or create a list
     //of habits if the list is empty
+
+    /*
     var habitList = JSON.parse(localStorage.getItem("habitList"));
     if(!habitList || habitList.length == 0){
         habitList = [];
@@ -67,12 +69,14 @@ function addHabitInStorage(callback){
     //in local storage
     habitList.push(habit);
     var stringHabit = JSON.stringify(habitList);
-    localStorage.setItem("habitList", stringHabit);
+    //localStorage.setItem("habitList", stringHabit);
+    */
+
+    $firebase.addHabit(habit);
     callback();
 }
 
 function pageTransitionOut(location) {
-    console.log("hello!");
     document.body.classList.add("anim-slide-out-right");
     prefixedEvent(document.body, "AnimationEnd", function() {
         document.getElementById('anim-wrapper').style.display = 'none';
