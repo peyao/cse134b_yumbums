@@ -18,7 +18,15 @@ body{
 .habit-info{padding:0;margin-left:20px;}
 .habit-info>li{list-style:none; height:100%; padding:0; margin-right:5px; vertical-align: center;}
 .habit-name{margin:0; padding:0; height:100%; display:inline-block; vertical-align: middle; line-height:60px;color:#888;font-size: 24px;}
+.habit-editOp{margin:0; padding:0; height:100%; display:inline-block; alignment = left;}
 .habit-icon{margin:0; border-radius:5px;width:100px; height:100px;}
+
+/* edit/delete (for a existing habit) */
+.edit-delete{float: right; display:inline-block; padding: 17px}
+.smallOp{width:30px; height:30px; border-radius: 50%; box-shadow: 0 0 3px gray; padding: 5px;}
+.smallOp:hover{box-shadow: 0 0 1px gray;}
+.smallOp:active{box-shadow: 0 0 2px gray;}
+.smallOp:focus{outline-style:none;}
 
 .message{position:absolute; display:inline-block; visibility: hidden; text-align:center; color:#888;}
 .message-total{visibility: visible;}
