@@ -11,7 +11,7 @@ function showNotification(msg) {
             var options = {
                 body: msg
             }
-            var notification = new Notification('Hi!', options);
+            var notification = new Notification('You have uncompleted habits!', options);
             setTimeout(notification.close.bind(notification), 5000);
         }
         else if(Notification.permission !== 'denied') {
@@ -23,7 +23,7 @@ function showNotification(msg) {
                     var options = {
                         body: msg
                     }
-                    var notification = new Notification('Hi!', options);
+                    var notification = new Notification('You have uncompleted habits!', options);
                     setTimeout(notification.close.bind(notification), 5000);
                 }
             });

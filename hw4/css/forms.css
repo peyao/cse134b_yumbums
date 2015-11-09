@@ -228,3 +228,34 @@ span#times{
 #daily-button input:hover + span {
     cursor: pointer;
 }
+
+#notification-button {
+    overflow: auto;
+};
+#notification-button label {
+    margin:4px;
+    border-radius:25px;
+    background-color:#EFEFEF;
+    float:left;
+    width:2.0em;
+}
+#notification-button label span {
+    text-align:center;
+    padding:3px 0px;
+    display:block;
+    /*border:1px solid #D0D0D0;*/
+    overflow:auto;
+
+}
+#notification-button label input {
+    position:absolute;
+    top:-100%;
+}
+#notification-button input:checked + span {
+    background-color:#9c9696;
+    border-radius:25px;
+    color:#fff;
+}
+#notification-button input:hover + span {
+    cursor: pointer;
+}
