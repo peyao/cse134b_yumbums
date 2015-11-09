@@ -55,6 +55,9 @@ function clearOther() {
 }
 
 function addHabitInStorage(){
+    var currentDate = new Date();
+    currentDate.setHours(0);
+    var startOfDay = currentDate.getTime();
     var habit = {
         title: document.getElementById("title").value,
         icon: imageSelect,
@@ -62,7 +65,8 @@ function addHabitInStorage(){
         dayFrequency: dayFreq,
         currentStreak: 0,
         bestStreak: 0,
-        completedToday: 0
+        completedToday: 0,
+        timeCheck: startOfDay
     };
     
     //need to retrieve the list of habits or create a list
