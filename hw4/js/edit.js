@@ -1,21 +1,3 @@
-var pageTransitionOut = function(location) {
-    document.body.classList.add("anim-slide-out-right");
-    prefixedEvent(document.body, "AnimationEnd", function() {
-        document.getElementById('anim-wrapper').style.display = 'none';
-        window.location.href = location;
-    });
-};
-
-var pfx = ["webkit", "moz", "MS", "o", ""];
-function prefixedEvent(element, type, callback) {
-    for (var p = 0; p < pfx.length; p++) {
-        if (!pfx[p])
-            type = type.toLowerCase();
-        element.addEventListener(pfx[p] + type, callback, false);
-    }
-}
-
-
 // global variables
 var imageSelect;
 var weeklySchedule = [];
@@ -55,7 +37,7 @@ function clearOther() {
     document.getElementById("others").value = null;
 }
 
-function updateHabitInStorage(){
+function updateHabitInStorage(callback){
     var habit = {
         title: document.getElementById("title").value,
         icon: imageSelect,
@@ -66,7 +48,7 @@ function updateHabitInStorage(){
         bestStreak: 0,
         completedToday: 0
     };
-    
+
     var habitList = JSON.parse(localStorage.getItem("habitList"));
     if(!habitList || habitList.length == 0){
         return false;
@@ -75,7 +57,26 @@ function updateHabitInStorage(){
     var stringHabit = JSON.stringify(habitList);
     localStorage.setItem("habitList", stringHabit);
     localStorage.setItem("currentIndex", null);
+    callback();
     return true;
+}
+
+function pageTransitionOut(location) {
+    console.log("hello!");
+    document.body.classList.add("anim-slide-out-right");
+    prefixedEvent(document.body, "AnimationEnd", function() {
+        document.getElementById('anim-wrapper').style.display = 'none';
+        window.location.href = location;
+    });
+}
+
+var pfx = ["webkit", "moz", "MS", "o", ""];
+function prefixedEvent(element, type, callback) {
+    for (var p = 0; p < pfx.length; p++) {
+        if (!pfx[p])
+            type = type.toLowerCase();
+        element.addEventListener(pfx[p] + type, callback, false);
+    }
 }
 
 function validateForm() {
@@ -116,13 +117,12 @@ function validateForm() {
         alert("Enter daily frequency");
         return false;
     }
-    
-    if(!updateHabitInStorage()){
+
+    if(!updateHabitInStorage(function() {
+        pageTransitionOut('list.html');
+    })){
         return false;
     }
-
-
-
 }
 
 /*
@@ -139,10 +139,10 @@ function initializeFields(){
     }else{
         currentHabit = habitList[currentIndex];
     }
-    
+
     //set the value of the title input field
     document.getElementById("title").value = currentHabit.title;
-    
+
     //set which icon to be selected by default
     if(currentHabit.icon === "../img/virtue.png"){
         selectImage('icon1');
@@ -152,8 +152,8 @@ function initializeFields(){
         document.getElementById('icon3').src = currentHabit.icon;
         selectImage('icon3');
     }
-    
-    //check all day of the week checkboxes that the user selected 
+
+    //check all day of the week checkboxes that the user selected
     //when creating the habit
     var dateCheckboxes = document.getElementsByName("date");
     for(var i = 0; i<currentHabit.weekFrequency.length; i++){
@@ -180,8 +180,8 @@ function initializeFields(){
             dateCheckboxes[6].checked = true;
         }
     }
-    
-    //set the default value of the day frequency either by 
+
+    //set the default value of the day frequency either by
     //checking one of the radio buttons or by setting the
     //value in the 'other' input field
     var dayRadioButtons = document.getElementsByName("day");

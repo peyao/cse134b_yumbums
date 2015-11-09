@@ -10,12 +10,12 @@ function updateMessageDiv(msgElement, habitIndex){
     //get the current habit from local storage
     var habitList = JSON.parse(localStorage.getItem("habitList"));
     var currentHabit = habitList[habitIndex];
-    
+
     //update the message showing how close the user is to reaching the daily goal
     currentHabit.completedToday += 1;
     var newMessage = "Completed <strong>" + currentHabit.completedToday + "/" + currentHabit.dayFrequency + "</strong> for today!";
     msgElement.getElementsByClassName("message-today")[0].innerHTML = newMessage;
-    
+
     //if the user reached their goal for the day, then update their current and best streak,
     //along with redraw the progress bar
     if(currentHabit.completedToday == currentHabit.dayFrequency){
@@ -31,7 +31,7 @@ function updateMessageDiv(msgElement, habitIndex){
         lines[0].setAttribute("x2", shadeWidth);
         lines[1].setAttribute("x1", shadeWidth);
     }
-    
+
     //commit the changes back to local storage
     localStorage.setItem("habitList", JSON.stringify(habitList));
 }
@@ -49,7 +49,7 @@ function showMsg(element) {
 
 /*
 * Function that removes a habit from the array of habits that is stored in local storage
-* This method needs to remove the habit at the proper index and also subtract 1 from the data-index 
+* This method needs to remove the habit at the proper index and also subtract 1 from the data-index
 * attribute on all habits after the one getting deleted.  This is because deleting an element from an
 * array forces all indeces after it to shift forward by 1.
 */
@@ -298,7 +298,8 @@ function attachClickListeners(){
                 return false;
             }
             localStorage.setItem("currentIndex", habitIndex);
-            location.href='edit.html';
+            //location.href='edit.html';
+            pageTransitionOut('edit.html');
         };
     }
 
@@ -312,13 +313,13 @@ function attachClickListeners(){
     }
 }
 
-var pageTransitionOut = function(location) {
+function pageTransitionOut(location) {
     document.body.classList.add("anim-slide-out-right");
     prefixedEvent(document.body, "AnimationEnd", function() {
         document.getElementById('anim-wrapper').style.display = 'none';
         window.location.href = location;
     });
-};
+}
 
 var pfx = ["webkit", "moz", "MS", "o", ""];
 function prefixedEvent(element, type, callback) {
