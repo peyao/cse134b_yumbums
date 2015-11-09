@@ -261,8 +261,10 @@ span#times{
 }
 */
 
-#selectNotification{
+#selectNotification {
 	height: 30px;
 	width: 250px;
-	font-size:medium;
+	font-size: medium;
+	color: #6c6c6c;
+
 }

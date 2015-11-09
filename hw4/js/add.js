@@ -40,6 +40,17 @@ function clearOther() {
     document.getElementById("others").value = null;
 }
 
+/* my failed attempt to create html element with js, jacob teach me the way
+function createTimeInput () {
+
+    var timeInput = document.createElement("INPUT");
+    timeInput.setAttribute("type", "time");
+    timeInput.setAttribute("id", "timeValue");
+    var timeLabel = document.createElement("LABEL");
+    timeLabel.appendChild(timeInput);
+    document.body.getElementById("nt-list").appendChild(timeLabel);
+}
+*/
 function addHabitInStorage(callback){
     var currentDate = new Date();
     currentDate.setHours(0);

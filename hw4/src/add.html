@@ -54,7 +54,7 @@
 				   placeholder="Enter custom frequency" onclick="uncheckradio()"></label></p>
             <p><label>Notifications Frequency</label></p>
 			<div id="nt-list">
-				<p>Interval: <select id="selectNotification" style="bottom:100%;">
+				<p><label for="selectNotification">Every: <select id="selectNotification">
 					<option name="time" value="None" selected>None</option>
 					<option name="time" value="15">15 Minutes</option>
 					<option name="time" value="30">30 Minutes</option>
@@ -64,8 +64,7 @@
 					<option name="time" value="4"> 4 Hours</option>
 					<option name="time" value="8"> 8 Hours</option>
 					<option name="time" value="12">12 Hours</option>
-					<option name="time" value="time">Specific Time</option>
-				</select></p>
+				</select></label></p>
 			</div>
 			<p id="save_p">
 				<input id="save" type="button" value="Save It" onclick="return validateForm()">
