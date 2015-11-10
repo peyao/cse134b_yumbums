@@ -2,6 +2,8 @@
                             Function Definitions
 **************************************************************************************/
 var allHabits;
+var firstHabitKey;
+var lastHabitKey;
 
 /*
  * Function that gets called when clicking the complete habit button, updates
@@ -282,40 +284,96 @@ function createHabitElement(currentHabit, habitKey, index){
     document.getElementById("habit-list").appendChild(habit);
 }
 
-/*
-* Function that generates the list of habits on the page
-*/
-function listHabits(callback){
-    //var habits = JSON.parse(localStorage.getItem("habitList"));
-    $firebase.getHabits(function(habits) {
-        allHabits = habits;
-        if(habits && habits.length != 0){
-            //for(var i = 0; i<habits.length; i++){
-            var i = 0;
-            for (var h in habits) {
-                var currentHabit = habits[h];
-                var currentDate = new Date();
-                currentDate.setHours(0);
-                var currentTime = currentDate.getTime();
+function clearHabitList(){
+    var habitList = document.getElementById("habit-list");
+    while(habitList.firstChild){
+        habitList.removeChild(habitList.firstChild);
+    }
+}
 
-                //if it is a new day, then reset some values back to zero for some habits
-                if(currentTime > currentHabit.timeCheck){
-                    //if the habit was not completed, then set the current streak back to zero
-                    if(currentHabit.completedToday < currentHabit.dayFrequency){
-                        currentHabit.currentStreak = 0;
-                    }
-                    currentHabit.completedToday = 0;
-                }
-                createHabitElement(currentHabit, h, i);
-
-                //values may have been reset if a new day occured, to reset stuff in local storage
-                //localStorage.setItem("habitList", JSON.stringify(habits));
-                i = i + 1;
+function createHabitList(habits, fromWhichMethod){
+    allHabits = habits;
+    var deletedFlag = false;
+    
+    if(habits && habits.length != 0){
+        var i = 0;
+        for (var h in habits) {
+            if(!deletedFlag && fromWhichMethod === "next"){
+                delete allHabits[h];
+                deletedFlag = true;
+                continue;
             }
+            
+            if(i > 2 && fromWhichMethod === "prev"){
+                delete allHabits[h];
+                continue;
+            }
+            
+            if(i === 0){
+                firstHabitKey = h;    
+            }
+            
+            var currentHabit = habits[h];
+            var currentDate = new Date();
+            currentDate.setHours(0);
+            var currentTime = currentDate.getTime();
+
+            //if it is a new day, then reset some values back to zero for some habits
+            if(currentTime > currentHabit.timeCheck){
+                //if the habit was not completed, then set the current streak back to zero
+                if(currentHabit.completedToday < currentHabit.dayFrequency){
+                    currentHabit.currentStreak = 0;
+                }
+                currentHabit.completedToday = 0;
+            }
+            createHabitElement(currentHabit, h, i);
+
+            //values may have been reset if a new day occured, to reset stuff in local storage
+            //localStorage.setItem("habitList", JSON.stringify(habits));
+            i = i + 1;
         }
+        
+        lastHabitKey = h;
+    }
+}
+
+/* LEAVE UNTIL PAGINATION IS CONFIRMED
+function listHabits(callback){
+    $firebase.getHabits(function(habits) {
+        createHabitList(habits);
         callback();
     });
 }
+*/
+
+/*
+* Function that generates the list of habits on the page on load
+*/
+
+////////////////////////PAGINATION//////////////////////////////
+function listHabits(callback){
+    $firebase.getFirstHabits(function(habits) {
+        createHabitList(habits);
+        callback();
+    });
+}
+
+function getPreviousHabits(callback){
+    clearHabitList();
+    $firebase.getPreviousHabits(function(habits) {
+        createHabitList(habits, "prev");
+        callback();
+    }, firstHabitKey);
+}
+
+function getNextHabits(callback){
+    clearHabitList();
+    $firebase.getNextHabits(function(habits) {
+        createHabitList(habits, "next");
+        callback();
+    }, lastHabitKey);
+}
+//////////////////////PAGINATION//////////////////////////////////
 
 /*
  * Function that calculates the values that the lines in the svg element
