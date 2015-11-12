@@ -16,7 +16,7 @@ var $firebase = {
             console.log('userId created: ' + userId);
         }
         else {
-            console.log('userId found: ' + userId);
+            //console.log('userId found: ' + userId);
         }
 
         return callback(userId);
@@ -41,18 +41,6 @@ var $firebase = {
             });
         });
     },
-    /* LEAVE UNITL PAGINATION IS CONFIRMED
-    getHabits: function(callback) {
-        this.setUser(function(userId) {
-            var habitsRef = firebaseRef.child('users/' + userId + '/habits');
-            habitsRef.once('value', function(snapshot) {
-                return callback(snapshot.val());
-            }, function (err) {
-                console.log("Err: " + err);
-            });
-        });
-    },*/
-    //////////////////PAGINATION/////////////////////////////
     getFirstHabits: function(callback) {
         this.setUser(function(userId) {
             var habitsRef = firebaseRef.child('users/' + userId + '/habits');
@@ -78,21 +66,6 @@ var $firebase = {
             });
         });  
     },
-     getPreviousHabits: function(callback, habitKey) {
-        this.setUser(function(userId) {
-            var habitsRef = firebaseRef.child('users/' + userId + '/habits');
-            habitsRef.orderByKey()
-                     .endAt(habitKey)
-                     .limitToLast(PAGINATION_VALUE + 1)
-                     .once('value', function(snapshot) {
-                return callback(snapshot.val());
-            }, function (err) {
-                console.log("Err: " + err);  
-            });
-        });  
-    },
-    //////////////////PAGINATION/////////////////////////////
-    
     updateHabit: function(habit, habitKey, callback) {
         this.setUser(function(userId) {
             var habitRef = firebaseRef.child('users/' + userId + '/habits/' + habitKey);

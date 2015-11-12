@@ -1,15 +1,15 @@
 /**************************************************************************************
                             Function Definitions
 **************************************************************************************/
-var allHabits;
-var firstHabitKey;
-var lastHabitKey;
+var allHabits = {};
+var lastHabitKey;  //variable needed for adding habits to the bottom of the page as user scrolls
 
 /*
  * Function that gets called when clicking the complete habit button, updates
  * the html on the page and also the values in the local storage
 */
 function updateMessageDiv(msgElement, habitKey, callback){
+    console.log(JSON.stringify(allHabits, null, 2));
     //get the current habit from local storage
     var currentHabit = allHabits[habitKey];
 
@@ -62,41 +62,11 @@ function showMsg(element) {
     });
 }
 
-/*
-* Function that removes a habit from the array of habits that is stored in local storage
-* This method needs to remove the habit at the proper index and also subtract 1 from the data-key
-* attribute on all habits after the one getting deleted.  This is because deleting an element from an
-* array forces all indeces after it to shift forward by 1.
-*/
-function deleteHabitFromDB(habitKey, callback){
-    /*
-    var habitList = N.parse(localStorage.getItem("habitList"));
-    var habitListElement = document.querySelectorAll("#habit-list > li");
-    for(var i = index + 1; i<habitListElement.length; i++){
-        var habitElement = habitListElement[i];
-        var habitIndex = habitElement.setAttribute("data-key", i - 1);
-    }
-    habitList.splice(index, 1);
-    localStorage.setItem("habitList", JSON.stringify(habitList));
-    $firebase.deleteHabit(habitKey, callback);
-    */
-}
-
 function deleteHabit(element) {
     var child = element.parentNode.parentNode;
     var habitKey = child.getAttribute("data-key");
     if(habitKey == null){
         return false;
-    }
-    //only remove the habit from the page if it is successfully removed
-    //from storage
-    if(deleteHabitFromDB(habitKey)){
-        var parent = child.parentNode;
-        child.classList.add("anim-slide-out-right-240-5");
-
-        prefixedEvent(child, "AnimationEnd", function() {
-            parent.removeChild(child);
-        });
     }
 
     $firebase.deleteHabit(habitKey, function() {
@@ -106,6 +76,14 @@ function deleteHabit(element) {
 
         prefixedEvent(child, "AnimationEnd", function() {
             parent.removeChild(child);
+            
+            //reset the value of lastHabitKey if the last habit in the list was deleted
+            var habitListElements = document.getElementById("habit-list").children;
+            if(habitListElements.length === 0){
+                lastHabitKey = null;
+            }else{
+                lastHabitKey = habitListElements[habitListElements.length - 1].getAttribute("data-key");
+            }
         });
     });
 }
@@ -297,33 +275,18 @@ function createHabitElement(currentHabit, habitKey, index){
     document.getElementById("habit-list").appendChild(habit);
 }
 
-function clearHabitList(){
-    var habitList = document.getElementById("habit-list");
-    while(habitList.firstChild){
-        habitList.removeChild(habitList.firstChild);
-    }
-}
-
 function createHabitList(habits, fromWhichMethod){
-    allHabits = habits;
     var deletedFlag = false;
-    
-    if(habits && habits.length != 0){
+    if(habits){
         var i = 0;
         for (var h in habits) {
+            //when retrieving habits as user scrolls down the page, firebase always returns one
+            //extra result from the database.  This extra habit is the same habit as the last habit
+            //on the page before the user scrolled.  This basically skips over the extra habit so it
+            //is not put on the page twice
             if(!deletedFlag && fromWhichMethod === "next"){
-                delete allHabits[h];
                 deletedFlag = true;
                 continue;
-            }
-            
-            if(i > 2 && fromWhichMethod === "prev"){
-                delete allHabits[h];
-                continue;
-            }
-            
-            if(i === 0){
-                firstHabitKey = h;    
             }
             
             var currentHabit = habits[h];
@@ -341,23 +304,13 @@ function createHabitList(habits, fromWhichMethod){
             }
             createHabitElement(currentHabit, h, i);
 
-            //values may have been reset if a new day occured, to reset stuff in local storage
-            //localStorage.setItem("habitList", JSON.stringify(habits));
             i = i + 1;
+            allHabits[h] = habits[h]; //add habit to list of all habits
         }
         
-        lastHabitKey = h;
+        lastHabitKey = h; //set last habit key equal to the last habit iterated over
     }
 }
-
-/* LEAVE UNTIL PAGINATION IS CONFIRMED
-function listHabits(callback){
-    $firebase.getHabits(function(habits) {
-        createHabitList(habits);
-        callback();
-    });
-}
-*/
 
 /*
 * Function that generates the list of habits on the page on load
@@ -366,21 +319,27 @@ function listHabits(callback){
 ////////////////////////PAGINATION//////////////////////////////
 function listHabits(callback){
     $firebase.getFirstHabits(function(habits) {
+        if(!habits){
+            document.getElementById("noHabitsDisplay").style.display = "block";
+        }
         createHabitList(habits);
         callback();
     });
 }
 
-function getPreviousHabits(callback){
-    clearHabitList();
-    $firebase.getPreviousHabits(function(habits) {
-        createHabitList(habits, "prev");
-        callback();
-    }, firstHabitKey);
-}
-
+/*
+* Function that is called when the user scrolls to the bottom of the page.  Basically
+retrieves the next 3 habits if there are more to get.  This prevents from loading all
+habits on page load and retrieves habits only when the user is looking for them.
+NOTE: $firebase.getNextHabits always returns 4 habits instead of 3 from the database. This 
+is pretty much unavoidable because of the nature of how pagination works with firebase
+so the first habit returned corresponds to the habit with key of the same value as 'lastHabitKey'
+and this value needs to be ignored.
+*/
 function getNextHabits(callback){
-    clearHabitList();
+    if(!lastHabitKey){
+        return;
+    }
     $firebase.getNextHabits(function(habits) {
         createHabitList(habits, "next");
         callback();
@@ -452,12 +411,37 @@ function prefixedEvent(element, type, callback) {
     }
 }
 
+//listener attached to window that fires every time user scrolls.  Basically checks if the
+//user has scrolled to the bottom of the page or not and retrieves the next 3 habits from the
+//database if this is true.
+function scrollListener(){
+    var bodyElement = document.body,
+    htmlElement = document.documentElement;
+
+    //browser conformant way to find height of document
+    var documentHeight = Math.max( bodyElement.scrollHeight, bodyElement.offsetHeight, 
+                    htmlElement.clientHeight, htmlElement.scrollHeight, htmlElement.offsetHeight );
+    
+    //browser conformant way to get height that user has scrolled to on page
+    var supportPageOffset = window.pageXOffset !== undefined;
+    var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+    var scrollHeight = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+    
+    //checks if the user has scrolled to the bottom
+    if(scrollHeight + window.innerHeight >= documentHeight){
+        getNextHabits(attachClickListeners, lastHabitKey);
+    }
+}
+
 /**************************************************************************************
                             Executed On Load of Page
 **************************************************************************************/
 document.body.onunload = function() {
     location.reload(true);
 };
+
+
 listHabits(function() {
     attachClickListeners();
+    window.onscroll = scrollListener;
 });
