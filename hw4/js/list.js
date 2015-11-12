@@ -37,7 +37,7 @@ function updateMessageDiv(msgElement, habitKey, callback){
             streaks[1].innerHTML = currentHabit.bestStreak;
         }
     }
-
+    
     //commit the changes back to local storage
     //localStorage.setItem("habitList", JSON.stringify(habitList));
     $firebase.updateHabit(currentHabit, habitKey, callback);

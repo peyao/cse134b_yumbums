@@ -3,6 +3,7 @@ var imageSelect;
 var weeklySchedule = [];
 var dayFreq = 0;
 var currentKey = localStorage.getItem("currentKey");
+var currentHabit;
 
 //upload personal image
 function setIcon() {
@@ -43,21 +44,12 @@ function updateHabit(callback){
         icon: imageSelect,
         weekFrequency: weeklySchedule,
         dayFrequency: dayFreq,
-        otherFrequency: 0,
-        currentStreak: 0,
-        bestStreak: 0,
-        completedToday: 0
+        notification: currentHabit.notification,
+        currentStreak: currentHabit.currentStreak,
+        bestStreak: currentHabit.bestStreak,
+        completedToday: currentHabit.completedToday,
+        timeCheck: currentHabit.timeCheck
     };
-
-    /*
-    var habitList = JSON.parse(localStorage.getItem("habitList"));
-    if(!habitList || habitList.length == 0){
-        return false;
-    }
-    habitList[currentIndex] = habit;
-    var stringHabit = JSON.stringify(habitList);
-    localStorage.setItem("habitList", stringHabit);
-    */
 
     $firebase.updateHabit(habit, currentKey, function() {
         callback();
@@ -116,17 +108,7 @@ function validateForm() {
  * initializes the values of the inputs in the form to the values
  * selected when creating a habit.
 */
-function initializeFields(currentHabit){
-    //get the habit that the user wants to edit
-    //var habitList = JSON.parse(localStorage.getItem("habitList"));
-    /*
-    if(!habitList || habitList.length == 0 || currentIndex == null){
-        return false;
-    }else{
-        currentHabit = habitList[currentIndex];
-    }
-    */
-
+function initializeFields(){
     //set the value of the title input field
     document.getElementById("title").value = currentHabit.title;
 
@@ -207,5 +189,6 @@ document.body.onunload = function() {
     location.reload(true);
 };
 $firebase.getHabit(currentKey, function(habit) {
-    initializeFields(habit);
+    currentHabit = habit;
+    initializeFields();
 });
