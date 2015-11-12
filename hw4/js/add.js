@@ -106,6 +106,11 @@ function prefixedEvent(element, type, callback) {
 
 function validateForm() {
     //icon select validation
+    if(!document.getElementById("title").value){
+        alert("Choose a title for your habit")
+        return false;
+    }
+
     if(imageSelect == null){
         alert("Choose an icon");
         return false;
