@@ -1,54 +1,19 @@
-//accessor function to notifications
-function notify() {
-    var notifications = createNotification();
-    if(notifications.length > 0)
-        showNotification(notifications);
-}
+var DEBUG = false;
 
-function showNotification(msg) {
-    //Check if Notification is supported
-    //for FF and Chrome
-    if('Notification' in window) {
-        console.log(Notification.permission);
-        if(Notification.permission === 'granted') {
-            var options = {
-                body: msg
-            }
-            var notification = new Notification('You have uncompleted habits!', options);
-            setTimeout(notification.close.bind(notification), 5000);
-        }
-        else if(Notification.permission !== 'denied') {
-            console.log('asking for notification...');
-            Notification.requestPermission(function (permission) {
-                console.log('permission asked...');
-                console.log(permission);
-                if(permission === 'granted') {
-                    var options = {
-                        body: msg
-                    }
-                    var notification = new Notification('You have uncompleted habits!', options);
-                    setTimeout(notification.close.bind(notification), 5000);
-                }
-            });
-        }
-    }
-    //for IE
-    else if (window.external.msSiteModeSetIconOverlay){
-        if(window.external.msIsSiteMode()) {
-            // Current page is a pinned site
-            window.external.msSiteModeSetIconOverlay('../img/icon.png', msg);
-        }
-    }
-    else {
-        alert('Notification not supported by this browser or browser version!');
-    }
-}
-
-function createNotification() {
-    // iterate through all notification msgs and form single notification
+/*
+ * Check if there's any notifications to send out every 1 minute
+ * Checking every 1 minute may be too often but it has to cover the
+ * scenario where the user opens the app at like 9:10, then checking
+ * it every 15 minutes will miss the 9:15 notification mark. So we
+ * have to check it every 1 minute b/c missing the scheduled time
+ * by seconds is still fine, but not if we miss it by anywhere from
+ * 1 minute to 14 minutes.
+ */
+window.setInterval(function() {
     var habitList = localStorage.getItem('habitList');
     habitList = JSON.parse(habitList);
-    console.log(habitList);
+		if(DEBUG)
+				console.log(habitList);
 
     var notification = [];
     if(habitList != null) {
@@ -79,7 +44,29 @@ function createNotification() {
         }
     }
 
-    return notification;
+		if(DEBUG) console.log('list of notifications to send out : ' + notification);
+		if(notification.length > 0) {
+				notify(notification);
+		}
+}, 60000);
+
+function notify(habitsToNotify) {
+		var perm = Notification.permission;
+		if(perm !== 'granted') {
+				Notification.requestPermission(function(permission) {
+						if(permission === 'granted') {
+								sendNotification(habitsToNotify);
+						}
+				});
+		} else {
+				sendNotification(habitsToNotify);
+		}
+}
+
+function sendNotification(habitsToNotify) {
+		var notification = new Notification('This is a notification', {
+				body: habitsToNotify.toString()
+		});
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -88,11 +75,11 @@ function createNotification() {
 
 //intervalType is either Hour or Minute
 function checkInterval(intervalType, interval) {
-    console.log(intervalType + ' ' + interval);
+    if(DEBUG) console.log(intervalType + ' ' + interval);
     var today = new Date();
     var hour = today.getHours();
     var minute = today.getMinutes();
-    console.log(hour + ':' + minute);
+    if(DEBUG) console.log(hour + ':' + minute);
     if(intervalType.toLowerCase() == 'hour') {
         if(hour % interval == 0)
             if(minute == 0)
@@ -101,10 +88,15 @@ function checkInterval(intervalType, interval) {
             return false;
     }
     else if(intervalType.toLowerCase() == 'minute') {
-        if(minute % interval == 0)
+				if(DEBUG) console.log(minute % interval);
+        if(minute % interval == 0) {
+						if(DEBUG) console.log('returning true');
             return true;
-        else
+				}
+        else {
+						if(DEBUG) console.log('returning false');
             return false;
+				}
     }
     return false;
 }
@@ -140,3 +132,4 @@ function checkDay(day) {
         return false;
     }
 }
+

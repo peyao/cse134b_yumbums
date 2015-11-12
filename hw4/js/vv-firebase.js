@@ -1,4 +1,5 @@
 var firebaseRef = new Firebase("https://fiery-heat-9545.firebaseio.com/");
+var PAGINATION_VALUE = 3;
 //localStorage.removeItem('userId');
 
 // Firebase
@@ -40,6 +41,7 @@ var $firebase = {
             });
         });
     },
+    /* LEAVE UNITL PAGINATION IS CONFIRMED
     getHabits: function(callback) {
         this.setUser(function(userId) {
             var habitsRef = firebaseRef.child('users/' + userId + '/habits');
@@ -49,7 +51,48 @@ var $firebase = {
                 console.log("Err: " + err);
             });
         });
+    },*/
+    //////////////////PAGINATION/////////////////////////////
+    getFirstHabits: function(callback) {
+        this.setUser(function(userId) {
+            var habitsRef = firebaseRef.child('users/' + userId + '/habits');
+            habitsRef.orderByKey()
+                     .limitToFirst(PAGINATION_VALUE)
+                     .once('value', function(snapshot) {
+                return callback(snapshot.val());
+            }, function (err) {
+                console.log("Err: " + err);
+            });
+        });
     },
+    getNextHabits: function(callback, habitKey) {
+        this.setUser(function(userId) {
+            var habitsRef = firebaseRef.child('users/' + userId + '/habits');
+            habitsRef.orderByKey()
+                     .startAt(habitKey)
+                     .limitToFirst(PAGINATION_VALUE + 1)
+                     .once('value', function(snapshot) {
+                return callback(snapshot.val());
+            }, function (err) {
+                console.log("Err: " + err);  
+            });
+        });  
+    },
+     getPreviousHabits: function(callback, habitKey) {
+        this.setUser(function(userId) {
+            var habitsRef = firebaseRef.child('users/' + userId + '/habits');
+            habitsRef.orderByKey()
+                     .endAt(habitKey)
+                     .limitToLast(PAGINATION_VALUE + 1)
+                     .once('value', function(snapshot) {
+                return callback(snapshot.val());
+            }, function (err) {
+                console.log("Err: " + err);  
+            });
+        });  
+    },
+    //////////////////PAGINATION/////////////////////////////
+    
     updateHabit: function(habit, habitKey, callback) {
         this.setUser(function(userId) {
             var habitRef = firebaseRef.child('users/' + userId + '/habits/' + habitKey);

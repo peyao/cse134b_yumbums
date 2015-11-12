@@ -10,7 +10,10 @@
 </head>
 <body>
 	<div id="anim-wrapper" class="forms anim-fade-in">
-		<h2>Add A Habit</h2>
+			<div class=topHeader>
+				<button type="button" id="backButton" onclick="pageTransitionOut('list.html')" title="back">&lt;</button>
+				<h2>Add A Habit</h2>
+			</div>
 		<form id="formADD">
 			<p><label for="title"><span id="title_text">Habit Title</span></label></p>
 			<p><input id="title" type="text" name="fullname" placeholder="Enter habit here" required></p>
