@@ -105,16 +105,48 @@ function prefixedEvent(element, type, callback) {
 }
 
 function validateForm() {
-    //icon select validation
+
+    // local variables
+    var orphan;
+    var invalidFlag = false;
+
+    // title validation
     if(!document.getElementById("title").value){
-        alert("Choose a title for your habit")
-        return false;
+        var aMessage1 = document.createTextNode(" *required field");
+        var aElement1 = document.createElement("ALERT");
+        aElement1.setAttribute("style", "color:red; font-size:small;");
+        aElement1.appendChild(aMessage1);
+
+        if(document.getElementById("title_text").childNodes[1]){
+            orphan = document.getElementById("title_text");
+            orphan.removeChild(orphan.childNodes[1]);
+        }
+        document.getElementById("title_text").appendChild(aElement1);
+        invalidFlag = true;
+    }
+    else if(document.getElementById("title_text").childNodes[1]){
+        orphan = document.getElementById("title_text");
+        orphan.removeChild(orphan.childNodes[1]);
     }
 
+    //icon select validation
     if(imageSelect == null){
-        alert("Choose an icon");
-        return false;
+        var aMessage2 = document.createTextNode(" *required field");
+        var aElement2 = document.createElement("ALERT");
+        aElement2.setAttribute("style", "color:red; font-size:small;");
+        aElement2.appendChild(aMessage2);
+        if(document.getElementById("hIcon").childNodes[1]){
+            orphan = document.getElementById("hIcon");
+            orphan.removeChild(orphan.childNodes[1]);
+        }
+        document.getElementById("hIcon").appendChild(aElement2);
+        invalidFlag = true;
     }
+    else if(document.getElementById("hIcon").childNodes[1]){
+        orphan = document.getElementById("hIcon");
+        orphan.removeChild(orphan.childNodes[1]);
+    }
+
     // checkbox validation
     var checkboxes = document.getElementsByName("date");
     var checkedweekly = false;
@@ -126,9 +158,23 @@ function validateForm() {
         }
     }
     if (!checkedweekly){
-        alert("Enter weekly frequency");
-        return false;
+        var aMessage3 = document.createTextNode(" *required field");
+        var aElement3 = document.createElement("ALERT");
+        aElement3.setAttribute("style", "color:red; font-size:small;");
+        aElement3.appendChild(aMessage3);
+
+        if(document.getElementById("hWeekly").childNodes[1]){
+            orphan = document.getElementById("hWeekly");
+            orphan.removeChild(orphan.childNodes[1]);
+        }
+        document.getElementById("hWeekly").appendChild(aElement3);
+        invalidFlag = true;
     }
+    else if(document.getElementById("hWeekly").childNodes[1]){
+        orphan = document.getElementById("hWeekly");
+        orphan.removeChild(orphan.childNodes[1]);
+    }
+
     // radio button and others validation
     var daily = document.getElementsByName("day");
     var dailyOther = document.getElementById("others").value;
@@ -144,7 +190,23 @@ function validateForm() {
         dayFreq = dailyOther;
     }
     if(!selectedradio && !dailyOther) {
-        alert("Enter daily frequency");
+        var aMessage4 = document.createTextNode(" *required field");
+        var aElement4 = document.createElement("ALERT");
+        aElement4.setAttribute("style", "color:red; font-size:small;");
+        aElement4.appendChild(aMessage4);
+
+        if(document.getElementById("hDaily").childNodes[1]){
+            orphan = document.getElementById("hDaily");
+            orphan.removeChild(orphan.childNodes[1]);
+        }
+        document.getElementById("hDaily").appendChild(aElement4);
+        invalidFlag = true;
+    }
+    else if(document.getElementById("hDaily").childNodes[1]){
+        orphan = document.getElementById("hDaily");
+        orphan.removeChild(orphan.childNodes[1]);
+    }
+    if(invalidFlag){
         return false;
     }
 
