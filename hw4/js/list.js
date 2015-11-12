@@ -115,8 +115,10 @@ function createHabitNameListElement(currentHabit){
     var habitNameDiv = document.createElement("DIV");
     var habitNameText = document.createTextNode(currentHabit.title);
     habitNameDiv.setAttribute("class", "habit-name");
+    var habitEditDeleteOpElementDiv = createHabitEditDeleteSmallOpElements (currentHabit);
     habitNameDiv.appendChild(habitNameText);
     habitNameListElement.appendChild(habitNameDiv);
+    habitNameListElement.appendChild(habitEditDeleteOpElementDiv);
     return habitNameListElement;
 }
 
@@ -218,6 +220,37 @@ function createHabitMessageElement(currentHabit){
 }
 
 /*
+ * Function that generates the buttons next to the title of each habit
+ * that allow for editing, deleting of a habit
+ */
+function createHabitEditDeleteSmallOpElements(currentHabit){
+	var habitOpDiv = document.createElement("DIV");
+    habitOpDiv.setAttribute("class", "edit-delete");
+    
+    var editButton = document.createElement("BUTTON");
+    editButton.setAttribute("class", "smallOp op-edit");
+    editButton.setAttribute("type", "button");
+    editButton.setAttribute("title", "edit habit");
+    var editImage = document.createElement("IMG");
+    editImage.setAttribute("src", "../img/edit.svg");
+    editImage.setAttribute("alt", "Edit");
+    editButton.appendChild(editImage);
+
+    var deleteButton = document.createElement("BUTTON");
+    deleteButton.setAttribute("class", "smallOp op-del");
+    deleteButton.setAttribute("type", "button");
+    deleteButton.setAttribute("title", "delete habit");
+    var deleteImage = document.createElement("IMG");
+    deleteImage.setAttribute("src", "../img/delete.svg");
+    deleteImage.setAttribute("alt", "Del");
+    deleteButton.appendChild(deleteImage);
+    
+    habitOpDiv.appendChild(editButton);
+    habitOpDiv.appendChild(deleteButton);
+    return habitOpDiv;
+}
+
+/*
  * Function that generates the buttons at the bottom of each habit
  * that allow for editing, deleting, and marking completion of a habit
 */
@@ -243,28 +276,8 @@ function createHabitOpElement(currentHabit){
     failedImage.setAttribute("alt", "failed");
     failedButton.appendChild(failedImage);
 
-    var editButton = document.createElement("BUTTON");
-    editButton.setAttribute("class", "op op-edit");
-    editButton.setAttribute("type", "button");
-    editButton.setAttribute("title", "edit habit");
-    var editImage = document.createElement("IMG");
-    editImage.setAttribute("src", "../img/edit.svg");
-    editImage.setAttribute("alt", "Edit");
-    editButton.appendChild(editImage);
-
-    var deleteButton = document.createElement("BUTTON");
-    deleteButton.setAttribute("class", "op op-del");
-    deleteButton.setAttribute("type", "button");
-    deleteButton.setAttribute("title", "delete habit");
-    var deleteImage = document.createElement("IMG");
-    deleteImage.setAttribute("src", "../img/delete.svg");
-    deleteImage.setAttribute("alt", "Del");
-    deleteButton.appendChild(deleteImage);
-
     habitOpDiv.appendChild(doneButton);
     habitOpDiv.appendChild(failedButton);
-    habitOpDiv.appendChild(editButton);
-    habitOpDiv.appendChild(deleteButton);
     return habitOpDiv;
 }
 
