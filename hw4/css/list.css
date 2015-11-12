@@ -22,8 +22,8 @@ body{
 .habit-icon{margin:0; border-radius:5px;width:100px; height:100px;}
 
 /* edit/delete (for a existing habit) */
-.edit-delete{float: right; display:inline-block; padding: 17px}
-.smallOp{width:30px; height:30px; border-radius: 50%; box-shadow: 0 0 3px gray; padding: 5px;}
+.edit-delete{float: right; display:inline-block; padding: 20px; margin: 0 auto;}
+.smallOp{width:30px; height:30px; border-radius: 50%; box-shadow: 0 0 3px gray; padding: 5px; margin-left:5px}
 .smallOp:hover{box-shadow: 0 0 1px gray;}
 .smallOp:active{box-shadow: 0 0 2px gray;}
 .smallOp:focus{outline-style:none;}
