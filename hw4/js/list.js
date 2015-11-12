@@ -415,7 +415,7 @@ function attachClickListeners(){
         //needs to be set in local storage so that edit.js can retrieve the
         //value and no which habit in the habitList to edit.
         editButtons[i].onclick = function(){
-            var child = this.parentNode.parentNode;
+            var child = this.parentNode.parentNode.parentNode.parentNode;
             var habitKey = child.getAttribute("data-key");
             if(habitKey == null){
                 return false;
@@ -429,7 +429,7 @@ function attachClickListeners(){
     for(var i = 0; i<deleteButtons.length; i++){
         deleteButtons[i].onclick = function(){
             if (window.confirm("Are you sure you want to delete this habit?")) {
-                deleteHabit(this);
+                deleteHabit(this.parentNode.parentNode);
             }
         };
     }
