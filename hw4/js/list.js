@@ -8,14 +8,25 @@ var lastHabitKey;  //variable needed for adding habits to the bottom of the page
  * Function that gets called when clicking the complete habit button, updates
  * the html on the page and also the values in the local storage
 */
-function updateMessageDiv(msgElement, habitKey, callback){
-    console.log(JSON.stringify(allHabits, null, 2));
+function updateMessageDiv(msgElement, messageType, habitKey, callback){
     //get the current habit from local storage
     var currentHabit = allHabits[habitKey];
-
+    
+    var streaks = msgElement.querySelectorAll(".message-total strong");
+    var newMessage;
+    
     //update the message showing how close the user is to reaching the daily goal
-    currentHabit.completedToday += 1;
-    var newMessage = "Completed <strong>" + currentHabit.completedToday + "/" + currentHabit.dayFrequency + "</strong> for today!";
+    if(messageType == "complete"){
+        currentHabit.completedToday += 1;
+        newMessage = "Completed <strong>" + currentHabit.completedToday + "/" + currentHabit.dayFrequency + "</strong> for today!";
+    }
+    else{
+        currentHabit.completedToday = 0;
+        currentHabit.currentStreak = 0;
+        streaks[0].innerHTML = 0;
+        newMessage = "Too bad, try again next time.";
+    }
+     
     msgElement.getElementsByClassName("message-today")[0].innerHTML = newMessage;
 
 
@@ -29,7 +40,6 @@ function updateMessageDiv(msgElement, habitKey, callback){
     //if the user reached their goal for the day, then update their current and best streak,
     //along with redraw the progress bar
     if(currentHabit.completedToday == currentHabit.dayFrequency){
-        var streaks = msgElement.querySelectorAll(".message-total strong");
         currentHabit.currentStreak += 1;
         streaks[0].innerHTML = currentHabit.currentStreak;
         if(currentHabit.currentStreak > currentHabit.bestStreak){
@@ -49,14 +59,14 @@ function hideMessageAfter3Secs(element, habitKey){
     msgElement.style.visibility="hidden";
 }
 
-function showMsg(element) {
+function showMsg(element, messageType) {
     var listElement = element.parentNode.parentNode;
     var habitKey = listElement.getAttribute("data-key");
     if(habitKey === null){
         return false;
     }
     var msgElement = (listElement.getElementsByClassName("message"))[0];
-    updateMessageDiv(msgElement, habitKey, function() {
+    updateMessageDiv(msgElement, messageType, habitKey, function() {
         msgElement.style.visibility="visible";
         setTimeout(function () {hideMessageAfter3Secs(element, habitKey);}, 3000);
     });
@@ -291,8 +301,8 @@ function createHabitList(habits, fromWhichMethod){
             
             var currentHabit = habits[h];
             var currentDate = new Date();
-            currentDate.setHours(0);
-            var currentTime = currentDate.getTime();
+            currentDate.setHours(0, 0, 0, 0);
+            var currentTime = currentDate.getTime(); //time at the start of the current day
 
             //if it is a new day, then reset some values back to zero for some habits
             if(currentTime > currentHabit.timeCheck){
@@ -301,6 +311,8 @@ function createHabitList(habits, fromWhichMethod){
                     currentHabit.currentStreak = 0;
                 }
                 currentHabit.completedToday = 0;
+                currentHabit.timeCheck = currentTime; //just set time check to beginning of the day
+                $firebase.updateHabit(currentHabit, h, function(){}); //no need for a callback, can just be asynchronous
             }
             createHabitElement(currentHabit, h, i);
 
@@ -365,7 +377,7 @@ function attachClickListeners(){
     var completedButtons = document.getElementsByClassName("op-done");
     for(var i = 0; i<completedButtons.length; i++){
         completedButtons[i].onclick = function(){
-            showMsg(this);
+            showMsg(this, "complete");
         };
     }
     var editButtons = document.getElementsByClassName("op-edit");
@@ -391,6 +403,14 @@ function attachClickListeners(){
                 deleteHabit(this.parentNode.parentNode);
             }
         };
+    }
+    
+    var failedButtons = document.getElementsByClassName("op-failed");
+    var failedLength = failedButtons.length;
+    for(var i = 0; i<failedLength; i++){
+        failedButtons[i].onclick = function(){
+            showMsg(this, "failed");
+        }
     }
 }
 
