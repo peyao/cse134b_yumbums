@@ -41,7 +41,7 @@ input#others{
 	width: 250px;
 	font-size:medium;
 }
-img.icon{
+img.icon, img.nIcon{
 	width: 80px;
 	height: 80px;
 	margin-right: 20px;
@@ -71,7 +71,7 @@ img.icon{
 	font-size:small;
 
 }
-  img.icon{
+  img.icon, img.nIcon{
 	width: 60px;
 	height: 60px;
 	margin-right: 10px;
@@ -107,7 +107,7 @@ div.topHeader h2{
 /* #backButton */
 #backButton{position: absolute; left: 10px; top: 20px;  background:rgba(33, 72, 100, 1.0); width: 30px;height:30px; vertical-align: middle; font-size:15px; line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
 #backButton:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
-##backButton:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
+#backButton:active{border: 2px solid gray; background: rgb(33, 72, 100); box-shadow: 0 0 10px gray;}
 #backButton:focus{outline-style:none;}
 
 #image-button input[type="radio"]{

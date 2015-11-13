@@ -11,6 +11,8 @@ function setIcon() {
         var file = this.files[0];
         var url = window.URL.createObjectURL(file);
         document.getElementById('icon3').src = url;
+        document.getElementById('icon3').setAttribute("class","icon");
+        document.getElementById('icon3').setAttribute("onclick", "selectImage('icon3')");
     };
 }
 
@@ -170,6 +172,28 @@ function validateForm() {
             break;
         }
     }
+
+    if (dailyOther.match(/[^0-9]|\d{3}|0(?!\d)/,i)){
+        document.getElementById("others").value = null;
+        var numEntry = document.createTextNode(" *enter a number (1-99)");
+        var numElement = document.createElement("ALERT");
+        numElement.setAttribute("style", "color:red; font-size:small;");
+        numElement.appendChild(numEntry);
+
+        if(document.getElementById("hDaily").childNodes[2]){
+            orphan = document.getElementById("hDaily");
+            orphan.removeChild(orphan.childNodes[1]);
+        }
+        document.getElementById("hDaily").appendChild(numElement);
+        invalidFlag = true;
+    }
+    else if(document.getElementById("hDaily").childNodes[1]){
+            orphan = document.getElementById("hDaily");
+            orphan.removeChild(orphan.childNodes[1]);
+    }
+
+
+
     if(!selectedradio){
         dayFreq = dailyOther;
     }
