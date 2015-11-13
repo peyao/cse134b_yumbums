@@ -1,0 +1,13 @@
+{
+  "name": "yumbums",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "ws"
+  },
+  "local-web-server": {
+      "port": 8080
+  },
+  "dependencies": {
+    "local-web-server": "~0.5.23"
+  }
+}
