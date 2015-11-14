@@ -99,7 +99,7 @@ function validateForm() {
         document.getElementById("hIcon").appendChild(invalidMess(rfield));
         invalidFlag = true;
     }
-    else if(document.getElementById("hIcon").childNodes[1]){
+    else if( document.getElementById("hIcon").childNodes[1]){
         orphan = document.getElementById("hIcon");
         orphan.removeChild(orphan.childNodes[1]);
     }
@@ -174,9 +174,9 @@ function validateForm() {
         return false;
     }
 
-    addHabitInStorage(function() {
-        pageTransitionOut('list.html');
-    });
+    if(!updateHabit(function() {pageTransitionOut('list.html');})){
+        return false;
+    }
 }
 
 /*
