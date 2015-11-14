@@ -1,7 +1,7 @@
 /*
  * Forms a POST request to the OneSignal REST API
  */
-function sendNotification(msg) {
+function sendPushNotification(msg) {
     var req = new XMLHttpRequest();
     req.open('POST', 'https://onesignal.com/api/v1/notifications', true);
     req.setRequestHeader('Content-Type', 'application/json');

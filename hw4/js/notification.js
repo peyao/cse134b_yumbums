@@ -17,16 +17,16 @@ setTimeout(function() {
 function getHabitList() {
     $firebase.getAllHabits(function proccessHabitList(habits) {
         if (DEBUG) {
-            console.log("firebase.getFirstHabits:");
+            console.log("firebase.getAllHabits:");
             console.log(habits);
         }
         checkNotifications(habits);
     });
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Notification Functions
-////////////////////////////////////////////////////////////////////////////////
+/******************************************************************************
+ * Notification Functions
+ ******************************************************************************/
 
 /*
  * Iterate through my habits and check if any notifications
@@ -49,6 +49,12 @@ function checkNotifications(habits) {
 
         if (DEBUG) console.log(id);
         if (DEBUG) console.log(habits[id]);
+
+        // Check if habit was already completed today
+        if(habit.completedToday == habit.dayFrequency) {
+            if(DEBUG) console.log(habit.title + ' is already completed so skipping');
+            continue;
+        }
 
         if (interval == 'None') continue;
         var frequency = habit.weekFrequency;
@@ -78,31 +84,52 @@ function checkNotifications(habits) {
     }
 }
 
-/*
+/*n
  * Format notifications into a nice string then call the
  * REST API
  */
 function notify(habitsToNotify) {
-    var strHabitList = "";
-    for (i = 0, len = habitsToNotify.length; i < len; i++) {
+    var str = '';
+    var i;
+    for(i = 0, len = habitsToNotify.length; i < len; i++) {
         if (i == len - 1) {
-            strHabitList += habitsToNotify[i];
+            str += habitsToNotify[i];
         } else {
-            strHabitList += habitsToNotify[i] + ", ";
+            str += habitsToNotify[i] + ", ";
         }
     }
 
-    if (DEBUG) console.log('strHabitList: ' + strHabitList);
-
-    if (oneSignalId != null) {
-        if (DEBUG) console.log("SENDING notifications");
-        sendNotification(strHabitList);
+    if(isPushSupported && oneSignalId != null) {
+        if (DEBUG) console.log("SENDING OneSignal notifications");
+        sendPushNotification(str);
+    } else {
+        if (DEBUG) console.log("SENDING Web notifications");
+        sendWebNotification(str);
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Time Calculation Functions
-////////////////////////////////////////////////////////////////////////////////p
+function sendWebNotification(strHabitList) {
+    var title = 'You have incomplete habits';
+    var chk = Notification.permission;
+    if(chk !== 'granted') {
+        Notification.requestPermission(function(permission) {
+            if(permission === 'granted') {
+                var notification = new Notification(title, {
+                    body: strHabitList
+                });
+            }
+        });
+    }
+    else {
+        var notification = new Notification(title, {
+            body: strHabitList
+        });
+    }
+}
+
+/******************************************************************************
+ * Time Calculation Functions
+ ******************************************************************************/
 
 /*
  * Checks if current time is at the interval
@@ -174,4 +201,3 @@ function checkDay(day) {
         return false;
     }
 } /* END checkDay() */
-
