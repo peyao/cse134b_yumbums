@@ -23,7 +23,7 @@ function selectImage(name) {
     document.getElementById('icon1').style.border = "none";
     document.getElementById('icon2').style.border = "none";
     document.getElementById('icon3').style.border = "none";
-    imageSelect = null;
+    //imageSelect = null;
     var image = document.getElementById(name);
     image.style.border = "5px solid #42A5F5";
     imageSelect = image.getAttribute("src");
@@ -60,24 +60,29 @@ function updateHabit(callback){
     });
 }
 
+function invalidMess(message){
+    var aMessage = document.createTextNode(message);
+    var aElement = document.createElement("ALERT");
+    aElement.setAttribute("style", "color:red; font-size:small;");
+    aElement.appendChild(aMessage);
+    return aElement
+}
+
 function validateForm() {
 
     // local variables
     var orphan;
     var invalidFlag = false;
+    var rfield = " *required field";
+    var efield = " *enter a number (1-99)";
 
     // title validation
     if(!document.getElementById("title").value){
-        var aMessage1 = document.createTextNode(" *required field");
-        var aElement1 = document.createElement("ALERT");
-        aElement1.setAttribute("style", "color:red; font-size:small;");
-        aElement1.appendChild(aMessage1);
-
         if(document.getElementById("title_text").childNodes[1]){
             orphan = document.getElementById("title_text");
             orphan.removeChild(orphan.childNodes[1]);
         }
-        document.getElementById("title_text").appendChild(aElement1);
+        document.getElementById("title_text").appendChild(invalidMess(rfield));
         invalidFlag = true;
     }
     else if(document.getElementById("title_text").childNodes[1]){
@@ -87,15 +92,11 @@ function validateForm() {
 
     //icon select validation
     if(imageSelect == null){
-        var aMessage2 = document.createTextNode(" *required field");
-        var aElement2 = document.createElement("ALERT");
-        aElement2.setAttribute("style", "color:red; font-size:small;");
-        aElement2.appendChild(aMessage2);
         if(document.getElementById("hIcon").childNodes[1]){
             orphan = document.getElementById("hIcon");
             orphan.removeChild(orphan.childNodes[1]);
         }
-        document.getElementById("hIcon").appendChild(aElement2);
+        document.getElementById("hIcon").appendChild(invalidMess(rfield));
         invalidFlag = true;
     }
     else if(document.getElementById("hIcon").childNodes[1]){
@@ -114,16 +115,11 @@ function validateForm() {
         }
     }
     if (!checkedweekly){
-        var aMessage3 = document.createTextNode(" *required field");
-        var aElement3 = document.createElement("ALERT");
-        aElement3.setAttribute("style", "color:red; font-size:small;");
-        aElement3.appendChild(aMessage3);
-
         if(document.getElementById("hWeekly").childNodes[1]){
             orphan = document.getElementById("hWeekly");
             orphan.removeChild(orphan.childNodes[1]);
         }
-        document.getElementById("hWeekly").appendChild(aElement3);
+        document.getElementById("hWeekly").appendChild(invalidMess(rfield));
         invalidFlag = true;
     }
     else if(document.getElementById("hWeekly").childNodes[1]){
@@ -143,47 +139,37 @@ function validateForm() {
         }
     }
 
-    if (dailyOther.match(/[^0-9]|\d{3}|0(?!\d)/,i)){
-        document.getElementById("others").value = null;
-        var numEntry = document.createTextNode(" *enter a number (1-99)");
-        var numElement = document.createElement("ALERT");
-        numElement.setAttribute("style", "color:red; font-size:small;");
-        numElement.appendChild(numEntry);
-
-        if(document.getElementById("hDaily").childNodes[2]){
-            orphan = document.getElementById("hDaily");
-            orphan.removeChild(orphan.childNodes[1]);
-        }
-        document.getElementById("hDaily").appendChild(numElement);
-        invalidFlag = true;
-    }
-    else if(document.getElementById("hDaily").childNodes[1]){
-        orphan = document.getElementById("hDaily");
-        orphan.removeChild(orphan.childNodes[1]);
-    }
-
-
-
+    // set daily frequency variable
     if(!selectedradio){
-        dayFreq = dailyOther;
+        if(dailyOther) {
+            dayFreq = dailyOther;
+        }
     }
     if(!selectedradio && !dailyOther) {
-        var aMessage4 = document.createTextNode(" *required field");
-        var aElement4 = document.createElement("ALERT");
-        aElement4.setAttribute("style", "color:red; font-size:small;");
-        aElement4.appendChild(aMessage4);
-
         if(document.getElementById("hDaily").childNodes[1]){
             orphan = document.getElementById("hDaily");
             orphan.removeChild(orphan.childNodes[1]);
         }
-        document.getElementById("hDaily").appendChild(aElement4);
+        document.getElementById("hDaily").appendChild(invalidMess(rfield));
         invalidFlag = true;
     }
     else if(document.getElementById("hDaily").childNodes[1]){
         orphan = document.getElementById("hDaily");
         orphan.removeChild(orphan.childNodes[1]);
     }
+
+    if (dailyOther.match(/[^0-9]|\d{3}|0(?!\d)/,i) ){
+        document.getElementById("others").value = null;
+        dailyOther = null;
+        if(document.getElementById("hDaily").childNodes[1]){
+            orphan = document.getElementById("hDaily");
+            orphan.removeChild(orphan.childNodes[1]);
+        }
+        document.getElementById("hDaily").appendChild(invalidMess(efield));
+        invalidFlag = true;
+    }
+
+    // validation check
     if(invalidFlag){
         return false;
     }
