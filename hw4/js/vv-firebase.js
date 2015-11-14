@@ -41,6 +41,17 @@ var $firebase = {
             });
         });
     },
+    getAllHabits: function(callback) {
+        this.setUser(function(userId) {
+            var habitsRef = firebaseRef.child('users/' + userId + '/habits');
+            habitsRef.orderByKey()
+                     .once('value', function(snapshot) {
+                         return callback(snapshot.val())
+                     }, function (err) {
+                         console.log('Err: ' + err);
+                     });
+        });
+    },
     getFirstHabits: function(callback) {
         this.setUser(function(userId) {
             var habitsRef = firebaseRef.child('users/' + userId + '/habits');
