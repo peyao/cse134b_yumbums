@@ -1,19 +1,7 @@
+/*
+ * Forms a POST request to the OneSignal REST API
+ */
 function sendNotification(msg) {
-    /*
-    var headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic NjA0ZTdiMTUtN2RiNi00MzRkLThhNzUtMjFmNmE4ZGMwYjRj'
-    };
-
-    var options = {
-        host: 'onesignal.com',
-        port: 443,
-        path: '/api/v1/notifications',
-        method: 'POST',
-        headers: headers
-    };
-    */
-
     var req = new XMLHttpRequest();
     req.open('POST', 'https://onesignal.com/api/v1/notifications', true);
     req.setRequestHeader('Content-Type', 'application/json');

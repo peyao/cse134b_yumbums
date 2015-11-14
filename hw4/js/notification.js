@@ -1,15 +1,20 @@
-var DEBUG = false;
+var DEBUG = true;
 
 /*
- * Check if there's any notifications to send out every 1 minute
- * Checking every 1 minute may be too often but it has to cover the
- * scenario where the user opens the app at like 9:10, then checking
- * it every 15 minutes will miss the 9:15 notification mark. So we
- * have to check it every 1 minute b/c missing the scheduled time
- * by seconds is still fine, but not if we miss it by anywhere from
- * 1 minute to 14 minutes.
+ * Figure out how many seconds until the next quarter hour mark
  */
-window.setInterval(function () {
+var d = new Date();
+var currSeconds = d.getTime() / 1000;
+var timeSinceLastQuarter = currSeconds % 900; // 900 seconds (15 minutes)
+var timeUntilNextQuarter = 900 - timeSinceLastQuarter;
+
+setTimeout(function() {
+    if(DEBUG) console.log('It is now the quarter hour mark');
+    setInterval(getHabitList, 900 * 1000);
+    getHabitList();
+}, timeUntilNextQuarter * 1000);
+
+function getHabitList() {
     $firebase.getAllHabits(function proccessHabitList(habits) {
         if (DEBUG) {
             console.log("firebase.getFirstHabits:");
@@ -17,9 +22,7 @@ window.setInterval(function () {
         }
         checkNotifications(habits);
     });
-}, 60000);
-/* END */
-
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Notification Functions
@@ -35,6 +38,9 @@ function checkNotifications(habits) {
         console.log('checkNotifications(habits)');
         console.log(habits);
     }
+
+    if(habits == null)
+        return;
 
     var arrHabitsToNotify = [];
     for (var id in habits) {
@@ -72,6 +78,10 @@ function checkNotifications(habits) {
     }
 }
 
+/*
+ * Format notifications into a nice string then call the
+ * REST API
+ */
 function notify(habitsToNotify) {
     var strHabitList = "";
     for (i = 0, len = habitsToNotify.length; i < len; i++) {
@@ -94,7 +104,10 @@ function notify(habitsToNotify) {
 // Time Calculation Functions
 ////////////////////////////////////////////////////////////////////////////////p
 
-//intervalType is either Hour or Minute
+/*
+ * Checks if current time is at the interval
+ * intervalType a string containing either 'hour' or 'minute'
+ */
 function checkInterval(intervalType, interval) {
     if (DEBUG) console.log(intervalType + ' ' + interval);
     var today = new Date();
@@ -120,10 +133,12 @@ function checkInterval(intervalType, interval) {
         }
     }
     return false;
-}
+} /* END checkInterval() */
 
-//time is string in HH:MM format
-//checks if given time is equal to current time
+/*
+ * time is string in HH:MM format
+ * checks if given time is equal to current time
+ */
 function checkHourMinute(time) {
     var today = new Date();
     var minutes = today.getMinutes();
@@ -139,8 +154,12 @@ function checkHourMinute(time) {
     else {
         return false;
     }
-}
+} /* END checkHourMinute() */
 
+/*
+ * Checks if current day of the week matches the one
+ * set for notification
+ */
 function checkDay(day) {
     if (DEBUG) console.log('Checking day:');
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
@@ -154,5 +173,5 @@ function checkDay(day) {
     else {
         return false;
     }
-}
+} /* END checkDay() */
 
