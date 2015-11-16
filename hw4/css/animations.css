@@ -28,10 +28,12 @@
     left: 20px;
 }
 
-#loader-ellipsis {
+#loader-list {
     visibility: hidden;
     position: relative;
-    left: 50%;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: -5px;
 }
 
 /* animations */
