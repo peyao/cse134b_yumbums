@@ -1,10 +1,11 @@
 var OneSignal = OneSignal || [];
 var oneSignalId = null;
+var isPushSupported = true;
 
 initOneSignal();
 
 function initOneSignal() {
-    var DEFAULT_URL = 'http://localhost/src/list.html';
+    var DEFAULT_URL = 'http://localhost:8080/src/list.html';
 
     /* Configured for Chrome and Safari */
     OneSignal.push(['init', {
@@ -13,7 +14,7 @@ function initOneSignal() {
         subdomainName: 'yumbums'
     }]);
     OneSignal.push(['setDefaultNotificationUrl', DEFAULT_URL]);
-    OneSignal.push(['setDefaultTitle', 'Habits Not Yet Finished']);
+    OneSignal.push(['setDefaultTitle', 'This is a friendly reminder to complete your habits']);
 
     checkSubscription();
     OneSignal.push(['getIdsAvailable', function(ids) {
@@ -22,6 +23,10 @@ function initOneSignal() {
     }]);
 }
 
+/*
+ * Check if push notifications are supported, if not then fallback to
+ * web notifications
+ */
 function checkSubscription() {
     OneSignal.push(function() {
         if(OneSignal.isPushNotificationsSupported()) {
@@ -29,6 +34,8 @@ function checkSubscription() {
                if(!pushEnabled)
                    OneSignal.push(['registerForPushNotifications']);
             });
+        } else {
+            isPushSupported = false;
         }
     });
 }
