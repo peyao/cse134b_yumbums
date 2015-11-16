@@ -5,19 +5,25 @@ var DEBUG = true;
  */
 var d = new Date();
 var currSeconds = d.getTime() / 1000;
-var timeSinceLastQuarter = currSeconds % 900; // 900 seconds (15 minutes)
-var timeUntilNextQuarter = 900 - timeSinceLastQuarter;
+//var timeSinceLastQuarter = currSeconds % 900; // 900 seconds (15 minutes)
+var timeSinceLastQuarter = currSeconds % 10; // 10 seconds
+var timeUntilNextQuarter = 10 - timeSinceLastQuarter;
+
+if(DEBUG) {
+    console.log('time since last quarter: ' + timeSinceLastQuarter);
+    console.log('time until next quarter: ' + timeUntilNextQuarter);
+}
 
 setTimeout(function() {
     if(DEBUG) console.log('It is now the quarter hour mark');
-    setInterval(getHabitList, 900 * 1000);
+    setInterval(getHabitList, 10 * 1000);
     getHabitList();
 }, timeUntilNextQuarter * 1000);
 
 function getHabitList() {
-    $firebase.getAllHabits(function proccessHabitList(habits) {
+    $firebase.getAllHabits(function(habits) {
         if (DEBUG) {
-            console.log("firebase.getAllHabits:");
+            console.log('firebase.getAllHabits:');
             console.log(habits);
         }
         checkNotifications(habits);
@@ -60,7 +66,14 @@ function checkNotifications(habits) {
         var frequency = habit.weekFrequency;
         for (var f in frequency) {
             if (checkDay(frequency[f])) {
-                if (interval == '15' || interval == '30' || interval == '45') {
+                if (interval == '20') {
+                    if (checkInterval('seconds', interval)) {
+                        arrHabitsToNotify.push(habit.title);
+                    } else {
+                        continue;
+                    }
+                }
+                else if (interval == '15' || interval == '30' || interval == '45') {
                     if (checkInterval('minute', interval)) {
                         arrHabitsToNotify.push(habit.title);
                     } else {
@@ -140,13 +153,14 @@ function checkInterval(intervalType, interval) {
     var today = new Date();
     var hour = today.getHours();
     var minute = today.getMinutes();
-    if (DEBUG) console.log(hour + ':' + minute);
+    var second = today.getSeconds();
+    if (DEBUG) console.log(hour + ':' + minute + ':' + second);
     if (intervalType.toLowerCase() == 'hour') {
         if (hour % interval == 0)
             if (minute == 0)
-                return true;
-            else
-                return false;
+                if (second == 0)
+                    return true;
+        return false;
     }
     else if (intervalType.toLowerCase() == 'minute') {
         if (DEBUG) console.log(minute % interval);
@@ -154,10 +168,16 @@ function checkInterval(intervalType, interval) {
             if (DEBUG) console.log('returning true');
             return true;
         }
-        else {
-            if (DEBUG) console.log('returning false');
-            return false;
+        if (DEBUG) console.log('returning false');
+        return false;
+    }
+    else if (intervalType.toLowerCase() == 'seconds') {
+        if (second % interval == 0) {
+            if (DEBUG) console.log('returning true');
+            return true;
         }
+        if (DEBUG) console.log('returning false');
+        return false;
     }
     return false;
 } /* END checkInterval() */

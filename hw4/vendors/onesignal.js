@@ -14,7 +14,7 @@ function initOneSignal() {
         subdomainName: 'yumbums'
     }]);
     OneSignal.push(['setDefaultNotificationUrl', DEFAULT_URL]);
-    OneSignal.push(['setDefaultTitle', 'Habits Not Yet Finished']);
+    OneSignal.push(['setDefaultTitle', 'This is a friendly reminder to complete your habits']);
 
     checkSubscription();
     OneSignal.push(['getIdsAvailable', function(ids) {
