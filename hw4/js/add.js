@@ -23,7 +23,7 @@ function selectImage(name) {
     document.getElementById('icon3').style.border = "none";
     //imageSelect = null;
     var image = document.getElementById(name);
-    image.style.border = "5px solid #42A5F5";
+    image.style.border = "2px solid #42A5F5";
     imageSelect = image.getAttribute("src");
 }
 
@@ -33,7 +33,7 @@ function uncheckradio() {
         unradio[i].checked = false;
     }
     unradio = document.getElementsByName("notification");
-    for (var i = 0; i < unradio.length - 1; i++) {
+    for ( i = 0; i < unradio.length - 1; i++) {
         unradio[i].checked = false;
     }
 }

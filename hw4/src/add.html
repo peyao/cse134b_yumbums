@@ -19,7 +19,7 @@
 			</div>
 		<form id="formADD">
 			<p><label for="title"><span id="title_text">Habit Title</span></label></p>
-			<p><input id="title" type="text" name="fullname" placeholder="Enter habit here" required></p>
+			<p><input id="title" type="text" name="fullname" placeholder=" Enter habit here" required></p>
 			<p><label id="hIcon">Habit Icon</label></p>
 			<div id="image-button">
 				<label>
@@ -50,17 +50,24 @@
 				<label> <input type="checkbox" name="date" value="saturday"><span>Sat</span></label>
 			</div>
 			<p><label id="hDaily">Daily Frequency</label></p>
-			<div id="daily-button" >
-				<label> <input type="radio" name="day" value="1" onclick="clearOther()"><span>1</span></label>
-				<label> <input type="radio" name="day" value="2" onclick="clearOther()"><span>2</span></label>
-				<label> <input type="radio" name="day" value="3" onclick="clearOther()"><span>3</span></label>
-				<span id="times">Times</span>
+			<div id="radioCase" style="display:inline-flex">
+
+				<span id="daily-button" >
+					<label> <input type="radio" name="day" value="1" onclick="clearOther()"><span>1</span></label>
+					<label> <input type="radio" name="day" value="2" onclick="clearOther()"><span>2</span></label>
+					<label> <input type="radio" name="day" value="3" onclick="clearOther()"><span>3</span></label>
+				</span>
+				<span id="times"></span>
+				<span id="daily-button2">Other:</span>
+				<span>
+					<label id="otherLabel" for="others">
+						<input id="others" type="text" name="day" placeholder="1-99" onclick="uncheckradio()">
+					</label>
+				</span>
 			</div>
-			<p><label for="others"><span id="others_text">Other: </span>
-			<input id="others" type="text" name="day"
-				   placeholder="Enter custom frequency" onclick="uncheckradio()"></label></p>
-            <p><label>Notifications Frequency</label></p>
-			<div id="nt-list">
+
+			<p><label>Notifications Frequency</label></p>
+				<div id="nt-list">
 				<p><label for="selectNotification">Every:
 				<select id="selectNotification">
 					<option name="time" value="None" selected>None</option>
