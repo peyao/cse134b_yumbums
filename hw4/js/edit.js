@@ -239,6 +239,9 @@ function initializeFields(){
     }else{
         document.getElementById("others").value = currentDayFrequency;
     }
+    document.getElementById("selectNotification").value = currentHabit.notification;
+
+
 }
 
 function pageTransitionOut(location) {
