@@ -76,6 +76,7 @@ var $firebase = {
     },
     getNextHabits: function(callback, habitKey) {
         $loader.show();
+        $loaderEllipsis.show();
         this.setUser(function(userId) {
             var habitsRef = firebaseRef.child('users/' + userId + '/habits');
             habitsRef.orderByKey()
@@ -87,6 +88,7 @@ var $firebase = {
                     console.log("Err: " + err);
                 });
         });
+        $loaderEllipsis.hide();
         $loader.hide();
     },
     updateHabit: function(habit, habitKey, callback) {
@@ -110,13 +112,32 @@ var $firebase = {
 
 var $loader = {
     show: function() {
-        loader = document.getElementById('loader');
+        var loader = document.getElementById('loader');
         if (!loader)
             return;
         loader.style.visibility = 'visible';
     },
     hide: function() {
-        loader = document.getElementById('loader');
+        var loader = document.getElementById('loader');
+        if (!loader)
+            return;
+        loader.classList.add("anim-loader-fade-out");
+        prefixedEvent(loader, "AnimationEnd", function() {
+            loader.style.visibility = 'hidden';
+            loader.className = ""; // Remove all classes
+        });
+    }
+};
+
+var $loaderEllipsis = {
+    show: function() {
+        var loader = document.getElementById('loader-ellipsis');
+        if (!loader)
+            return;
+        loader.style.visibility = 'visible';
+    },
+    hide: function() {
+        var loader = document.getElementById('loader-ellipsis');
         if (!loader)
             return;
         loader.classList.add("anim-loader-fade-out");

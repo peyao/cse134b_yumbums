@@ -3,7 +3,6 @@
 *       .anim-fade-in
 *       .anim-fade-out
 *
-*       .anim-loader-fade-in
 *       .anim-loader-fade-out
 *
 *       .anim-slide-in-left
@@ -24,9 +23,15 @@
 
 #loader {
     visibility: hidden;
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 20px;
+}
+
+#loader-ellipsis {
+    visibility: hidden;
+    position: relative;
+    left: 50%;
 }
 
 /* animations */
