@@ -18,8 +18,8 @@
 				<h2>Edit A Habit</h2>
 			</div>
 			<form id="formEDIT">
-				<p><label for="title"><span id="title_text">Habit Title</span></label></p>
-				<p><input id="title" type="text" name="fullname" placeholder="Enter habit here" required></p>
+				<p><label id="title_text" for="title">Habit Title</label></p>
+				<input id="title" type="text" name="fullname" placeholder=" Enter habit here" required>
 				<p><label id="hIcon">Habit Icon</label></p>
 				<div id="image-button">
 					<label>
@@ -50,19 +50,25 @@
 					<label> <input type="checkbox" name="date" value="saturday"><span>Sat</span></label>
 				</div>
 				<p><label id="hDaily">Daily Frequency</label></p>
-				<div id="daily-button" >
-					<label> <input type="radio" name="day" value="1" onclick="clearOther()"><span>1</span></label>
-					<label> <input type="radio" name="day" value="2" onclick="clearOther()"><span>2</span></label>
-					<label> <input type="radio" name="day" value="3" onclick="clearOther()"><span>3</span></label>
-					<span id="times">Times</span>
+				<div id="radioCase">
+
+					<span id="daily-button" >
+						<label> <input type="radio" name="day" value="1" onclick="clearOther()"><span>1</span></label>
+						<label> <input type="radio" name="day" value="2" onclick="clearOther()"><span>2</span></label>
+						<label> <input type="radio" name="day" value="3" onclick="clearOther()"><span>3</span></label>
+					</span>
+
+					<span id="daily-button2">Other:
+						<label id="otherLabel" for="others">
+							<input id="others" type="text" name="day" placeholder=" Times per day" onclick="uncheckradio()">
+						</label>
+					</span>
 				</div>
-				<p><label for="others"><span id="others_text">Other: </span>
-					<input id="others" type="text" name="day"
-						   placeholder="Enter custom frequency" onclick="uncheckradio()"></label></p>
+
 				<p><label>Notifications Frequency</label></p>
 				<div id="nt-list">
-					<p><label for="selectNotification">Every:
-						<select id="selectNotification" >
+					<label for="selectNotification"><span id="every">Every:</span>
+						<select id="selectNotification">
 							<option name="time" value="None" selected>None</option>
 							<option name="time" value="15">15 Minutes</option>
 							<option name="time" value="30">30 Minutes</option>
@@ -72,7 +78,7 @@
 							<option name="time" value="4"> 4 Hours</option>
 							<option name="time" value="8"> 8 Hours</option>
 							<option name="time" value="20" style="color:darkblue;">(20s - for grading)</option>
-						</select></label></p>
+						</select></label>
 				</div>
 				<p id="save_p">
 					<input id="save" type="button" value="Save It" onclick="return validateForm()">

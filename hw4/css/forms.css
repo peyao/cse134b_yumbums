@@ -19,8 +19,10 @@ body {
 }
 p{
 	color:#6c6c6c;
-	font-size: medium;
+	font-size: x-large;
 }
+
+
 div.forms {
 	position: relative;
 	margin: 0 auto;
@@ -31,20 +33,18 @@ div.forms {
 	bottom: auto;
 }
 input#title{
+	margin-left: 4px;
 	height: 30px;
-	width: 350px;
+	width: 435px;
 	font-size:medium;
 
 }
-input#others{
-	height: 30px;
-	width: 250px;
-	font-size:medium;
-}
+
+
 img.icon, img.nIcon{
 	width: 80px;
 	height: 80px;
-	margin-right: 20px;
+	margin: 0 14px 0 14px;
 	border-radius: 25px;
 	-webkit-transform: scale(1);
 	transform: scale(1);
@@ -74,7 +74,7 @@ img.icon, img.nIcon{
 	img.icon, img.nIcon{
 		width: 60px;
 		height: 60px;
-		margin-right: 10px;
+		margin: 0 5px 0 5px;
 		border-radius: 15px;
 		-webkit-transform: scale(1);
 		transform: scale(1);
@@ -98,6 +98,7 @@ div.topHeader{
 
 div.topHeader h2{
 	text-align: center;
+	font-size: x-large;
 	width: 100%;
 	display: inline-block;
 	color:white;
@@ -116,16 +117,15 @@ div.topHeader h2{
 #image-button input[type="file"]{
 	display: none;
 }
+#image-button label{
+
+	align-content: center;
+}
 img.icon:hover{
 	-webkit-transform: scale(1.2);
 	transform: scale(1.2);
 	cursor: pointer;
 }
-span#others_text{
-	padding-right: 5px;
-}
-
-
 
 input#save{
 	-webkit-appearance:none;
@@ -154,8 +154,8 @@ p#save_p{
 	text-align: center;
 }
 form{
-	padding-left: 25px;
-	padding-bottom: 20px;
+	padding: 0 25px 20px 25px;
+
 }
 div label input {
 	margin-right:100px;
@@ -171,7 +171,7 @@ div label input {
 	/*border:1px solid #D0D0D0;*/
 	background-color:#EFEFEF;
 	float:left;
-	width:3.0em;
+	width: 55px;
 }
 
 #ck-button label span {
@@ -214,6 +214,12 @@ span#times{
 	padding:3px 0px;
 	float:left;
 }
+input#others{
+	height: 30px;
+	width: 111px;
+	font-size:medium;
+
+}
 
 #daily-button label span {
 	text-align:center;
@@ -236,6 +242,10 @@ span#times{
 }
 #daily-button input:hover + span {
 	cursor: pointer;
+}
+#daily-button2{
+	padding-left: 10px;
+	color:#6c6c6c;
 }
 /*
 #notification-button {
@@ -272,6 +282,12 @@ span#times{
 #selectNotification {
 	height: 30px;
 	width: 250px;
+	font-size: medium;
+	color: #6c6c6c;
+
+}
+#every {
+	padding-left: 4px;
 	font-size: medium;
 	color: #6c6c6c;
 
