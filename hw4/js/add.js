@@ -29,6 +29,7 @@ function selectImage(name) {
 
 function uncheckradio() {
     var unradio = document.getElementsByName("day");
+    document.getElementById("others").setAttribute("placeholder", "");
     for (var i = 0; i < unradio.length - 1; i++) {
         unradio[i].checked = false;
     }
@@ -39,7 +40,7 @@ function uncheckradio() {
 }
 
 function clearOther() {
-    document.getElementById("others").value = null;
+    document.getElementById("others").setAttribute("placeholder","1-99");
 }
 
 /* my failed attempt to create html element with js, jacob teach me the way

@@ -50,16 +50,17 @@
 				<label> <input type="checkbox" name="date" value="saturday"><span>Sat</span></label>
 			</div>
 			<p><label id="hDaily">Daily Frequency</label></p>
-			<div id="radioCase" style="display:inline-flex">
+			<div id="radioCase">
 
 				<span id="daily-button" >
 					<label> <input type="radio" name="day" value="1" onclick="clearOther()"><span>1</span></label>
 					<label> <input type="radio" name="day" value="2" onclick="clearOther()"><span>2</span></label>
 					<label> <input type="radio" name="day" value="3" onclick="clearOther()"><span>3</span></label>
 				</span>
-				<span id="times"></span>
-				<span id="daily-button2">Other:</span>
-				<span>
+
+
+
+				<span id="daily-button2">Other:
 					<label id="otherLabel" for="others">
 						<input id="others" type="text" name="day" placeholder="1-99" onclick="uncheckradio()">
 					</label>
@@ -67,8 +68,8 @@
 			</div>
 
 			<p><label>Notifications Frequency</label></p>
-				<div id="nt-list">
-				<p><label for="selectNotification">Every:
+			<div id="nt-list">
+				<p><label for="selectNotification"><span>Every:</span>
 				<select id="selectNotification">
 					<option name="time" value="None" selected>None</option>
 					<option name="time" value="15">15 Minutes</option>
@@ -81,6 +82,7 @@
 					<option name="time" value="20" style="color:darkblue;">(20s - for grading)</option>
 				</select></label></p>
 			</div>
+
 			<p id="save_p">
 				<input id="save" type="button" value="Save It" onclick="return validateForm()">
 			</p>
