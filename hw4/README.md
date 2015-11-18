@@ -5,7 +5,8 @@
 The only text input fields we give to the user are for the habit title and daily frequency. Daily frequency will not
 accept any input that is not a number while habit title does accept script tags. But we prevent the injected scripts
 from executing by putting it into the DOM, in list.html, using the document.createTextNode() so it is interpreted as
-text rather than an html node.
+text rather than an html node. But since everything is client side, anyone malicious enough to try script injection
+can just modify the javascript code to get around any client side protection.
 
 ## Notifications
 

@@ -1,5 +1,8 @@
-/*
+/**
  * Forms a POST request to the OneSignal REST API
+ * We only use XMLHttpRequest because push notification will only work
+ * on Chrome and Safari and in the future Firefox. So we don't have to
+ * worry about making this request in Internet Explorer
  */
 function sendPushNotification(msg) {
     var req = new XMLHttpRequest();
