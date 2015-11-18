@@ -34,3 +34,14 @@ making ReST api calls for notification pushing and storing API keys that are sup
     - Firefox / Firefox Mobile
     - Internet Explorer (requires pinned sites)
     - Safari Mobile
+
+function JohnWishon(){
+    - restructured the HTML for add/edit.html files
+    - wrote js for adding images to personal image icon field.
+    - designed custom default icons for the app.
+    - wrote js for in add/edit.js for form validations w/messages.
+    - wrote js for adding a habit to local storage.
+    - wrote css for add/edit form inputs, validation messages, and labels.
+    - created delete habit confirmation check.
+    - collaborated with teammates at weekly team meetings to discuss our direction with project.
+}
