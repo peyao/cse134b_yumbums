@@ -1,7 +1,6 @@
-var DEBUG = true;
-
-/*
- * Figure out how many seconds until the next quarter hour mark
+/**
+ * Figure out how many seconds have passed since last interval
+ * and how many more seconds until next interval
  */
 var d = new Date();
 var currSeconds = d.getTime() / 1000;
@@ -9,23 +8,18 @@ var currSeconds = d.getTime() / 1000;
 var timeSinceLastQuarter = currSeconds % 10; // 10 seconds
 var timeUntilNextQuarter = 10 - timeSinceLastQuarter;
 
-if(DEBUG) {
-    console.log('time since last quarter: ' + timeSinceLastQuarter);
-    console.log('time until next quarter: ' + timeUntilNextQuarter);
-}
-
+/**
+ * If we're in the middle of an interval then we'll wait
+ * until the next interval and run a timer once we hit
+ * the interval
+ */
 setTimeout(function() {
-    if(DEBUG) console.log('It is now the quarter hour mark');
     setInterval(getHabitList, 10 * 1000);
     getHabitList();
 }, timeUntilNextQuarter * 1000);
 
 function getHabitList() {
     $firebase.getAllHabits(function(habits) {
-        if (DEBUG) {
-            console.log('firebase.getAllHabits:');
-            console.log(habits);
-        }
         checkNotifications(habits);
     });
 }
@@ -34,17 +28,11 @@ function getHabitList() {
  * Notification Functions
  ******************************************************************************/
 
-/*
+/**
  * Iterate through my habits and check if any notifications
  * need to be sent
  */
 function checkNotifications(habits) {
-
-    if (DEBUG) {
-        console.log('checkNotifications(habits)');
-        console.log(habits);
-    }
-
     if(habits == null)
         return;
 
@@ -97,7 +85,7 @@ function checkNotifications(habits) {
     }
 }
 
-/*n
+/**
  * Format notifications into a nice string then call the
  * REST API
  */
@@ -113,14 +101,17 @@ function notify(habitsToNotify) {
     }
 
     if(isPushSupported && oneSignalId != null) {
-        if (DEBUG) console.log("SENDING OneSignal notifications");
         sendPushNotification(str);
     } else {
-        if (DEBUG) console.log("SENDING Web notifications");
         sendWebNotification(str);
     }
 }
 
+/**
+ * A fallback for when push notification isn't supported. Uses the
+ * Notification API
+ * @param strHabitList
+ */
 function sendWebNotification(strHabitList) {
     var title = 'You have incomplete habits';
     var chk = Notification.permission;
@@ -144,17 +135,16 @@ function sendWebNotification(strHabitList) {
  * Time Calculation Functions
  ******************************************************************************/
 
-/*
+/**
  * Checks if current time is at the interval
- * intervalType a string containing either 'hour' or 'minute'
+ * @param intervalType a string containing either 'hour' or 'minute'
+ * @param interval a number representing the interval
  */
 function checkInterval(intervalType, interval) {
-    if (DEBUG) console.log(intervalType + ' ' + interval);
     var today = new Date();
     var hour = today.getHours();
     var minute = today.getMinutes();
     var second = today.getSeconds();
-    if (DEBUG) console.log(hour + ':' + minute + ':' + second);
     if (intervalType.toLowerCase() == 'hour') {
         if (hour % interval == 0)
             if (minute == 0)
@@ -163,57 +153,29 @@ function checkInterval(intervalType, interval) {
         return false;
     }
     else if (intervalType.toLowerCase() == 'minute') {
-        if (DEBUG) console.log(minute % interval);
         if (minute % interval == 0) {
-            if (DEBUG) console.log('returning true');
             return true;
         }
-        if (DEBUG) console.log('returning false');
         return false;
     }
     else if (intervalType.toLowerCase() == 'seconds') {
         if (second % interval == 0) {
-            if (DEBUG) console.log('returning true');
             return true;
         }
-        if (DEBUG) console.log('returning false');
         return false;
     }
     return false;
 } /* END checkInterval() */
 
-/*
- * time is string in HH:MM format
- * checks if given time is equal to current time
- */
-function checkHourMinute(time) {
-    var today = new Date();
-    var minutes = today.getMinutes();
-    var hours = today.getHours();
-
-    var arr = time.split(':');
-    var inHour = arr[0];
-    var inMinute = arr[1];
-
-    if (inHour === hours && inMinute === minutes) {
-        return true;
-    }
-    else {
-        return false;
-    }
-} /* END checkHourMinute() */
-
-/*
+/**
  * Checks if current day of the week matches the one
  * set for notification
  */
 function checkDay(day) {
-    if (DEBUG) console.log('Checking day:');
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
         'Thursday', 'Friday', 'Saturday', 'Sunday'];
     var today = new Date();
     var weekday = days[today.getDay()];
-    if (DEBUG) console.log('today: ' + weekday.toLowerCase() + ' ' + 'habit day: ' + day.toLowerCase());
     if (day.toLowerCase() === weekday.toLowerCase()) {
         return true;
     }
