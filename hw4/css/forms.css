@@ -6,21 +6,23 @@ html {
 }
 
 body {
-  font-family: 'Helvetica', sans-serif;
-  background: -webkit-linear-gradient(left top, #BBDEFB, #B0C4DE) fixed; /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right,#BBDEFB, #B0C4DE) fixed; /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right, #BBDEFB, #B0C4DE) fixed ; /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right,  #BBDEFB, #B0C4DE) fixed; /* Standard syntax */
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  overflow-x: hidden; /* Required for animations slide in so horizontal scrollbar doesn't appear */
+	font-family: 'Helvetica', sans-serif;
+	background: -webkit-linear-gradient(left top, #BBDEFB, #B0C4DE) fixed; /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(bottom right,#BBDEFB, #B0C4DE) fixed; /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(bottom right, #BBDEFB, #B0C4DE) fixed ; /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to bottom right,  #BBDEFB, #B0C4DE) fixed; /* Standard syntax */
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	overflow-x: hidden; /* Required for animations slide in so horizontal scrollbar doesn't appear */
 }
 p{
 	color:#6c6c6c;
-	font-size: medium;
+	font-size: x-large;
 }
+
+
 div.forms {
 	position: relative;
 	margin: 0 auto;
@@ -31,20 +33,18 @@ div.forms {
 	bottom: auto;
 }
 input#title{
+	margin-left: 4px;
 	height: 30px;
-	width: 350px;
+	width: 435px;
 	font-size:medium;
 
 }
-input#others{
-	height: 30px;
-	width: 250px;
-	font-size:medium;
-}
+
+
 img.icon, img.nIcon{
 	width: 80px;
 	height: 80px;
-	margin-right: 20px;
+	margin: 0 14px 0 14px;
 	border-radius: 25px;
 	-webkit-transform: scale(1);
 	transform: scale(1);
@@ -52,39 +52,39 @@ img.icon, img.nIcon{
 	transition: .3s ease-in-out;
 }
 @media (max-width: 500px) {
-  div.forms {
-  	position: relative;
-  	margin: 0 auto;
-	top: 0%;
-	width: 350px;
-	background-color: white;
-	border-radius: 25px;
-  }
-  input#title{
-	height: 30px;
-	width: 250px;
-	font-size:small;
-  }
-  input#others{
-	height: 30px;
-	width: 250px;
-	font-size:small;
+	div.forms {
+		position: relative;
+		margin: 0 auto;
+		top: 0%;
+		width: 350px;
+		background-color: white;
+		border-radius: 25px;
+	}
+	input#title{
+		height: 30px;
+		width: 250px;
+		font-size:small;
+	}
+	input#others{
+		height: 30px;
+		width: 250px;
+		font-size:small;
 
-}
-  img.icon, img.nIcon{
-	width: 60px;
-	height: 60px;
-	margin-right: 10px;
-	border-radius: 15px;
-	-webkit-transform: scale(1);
-	transform: scale(1);
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
-  }
+	}
+	img.icon, img.nIcon{
+		width: 60px;
+		height: 60px;
+		margin: 0 5px 0 5px;
+		border-radius: 15px;
+		-webkit-transform: scale(1);
+		transform: scale(1);
+		-webkit-transition: .3s ease-in-out;
+		transition: .3s ease-in-out;
+	}
 
-  p{
-	color:#6c6c6c;
-	font-size: small;
+	p{
+		color:#6c6c6c;
+		font-size: small;
 	}
 
 }
@@ -97,8 +97,9 @@ div.topHeader{
 }
 
 div.topHeader h2{
-	text-align: center; 
-	width: 100%; 
+	text-align: center;
+	font-size: x-large;
+	width: 100%;
 	display: inline-block;
 	color:white;
 	text-shadow: 0px 0px 0px black;
@@ -116,16 +117,15 @@ div.topHeader h2{
 #image-button input[type="file"]{
 	display: none;
 }
+#image-button label{
+
+	align-content: center;
+}
 img.icon:hover{
 	-webkit-transform: scale(1.2);
 	transform: scale(1.2);
 	cursor: pointer;
 }
-span#others_text{
-	padding-right: 5px;
-}
-
-
 
 input#save{
 	-webkit-appearance:none;
@@ -154,59 +154,59 @@ p#save_p{
 	text-align: center;
 }
 form{
-	padding-left: 25px;
-	padding-bottom: 20px;
+	padding: 0 25px 20px 25px;
+
 }
 div label input {
-   margin-right:100px;
+	margin-right:100px;
 }
 
 #ck-button {
-    overflow:auto;
+	overflow:auto;
 }
 
 #ck-button label {
-    margin:4px;
-    border-radius:5px;
+	margin:4px;
+	border-radius:5px;
 	/*border:1px solid #D0D0D0;*/
-    background-color:#EFEFEF;
-    float:left;
-    width:4.0em;
+	background-color:#EFEFEF;
+	float:left;
+	width: 55px;
 }
 
 #ck-button label span {
-    text-align:center;
-    padding:3px 0px;
-    display:block;
-    /*border:1px solid #D0D0D0;*/
-    overflow:auto;
+	text-align:center;
+	padding:3px 0px;
+	display:block;
+	/*border:1px solid #D0D0D0;*/
+	overflow:auto;
 
 }
 
 #ck-button label input {
-    position:absolute;
-    top:-100%;
+	position:absolute;
+	top:-100%;
 }
 
 #ck-button input:checked + span {
-    background-color:#9c9696;
-    border-radius:5px;
-    color:#fff;
+	background-color:#9c9696;
+	border-radius:5px;
+	color:#fff;
 }
 #ck-button input:hover + span {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 #daily-button {
-    overflow:auto;
+	overflow:auto;
 }
 
 #daily-button label {
-    margin:4px;
-    border-radius:25px;
-    background-color:#EFEFEF;
-    float:left;
-    width:2.0em;
+	margin:4px;
+	border-radius:25px;
+	background-color:#EFEFEF;
+	float:left;
+	width:2.0em;
 }
 
 span#times{
@@ -214,28 +214,38 @@ span#times{
 	padding:3px 0px;
 	float:left;
 }
+input#others{
+	height: 30px;
+	width: 111px;
+	font-size:medium;
+
+}
 
 #daily-button label span {
-    text-align:center;
-    padding:3px 0px;
-    display:block;
-    /*border:1px solid #D0D0D0;*/
-    overflow:auto;
+	text-align:center;
+	padding:3px 0px;
+	display:block;
+	/*border:1px solid #D0D0D0;*/
+	overflow:auto;
 
 }
 
 #daily-button label input {
-    position:absolute;
-    top:-100%;
+	position:absolute;
+	top:-100%;
 }
 
 #daily-button input:checked + span {
-    background-color:#9c9696;
-    border-radius:25px;
-    color:#fff;
+	background-color:#9c9696;
+	border-radius:25px;
+	color:#fff;
 }
 #daily-button input:hover + span {
-    cursor: pointer;
+	cursor: pointer;
+}
+#daily-button2{
+	padding-left: 10px;
+	color:#6c6c6c;
 }
 /*
 #notification-button {
@@ -254,7 +264,6 @@ span#times{
     display:block;
     border:1px solid #D0D0D0;
     overflow:auto;
-
 }
 #notification-button label input {
     position:absolute;
@@ -273,6 +282,12 @@ span#times{
 #selectNotification {
 	height: 30px;
 	width: 250px;
+	font-size: medium;
+	color: #6c6c6c;
+
+}
+#every {
+	padding-left: 4px;
 	font-size: medium;
 	color: #6c6c6c;
 
