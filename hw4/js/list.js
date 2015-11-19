@@ -3,7 +3,7 @@
 **************************************************************************************/
 var allHabits = {};
 var lastHabitKey;  //variable needed for adding habits to the bottom of the page as user scrolls
-var habitsForDay = [];
+var habitsForDay = {};
 var currentDayIndex = 0;
 /*
  * Function that gets called when clicking the complete habit button, updates
@@ -373,48 +373,51 @@ function createHabitList(habits, fromWhichMethod){
 ////////////////////////PAGINATION//////////////////////////////
 function listHabits(day, callback){
     getHabitsForDay(day, function() {
-        if(habitsForDay.length == 0) {
+        if(Object.keys(habitsForDay).length === 0) {
             document.getElementById("noHabitsDisplay").style.display = "block";
+        }else{
+            document.getElementById("noHabitsDisplay").style.display = "none";
         }
         createHabitList(habitsForDay);
         callback();
     });
 }
 
-/*
-* Function that is called when the user scrolls to the bottom of the page.  Basically
-retrieves the next 3 habits if there are more to get.  This prevents from loading all
-habits on page load and retrieves habits only when the user is looking for them.
-NOTE: $firebase.getNextHabits always returns 4 habits instead of 3 from the database. This
-is pretty much unavoidable because of the nature of how pagination works with firebase
-so the first habit returned corresponds to the habit with key of the same value as 'lastHabitKey'
-and this value needs to be ignored.
-*/
 function getNextHabits(callback){
     if(!lastHabitKey){
         return;
     }
-    $firebase.getNextHabits(function(habits) {
+    
+    
+    /*$firebase.getNextHabits(function(habits) {
         createHabitList(habits, "next");
         callback();
-    }, lastHabitKey);
+    }, lastHabitKey);*/
 }
 
-function getHabitsForDay(today, callback) {
-    $firebase.getAllHabits(function(habits) {
-        while(habitsForDay.length > 0) {
-            habitsForDay.pop();
-        }
+function doSomething(habits, today, callback){
+    habitsForDay = {};
         for(h in habits) {
             var habit = habits[h];
             for(i in habit.weekFrequency) {
                 if(today.toLowerCase() === habit.weekFrequency[i].toLowerCase()) {
-                    habitsForDay.push(habit);
+                    habitsForDay[h] = habit;
                 }
             }
+            allHabits[h] = habit;
         }
         callback();
-    });
+}
+
+function getHabitsForDay(today, callback) {
+    if(Object.keys(allHabits).length === 0){
+        $firebase.getAllHabits(function(habits) {
+            doSomething(habits, today, callback);
+        });
+    }else{
+        doSomething(allHabits, today, callback);
+    }
+    
 }
 //////////////////////PAGINATION//////////////////////////////////
 
@@ -477,6 +480,7 @@ function attachClickListeners(){
         var nextDayIndex = getNextDay(currentDayIndex);
         updateListHeaderWithDay(dayText(nextDayIndex));
         currentDayIndex = nextDayIndex;
+        removeHabitsFromPage();
         listHabits(dayText(nextDayIndex), function() {
             attachClickListeners();
             window.onscroll = scrollListener;
@@ -488,11 +492,20 @@ function attachClickListeners(){
         var previousDayIndex = getPreviousDay(currentDayIndex);
         updateListHeaderWithDay(dayText(previousDayIndex));
         currentDayIndex = previousDayIndex;
+        removeHabitsFromPage();
         listHabits(dayText(previousDayIndex), function() {
             attachClickListeners();
             window.onscroll = scrollListener;
         });
     };
+}
+
+function removeHabitsFromPage(){
+    var habitPageList = document.querySelectorAll("#habit-list > li");
+    var listLength = habitPageList.length;
+    for(var i = 0; i<listLength; i++){
+        habitPageList[i].parentNode.removeChild(habitPageList[i]);
+    }
 }
 
 function getPreviousDay(currentDay){
@@ -589,6 +602,10 @@ function scrollListener(){
     if(scrollHeight + window.innerHeight >= documentHeight){
         getNextHabits(attachClickListeners, lastHabitKey);
     }
+}
+
+function printJson(s){
+    console.log(JSON.stringify(s));
 }
 
 /**************************************************************************************
