@@ -97,6 +97,17 @@ function deleteHabit(element) {
         });
     });
 }
+function updateListHeaderWithDay(day){
+	document.getElementById("daySelector").innerHTML = (day)
+}
+
+function checkDay() {
+	var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
+        'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    var today = new Date();
+    var weekday = days[today.getDay()];
+    return weekday;
+} /* END checkDay() */
 
 function createHabitNameListElement(currentHabit){
     var habitNameListElement = document.createElement("LI");
@@ -441,6 +452,80 @@ function attachClickListeners(){
             showMsg(this, "failed");
         }
     }
+    
+    var today = new Date();
+    var currentDayIndex = today.getDay();
+    
+    var nextDayButton = document.getElementById("rightDaySelectorButton");
+    nextDayButton.onclick = function(){
+	    var nextDayIndex = getNextDay(currentDayIndex);
+	    updateListHeaderWithDay(dayText(nextDayIndex));
+	    currentDayIndex = nextDayIndex;
+	    };
+    
+    var previousDayButton = document.getElementById("leftDaySelectorButton");
+    previousDayButton.onclick = function(){
+	    var previousDayIndex = getPreviousDay(currentDayIndex);
+	    updateListHeaderWithDay(dayText(previousDayIndex));
+	    currentDayIndex = previousDayIndex;
+	    };
+}
+
+function getPreviousDay(currentDay){
+	switch (currentDay) {
+        case 6:
+            return 5;
+        case 5:
+            return 4;
+        case 4:
+            return 3;
+        case 3:
+            return 2;
+        case 2:
+            return 1;
+        case 1:
+            return 0;
+        case 0:
+            return 6;
+    }
+}
+
+function getNextDay(currentDay){
+	switch (currentDay) {
+        case 6:
+            return 0;
+        case 5:
+            return 6;
+        case 4:
+            return 5;
+        case 3:
+            return 4;
+        case 2:
+            return 3;
+        case 1:
+            return 2;
+        case 0:
+            return 1;
+    }
+}
+
+function dayText(dayIndex){
+	switch (dayIndex) {
+        case 6:
+            return "Saturday";
+        case 5:
+            return "Friday";
+        case 4:
+            return "Thursday";
+        case 3:
+            return "Wednesday";
+        case 2:
+            return "Tuesday";
+        case 1:
+            return "Monday";
+        case 0:
+            return "Sunday";
+    }
 }
 
 function pageTransitionOut(location) {
@@ -489,6 +574,7 @@ document.body.onunload = function() {
     location.reload(true);
 };
 
+updateListHeaderWithDay(checkDay());
 
 listHabits(function() {
     attachClickListeners();

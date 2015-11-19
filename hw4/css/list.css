@@ -1,6 +1,7 @@
 /* basic structure & layout */
 html{height: 100%;}
-h1{color:#888;text-align: center;}
+h1{ display: block;
+	color:#888;text-align: center; padding-top: 10px; margin-bottom:5px;}
 body{
     height:100%;
     background: -webkit-linear-gradient(left top, #BBDEFB, #B0C4DE) fixed; /* For Safari 5.1 to 6.0 */
@@ -18,7 +19,7 @@ body{
 .habit-info{padding:0;margin-left:20px;}
 .habit-info>li{list-style:none; height:100%; padding:0; margin-right:5px; vertical-align: center;}
 .habit-name{margin:0; padding:0; height:100%; display:inline-block; vertical-align: middle; line-height:60px;color:#888;font-size: 24px;}
-.habit-editOp{margin:0; padding:0; height:100%; display:inline-block; alignment = left;}
+.habit-editOp{margin:0; padding:0; height:100%; display:inline-block;}
 .habit-icon{margin:0; border-radius:5px;width:100px; height:100px;}
 
 /* edit/delete (for a existing habit) */
@@ -57,8 +58,49 @@ body{
 .op-del:hover{background:#F22613;}
 .op-del:active{background:#F22613; border:2px solid red;}
 
+/* listHeader */
+#listHeader{
+	display:  block;
+	background-color: white;
+	border-top-right-radius: 50px;
+	border-top-left-radius:50px;
+	border-bottom-right-radius: 50px;
+	border-bottom-left-radius: 50px;
+}
+#listHeader:hover #leftDaySelectorButton {visibility: visible;}
+#listHeader:hover #rightDaySelectorButton {visibility: visible;}
+#leftDaySelectorButton{
+	color:rgba(33, 72, 100, 1);;
+	font-size: larger;
+	font-weight: 800;
+	visibility: hidden;
+	width: 40%;
+	display: inline-block;
+	text-align: right;
+	position: inherit;
+	padding-bottom: 10px;
+}
+#rightDaySelectorButton{
+	color:rgba(33, 72, 100, 1);;
+	font-size: larger;
+	font-weight: 800;
+	visibility: hidden;
+	text-align: left;
+	display: inline-block;
+	position: inherit;
+
+}
+#daySelector{
+	color:#888;
+	display: inline-block;;
+	width: 18%;
+	text-align: center;
+}
+
+
+
 /* add habit */
-#addHabit{position:fixed; bottom: 40px; right:20px;background:rgba(33, 72, 100, 1.0); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
+#addHabit{display:inline-block; position:fixed; margin-top:7px; background:rgba(33, 72, 100, 1); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray; z-index: 10;}
 #addHabit:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
 #addHabit:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
 #addHabit:focus{outline-style:none;}
@@ -67,6 +109,10 @@ body{
 /* phone */
 @media only screen
     and (max-width: 500px) {
+	    #leftDaySelectorButton {width: 35%; visibility: visible;}
+	    #rightDaySelectorButton {visibility: visible;}
+	    #daySelector {width: 27%}
+	    #addHabit{left: calc(100%/2 + 25px);}
         section{width:350px;margin: 0 auto;}
         .message{right:5px;bottom:80px;font-size: small;}
 }
@@ -74,6 +120,7 @@ body{
 /* desktop, tablet */
 @media only screen
     and (min-width: 500px) {
+	#addHabit{left: calc(100%/2 + 185px);}
     section{width:500px;margin: 0 auto;}
     .message{right:60px;bottom:80px;}
 }
