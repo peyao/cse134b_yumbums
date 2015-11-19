@@ -41,12 +41,8 @@ function checkNotifications(habits) {
         var habit = habits[id];
         var interval = habit.notification;
 
-        if (DEBUG) console.log(id);
-        if (DEBUG) console.log(habits[id]);
-
         // Check if habit was already completed today
         if(habit.completedToday == habit.dayFrequency) {
-            if(DEBUG) console.log(habit.title + ' is already completed so skipping');
             continue;
         }
 
