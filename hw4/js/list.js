@@ -409,7 +409,7 @@ function getHabitsForDay(today, callback) {
                 }
             }
         }
-
+        console.log(habitsForDay);
         callback();
     });
 }
@@ -474,16 +474,32 @@ function attachClickListeners(){
     
     var nextDayButton = document.getElementById("rightDaySelectorButton");
     nextDayButton.onclick = function(){
-	    var nextDayIndex = getNextDay(currentDayIndex);
-	    updateListHeaderWithDay(dayText(nextDayIndex));
-	    currentDayIndex = nextDayIndex;
+	    	var nextDayIndex = getNextDay(currentDayIndex);
+	    	updateListHeaderWithDay(dayText(nextDayIndex));
+			currentDayIndex = nextDayIndex;
+			getHabitsForDay(dayText(nextDayIndex), function() {
+				console.log(habitsForDay);
+			});
+
+			listHabits(function() {
+			attachClickListeners();
+				window.onscroll = scrollListener;
+			});
 	    };
     
     var previousDayButton = document.getElementById("leftDaySelectorButton");
     previousDayButton.onclick = function(){
-	    var previousDayIndex = getPreviousDay(currentDayIndex);
-	    updateListHeaderWithDay(dayText(previousDayIndex));
-	    currentDayIndex = previousDayIndex;
+	    	var previousDayIndex = getPreviousDay(currentDayIndex);
+	    	updateListHeaderWithDay(dayText(previousDayIndex));
+	    	currentDayIndex = previousDayIndex;
+	    	getHabitsForDay(dayText(previousDayIndex), function() {
+				console.log(habitsForDay);
+			});
+
+			listHabits(function() {
+			attachClickListeners();
+				window.onscroll = scrollListener;
+			});
 	    };
 }
 

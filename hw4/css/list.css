@@ -70,7 +70,7 @@ body{
 #listHeader:hover #leftDaySelectorButton {visibility: visible;}
 #listHeader:hover #rightDaySelectorButton {visibility: visible;}
 #leftDaySelectorButton{
-	color:rgba(33, 72, 100, 1);;
+	color:rgba(33, 72, 100, 1);
 	font-size: larger;
 	font-weight: 800;
 	visibility: hidden;
@@ -82,7 +82,7 @@ body{
 	cursor: pointer;
 }
 #rightDaySelectorButton{
-	color:rgba(33, 72, 100, 1);;
+	color:rgba(33, 72, 100, 1);
 	font-size: larger;
 	font-weight: 800;
 	visibility: hidden;
@@ -94,7 +94,7 @@ body{
 }
 #daySelector{
 	color:#888;
-	display: inline-block;;
+	display: inline-block;
 	width: 18%;
 	text-align: center;
 }
