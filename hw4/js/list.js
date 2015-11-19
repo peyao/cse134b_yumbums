@@ -4,7 +4,7 @@
 var allHabits = {};
 var lastHabitKey;  //variable needed for adding habits to the bottom of the page as user scrolls
 var habitsForDay = [];
-
+var currentDayIndex = 0;
 /*
  * Function that gets called when clicking the complete habit button, updates
  * the html on the page and also the values in the local storage
@@ -107,6 +107,7 @@ function checkDay() {
         'Thursday', 'Friday', 'Saturday', 'Sunday'];
     var today = new Date();
     var weekday = days[today.getDay()];
+    currentDayIndex = today.getDay();
     return weekday;
 } /* END checkDay() */
 
@@ -370,12 +371,12 @@ function createHabitList(habits, fromWhichMethod){
 */
 
 ////////////////////////PAGINATION//////////////////////////////
-function listHabits(callback){
-    $firebase.getFirstHabits(function(habits) {
-        if(!habits){
+function listHabits(day, callback){
+    getHabitsForDay(day, function() {
+        if(habitsForDay.length == 0) {
             document.getElementById("noHabitsDisplay").style.display = "block";
         }
-        createHabitList(habits);
+        createHabitList(habitsForDay);
         callback();
     });
 }
@@ -401,6 +402,9 @@ function getNextHabits(callback){
 
 function getHabitsForDay(today, callback) {
     $firebase.getAllHabits(function(habits) {
+        while(habitsForDay.length > 0) {
+            habitsForDay.pop();
+        }
         for(h in habits) {
             var habit = habits[h];
             for(i in habit.weekFrequency) {
@@ -409,7 +413,6 @@ function getHabitsForDay(today, callback) {
                 }
             }
         }
-        console.log(habitsForDay);
         callback();
     });
 }
@@ -469,38 +472,27 @@ function attachClickListeners(){
         }
     }
     
-    var today = new Date();
-    var currentDayIndex = today.getDay();
-    
     var nextDayButton = document.getElementById("rightDaySelectorButton");
     nextDayButton.onclick = function(){
-	    	var nextDayIndex = getNextDay(currentDayIndex);
-	    	updateListHeaderWithDay(dayText(nextDayIndex));
-			currentDayIndex = nextDayIndex;
-			getHabitsForDay(dayText(nextDayIndex), function() {
-				console.log(habitsForDay);
-			});
-
-			listHabits(function() {
-			attachClickListeners();
-				window.onscroll = scrollListener;
-			});
-	    };
+        var nextDayIndex = getNextDay(currentDayIndex);
+        updateListHeaderWithDay(dayText(nextDayIndex));
+        currentDayIndex = nextDayIndex;
+        listHabits(dayText(nextDayIndex), function() {
+            attachClickListeners();
+            window.onscroll = scrollListener;
+        });
+    };
     
     var previousDayButton = document.getElementById("leftDaySelectorButton");
     previousDayButton.onclick = function(){
-	    	var previousDayIndex = getPreviousDay(currentDayIndex);
-	    	updateListHeaderWithDay(dayText(previousDayIndex));
-	    	currentDayIndex = previousDayIndex;
-	    	getHabitsForDay(dayText(previousDayIndex), function() {
-				console.log(habitsForDay);
-			});
-
-			listHabits(function() {
-			attachClickListeners();
-				window.onscroll = scrollListener;
-			});
-	    };
+        var previousDayIndex = getPreviousDay(currentDayIndex);
+        updateListHeaderWithDay(dayText(previousDayIndex));
+        currentDayIndex = previousDayIndex;
+        listHabits(dayText(previousDayIndex), function() {
+            attachClickListeners();
+            window.onscroll = scrollListener;
+        });
+    };
 }
 
 function getPreviousDay(currentDay){
@@ -607,11 +599,8 @@ document.body.onunload = function() {
 };
 
 updateListHeaderWithDay(checkDay());
-getHabitsForDay(checkDay(), function() {
-    console.log(habitsForDay);
-});
 
-listHabits(function() {
+listHabits(checkDay(), function() {
     attachClickListeners();
     window.onscroll = scrollListener;
 });
