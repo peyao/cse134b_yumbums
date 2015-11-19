@@ -3,6 +3,7 @@
 **************************************************************************************/
 var allHabits = {};
 var lastHabitKey;  //variable needed for adding habits to the bottom of the page as user scrolls
+var habitsForDay = [];
 
 /*
  * Function that gets called when clicking the complete habit button, updates
@@ -397,6 +398,21 @@ function getNextHabits(callback){
         callback();
     }, lastHabitKey);
 }
+
+function getHabitsForDay(today, callback) {
+    $firebase.getAllHabits(function(habits) {
+        for(h in habits) {
+            var habit = habits[h];
+            for(i in habit.weekFrequency) {
+                if(today.toLowerCase() === habit.weekFrequency[i].toLowerCase()) {
+                    habitsForDay.push(habit);
+                }
+            }
+        }
+
+        callback();
+    });
+}
 //////////////////////PAGINATION//////////////////////////////////
 
 /*
@@ -575,6 +591,9 @@ document.body.onunload = function() {
 };
 
 updateListHeaderWithDay(checkDay());
+getHabitsForDay(checkDay(), function() {
+    console.log(habitsForDay);
+});
 
 listHabits(function() {
     attachClickListeners();
