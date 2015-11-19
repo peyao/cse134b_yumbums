@@ -10,16 +10,10 @@ can just modify the javascript code to get around any client side protection.
 
 ## Notifications
 
-Our choice of technology:
+*Our choice of technology*:
 
 We use OneSignal Push Notification service for Chrome (desktop and mobile) and Safari (desktop). We first tried out
-Goroost, but we eventually moved onto OneSignal for multiple reasons. OneSignal has a free plan and allows us to register
-multiple domains and does not restrict us in the features and platforms available to us. While Goroost only has a 30
-day free trial for 1 registered domain, no Safari support for a trial account, and no support for pushing to target subscribers. 
-Having multiple domains was a big deal in our decision because we needed a domain for localhost so we can test on 
-our app locally and a second domain for deploying and turning in. OneSignal also has SDK support for native Android and 
-iOS platforms along with JavaScript bindings for mobile (i.e. Cordova) that will be useful for us in the next assignment
-if it ever goes in that direction.
+Goroost, but we eventually moved onto OneSignal for multiple reasons. OneSignal has a free plan and allows us to register multiple domains and does not restrict us in the features and platforms available to us. While Goroost only has a 30 day free trial for 1 registered domain, no Safari support for a trial account, and no support for pushing to target subscribers. Having multiple domains was a big deal in our decision because we needed a domain for localhost so we can test on our app locally and a second domain for deploying and turning in. OneSignal also gives us the option of scheduling and cancelling scheduled notifications. OneSignal has SDK support for native Android and iOS platforms along with JavaScript bindings for mobile (i.e. Cordova) that will be useful for us in the next assignment if it ever goes in that direction.
 
 **Features**
 
@@ -32,13 +26,15 @@ if it ever goes in that direction.
 
 Given the scope of the project, we didn't setup a server to handle server sided code execution (only hosting and
 delivery of our files). So we have to handle all our operations client side. This raises security issues like
-making ReST api calls for notification pushing and storing API keys and other secrets on the client.
+making ReST api calls for notification pushing and storing API keys and other secrets on the client. Since we don't
+have a server, our current implementation of checking and sending notifications does not work when the tabs are closed. However, we are able to receive push notifications even with closed tabs when pushed from the OneSignal dashboard. We can solve this issue by scheduling notifications and adding signal callbacks to our data in Firebase so
+that we are notified whenever notification options are changed so we can cancel scheduled notifications as needed.
 
 The benefits of the client side however, also simplifies our application in a big way. Since we are already within
 the user context, each client only manages one user (we are assuming the user is already logged into our app)
 so our javascript code only has to deal with the habits and notifications of a single user. This saves us the work of
-having to manage which user to send what notification and possibly even where to send the notification if user has
-multiple browsers and platforms from server side.
+having to manage which user to send what notification and possibly even where to send the notification if the user has
+multiple browsers and platforms from the server side.
 
 **Supported Platforms**
 
