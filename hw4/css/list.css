@@ -79,6 +79,7 @@ body{
 	text-align: right;
 	position: inherit;
 	padding-bottom: 10px;
+	cursor: pointer;
 }
 #rightDaySelectorButton{
 	color:rgba(33, 72, 100, 1);;
@@ -88,6 +89,7 @@ body{
 	text-align: left;
 	display: inline-block;
 	position: inherit;
+	cursor: pointer;
 
 }
 #daySelector{
