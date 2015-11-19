@@ -11,10 +11,10 @@ var lastHabitKey;  //variable needed for adding habits to the bottom of the page
 function updateMessageDiv(msgElement, messageType, habitKey, callback){
     //get the current habit from local storage
     var currentHabit = allHabits[habitKey];
-    
+
     var streaks = msgElement.querySelectorAll(".message-total strong");
     var newMessage;
-    
+
     //update the message showing how close the user is to reaching the daily goal
     if(messageType == "complete"){
         currentHabit.completedToday += 1;
@@ -26,7 +26,7 @@ function updateMessageDiv(msgElement, messageType, habitKey, callback){
         streaks[0].innerHTML = 0;
         newMessage = "Too bad, try again next time.";
     }
-     
+
     msgElement.getElementsByClassName("message-today")[0].innerHTML = newMessage;
 
 
@@ -47,7 +47,7 @@ function updateMessageDiv(msgElement, messageType, habitKey, callback){
             streaks[1].innerHTML = currentHabit.bestStreak;
         }
     }
-    
+
     //commit the changes back to local storage
     //localStorage.setItem("habitList", JSON.stringify(habitList));
     $firebase.updateHabit(currentHabit, habitKey, callback);
@@ -86,7 +86,7 @@ function deleteHabit(element) {
 
         prefixedEvent(child, "AnimationEnd", function() {
             parent.removeChild(child);
-            
+
             //reset the value of lastHabitKey if the last habit in the list was deleted
             var habitListElements = document.getElementById("habit-list").children;
             if(habitListElements.length === 0){
@@ -214,7 +214,7 @@ function createHabitMessageElement(currentHabit){
 function createHabitEditDeleteSmallOpElements(currentHabit){
 	var habitOpDiv = document.createElement("DIV");
     habitOpDiv.setAttribute("class", "edit-delete");
-    
+
     var editButton = document.createElement("BUTTON");
     editButton.setAttribute("class", "smallOp op-edit");
     editButton.setAttribute("type", "button");
@@ -232,7 +232,7 @@ function createHabitEditDeleteSmallOpElements(currentHabit){
     deleteImage.setAttribute("src", "../img/delete.svg");
     deleteImage.setAttribute("alt", "Del");
     deleteButton.appendChild(deleteImage);
-    
+
     habitOpDiv.appendChild(editButton);
     habitOpDiv.appendChild(deleteButton);
     return habitOpDiv;
@@ -285,11 +285,40 @@ function createHabitElement(currentHabit, habitKey, index){
     document.getElementById("habit-list").appendChild(habit);
 }
 
+function getWeekday() {
+    var today = new Date().getDay();
+    switch (today) {
+        case 0:
+            return "sunday";
+        case 1:
+            return "monday";
+        case 2:
+            return "tuesday";
+        case 3:
+            return "wednesday";
+        case 4:
+            return "thursday";
+        case 5:
+            return "friday";
+        case 6:
+            return "saturday";
+    }
+}
+
 function createHabitList(habits, fromWhichMethod){
     var deletedFlag = false;
     if(habits){
         var i = 0;
         for (var h in habits) {
+
+            /*
+            var today = getWeekday();
+            if (habits[h].weekFrequency.indexOf(today) === -1) {
+                console.log("Skipping...");
+                continue;
+            }
+            */
+
             //when retrieving habits as user scrolls down the page, firebase always returns one
             //extra result from the database.  This extra habit is the same habit as the last habit
             //on the page before the user scrolled.  This basically skips over the extra habit so it
@@ -298,7 +327,7 @@ function createHabitList(habits, fromWhichMethod){
                 deletedFlag = true;
                 continue;
             }
-            
+
             var currentHabit = habits[h];
             var currentDate = new Date();
             currentDate.setHours(0, 0, 0, 0);
@@ -319,7 +348,7 @@ function createHabitList(habits, fromWhichMethod){
             i = i + 1;
             allHabits[h] = habits[h]; //add habit to list of all habits
         }
-        
+
         lastHabitKey = h; //set last habit key equal to the last habit iterated over
     }
 }
@@ -343,7 +372,7 @@ function listHabits(callback){
 * Function that is called when the user scrolls to the bottom of the page.  Basically
 retrieves the next 3 habits if there are more to get.  This prevents from loading all
 habits on page load and retrieves habits only when the user is looking for them.
-NOTE: $firebase.getNextHabits always returns 4 habits instead of 3 from the database. This 
+NOTE: $firebase.getNextHabits always returns 4 habits instead of 3 from the database. This
 is pretty much unavoidable because of the nature of how pagination works with firebase
 so the first habit returned corresponds to the habit with key of the same value as 'lastHabitKey'
 and this value needs to be ignored.
@@ -404,7 +433,7 @@ function attachClickListeners(){
             }
         };
     }
-    
+
     var failedButtons = document.getElementsByClassName("op-failed");
     var failedLength = failedButtons.length;
     for(var i = 0; i<failedLength; i++){
@@ -439,14 +468,14 @@ function scrollListener(){
     htmlElement = document.documentElement;
 
     //browser conformant way to find height of document
-    var documentHeight = Math.max( bodyElement.scrollHeight, bodyElement.offsetHeight, 
+    var documentHeight = Math.max( bodyElement.scrollHeight, bodyElement.offsetHeight,
                     htmlElement.clientHeight, htmlElement.scrollHeight, htmlElement.offsetHeight );
-    
+
     //browser conformant way to get height that user has scrolled to on page
     var supportPageOffset = window.pageXOffset !== undefined;
     var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
     var scrollHeight = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
-    
+
     //checks if the user has scrolled to the bottom
     if(scrollHeight + window.innerHeight >= documentHeight){
         getNextHabits(attachClickListeners, lastHabitKey);
