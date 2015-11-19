@@ -7,7 +7,7 @@ var ENV = 'PRODUCTION';
 initOneSignal();
 
 function initOneSignal() {
-    var DEFAULT_URL = 'http://localhost:8080/src/list.html';
+    var DEFAULT_URL = '';
 
     /* Configured for Chrome and Safari */
     if(ENV == 'DEBUG') {
@@ -16,6 +16,7 @@ function initOneSignal() {
             safari_web_id: 'web.onesignal.auto.27be598e-7a22-4ed6-a01a-10378439b214',
             subdomainName: 'yumbums'
         }]);
+        DEFAULT_URL = 'http://localhost:8080/src/list.html';
     }
     else if(ENV == 'PRODUCTION') {
         OneSignal.push(['init', {
@@ -23,6 +24,7 @@ function initOneSignal() {
             safari_web_id: 'web.onesignal.auto.1afb9025-a2b0-4a54-8c00-23b218b2b39b',
             subdomainName: 'hostedyumbums'
         }]);
+        DEFAULT_URL = 'http://peyao.me/yumbums/hw4/src/list.html';
     }
 
     OneSignal.push(['setDefaultNotificationUrl', DEFAULT_URL]);
