@@ -175,7 +175,7 @@ function validateForm() {
         orphan.removeChild(orphan.childNodes[1]);
     }
 
-    if (!dailyOther.match(/^[1-9][0-9]?/) ){
+    if (!dailyOther.match(/^[1-9][0-9]?$/) ){
         document.getElementById("others").value = null;
         dailyOther = null;
         if(document.getElementById("hDaily").childNodes[1]){
@@ -187,7 +187,7 @@ function validateForm() {
     }
 
     // validation check
-    if(invalidFlag){
+    if(invalidFlag) {
         return false;
     }
 
