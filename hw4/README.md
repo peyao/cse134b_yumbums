@@ -79,7 +79,7 @@ var PeterYao = function() {
     - Facilitate team task tracking with Trello.
 }
 
-var AmrKahhaleh = function() {
+var AmrKahhaleh function() {
 	- Mainly worked on list.js, list.html, and list.css
 	- Re-designing and styling almost all the elements on list.html (desktop and mobile)
 	- wrote js for dynamically handling the habits displayed to user on list.html
