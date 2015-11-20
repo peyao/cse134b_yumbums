@@ -17,6 +17,8 @@ can just modify the javascript code to get around any client side protection.
 We use OneSignal Push Notification service for Chrome (desktop and mobile) and Safari (desktop). We first tried out
 Goroost, but we eventually moved onto OneSignal for multiple reasons. OneSignal has a free plan and allows us to register multiple domains and does not restrict us in the features and platforms available to us. While Goroost only has a 30 day free trial for 1 registered domain, no Safari support for a trial account, and no support for pushing to target subscribers. Having multiple domains was a big deal in our decision because we needed a domain for localhost so we can test on our app locally and a second domain for deploying and turning in. OneSignal also gives us the option of scheduling and cancelling scheduled notifications. OneSignal has SDK support for native Android and iOS platforms along with JavaScript bindings for mobile (i.e. Cordova) that will be useful for us in the next assignment if it ever goes in that direction.
 
+We also use Notification.js as a fallback to handle web notifications when push notification isn't supported (i.e. Firefox, Internet Explorer). We decided to use this small library instead of implementing web notifications on our own because it support multiple browsers, including mobile.
+
 **Features**
 
 - Can add notifications for each habit to run at 20 seconds (for grading), 15 minutes, 30 minutes, 25 minutes, etc. intervals
