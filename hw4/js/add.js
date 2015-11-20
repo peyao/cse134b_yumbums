@@ -175,7 +175,7 @@ function validateForm() {
         orphan.removeChild(orphan.childNodes[1]);
     }
 
-    if (dailyOther.match(/[^0-9]|\d{3}|0(?!\d)/,i) ){
+    if (!dailyOther.match(/^[1-9][0-9]?/) ){
         document.getElementById("others").value = null;
         dailyOther = null;
         if(document.getElementById("hDaily").childNodes[1]){
