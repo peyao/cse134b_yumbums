@@ -62,7 +62,7 @@ multiple browsers and platforms from the server side.
 6) We shifted the Check and X buttons to be centered with the progress bar. We felt like their initial location was a little weird and the connection to the progress bar didn't feel so intuitive. Centering them under the progress bar would automatically strengthen their relationship and purpose in the user's head.
 
 ##Individual Contributions
-function JohnWishon(){
+var JohnWishon = function(){
     - restructured the HTML for add/edit.html files
     - wrote js for adding images to personal image icon field.
     - designed custom default icons for the app.
