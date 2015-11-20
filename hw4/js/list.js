@@ -2,7 +2,6 @@
                             Function Definitions
 **************************************************************************************/
 var allHabits = {};
-//var lastHabitKey;  //variable needed for adding habits to the bottom of the page as user scrolls
 var habitsForDay = {};
 var currentDayIndex = 0;
 
@@ -56,7 +55,6 @@ function updateMessageDiv(msgElement, messageType, habitKey, callback){
     }
 
     //commit the changes back to local storage
-    //localStorage.setItem("habitList", JSON.stringify(habitList));
     $firebase.updateHabit(currentHabit, habitKey, callback);
 }
 
@@ -97,14 +95,6 @@ function deleteHabit(element) {
 
         prefixedEvent(child, "AnimationEnd", function() {
             parent.removeChild(child);
-
-            //reset the value of lastHabitKey if the last habit in the list was deleted
-            /*var habitListElements = document.getElementById("habit-list").children;
-            if(habitListElements.length === 0){
-                lastHabitKey = null;
-            }else{
-                lastHabitKey = habitListElements[habitListElements.length - 1].getAttribute("data-key");
-            }*/
         });
     });
 }
@@ -333,24 +323,6 @@ function createHabitList(habits /*,fromWhichMethod*/){
     if(habits){
         var i = 0;
         for (var h in habits) {
-
-            /*
-            var today = getWeekday();
-            if (habits[h].weekFrequency.indexOf(today) === -1) {
-                console.log("Skipping...");
-                continue;
-            }
-            */
-
-            //when retrieving habits as user scrolls down the page, firebase always returns one
-            //extra result from the database.  This extra habit is the same habit as the last habit
-            //on the page before the user scrolled.  This basically skips over the extra habit so it
-            //is not put on the page twice
-            /*if(!deletedFlag && fromWhichMethod === "next"){
-                deletedFlag = true;
-                continue;
-            }*/
-
             var currentHabit = habits[h];
             var currentDate = new Date();
             currentDate.setHours(0, 0, 0, 0);
@@ -370,8 +342,6 @@ function createHabitList(habits /*,fromWhichMethod*/){
 
             i = i + 1;
         }
-
-        //lastHabitKey = h; //set last habit key equal to the last habit iterated over
     }
 }
 
@@ -389,18 +359,6 @@ function listHabits(day, callback){
         callback();
     });
 }
-
-/*function getNextHabits(callback){
-    if(!lastHabitKey){
-        return;
-    }
-    
-    
-    $firebase.getNextHabits(function(habits) {
-        createHabitList(habits, "next");
-        callback();
-    }, lastHabitKey);
-}*/
 
 /*
  * function that uses takes an input an object containing habits and
@@ -436,7 +394,6 @@ function getHabitsForDay(today, callback) {
     }
     
 }
-//////////////////////PAGINATION//////////////////////////////////
 
 /*
  * Function that calculates the values that the lines in the svg element
@@ -500,7 +457,6 @@ function attachClickListeners(){
         removeHabitsFromPage();
         listHabits(dayText(nextDayIndex), function() {
             attachClickListeners();
-            //window.onscroll = scrollListener;
         });
     };
     
@@ -512,7 +468,6 @@ function attachClickListeners(){
         removeHabitsFromPage();
         listHabits(dayText(previousDayIndex), function() {
             attachClickListeners();
-            //window.onscroll = scrollListener;
         });
     };
 }
@@ -605,30 +560,8 @@ function prefixedEvent(element, type, callback) {
     }
 }
 
-//listener attached to window that fires every time user scrolls.  Basically checks if the
-//user has scrolled to the bottom of the page or not and retrieves the next 3 habits from the
-//database if this is true.
-/*function scrollListener(){
-    var bodyElement = document.body,
-    htmlElement = document.documentElement;
-
-    //browser conformant way to find height of document
-    var documentHeight = Math.max( bodyElement.scrollHeight, bodyElement.offsetHeight,
-                    htmlElement.clientHeight, htmlElement.scrollHeight, htmlElement.offsetHeight );
-
-    //browser conformant way to get height that user has scrolled to on page
-    var supportPageOffset = window.pageXOffset !== undefined;
-    var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
-    var scrollHeight = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
-
-    //checks if the user has scrolled to the bottom
-    if(scrollHeight + window.innerHeight >= documentHeight){
-        getNextHabits(attachClickListeners, lastHabitKey);
-    }
-}*/
-
 function printJson(s){
-    console.log(JSON.stringify(s));
+    console.log(JSON.stringify(s), null, 2);
 }
 
 /**************************************************************************************
