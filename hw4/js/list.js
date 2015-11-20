@@ -240,7 +240,6 @@ function createHabitEditDeleteSmallOpElements(currentHabit){
 
     var editButton = document.createElement("BUTTON");
     editButton.setAttribute("class", "smallOp op-edit");
-    editButton.setAttribute("type", "button");
     editButton.setAttribute("title", "edit habit");
     var editImage = document.createElement("IMG");
     editImage.setAttribute("src", "../img/edit.svg");
@@ -249,7 +248,6 @@ function createHabitEditDeleteSmallOpElements(currentHabit){
 
     var deleteButton = document.createElement("BUTTON");
     deleteButton.setAttribute("class", "smallOp op-del");
-    deleteButton.setAttribute("type", "button");
     deleteButton.setAttribute("title", "delete habit");
     var deleteImage = document.createElement("IMG");
     deleteImage.setAttribute("src", "../img/delete.svg");
@@ -271,7 +269,6 @@ function createHabitOpElement(currentHabit){
 
     var doneButton = document.createElement("BUTTON");
     doneButton.setAttribute("class", "op op-done");
-    doneButton.setAttribute("type", "button");
     doneButton.setAttribute("title", "done");
     var doneImage = document.createElement("IMG");
     doneImage.setAttribute("src", "../img/done.svg");
@@ -280,7 +277,6 @@ function createHabitOpElement(currentHabit){
 
     var failedButton = document.createElement("BUTTON");
     failedButton.setAttribute("class", "op op-failed");
-    failedButton.setAttribute("type", "button");
     failedButton.setAttribute("title", "failed");
     var failedImage = document.createElement("IMG");
     failedImage.setAttribute("src", "../img/x.svg");
