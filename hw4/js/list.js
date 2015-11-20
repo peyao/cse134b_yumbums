@@ -20,7 +20,12 @@ function updateMessageDiv(msgElement, messageType, habitKey, callback){
     //update the message showing how close the user is to reaching the daily goal
     if(messageType == "complete"){
         currentHabit.completedToday += 1;
-        newMessage = "Completed <strong>" + currentHabit.completedToday + "/" + currentHabit.dayFrequency + "</strong> for today!";
+        if (currentHabit.completedToday <= currentHabit.dayFrequency){
+	        newMessage = "Completed <strong>" + currentHabit.completedToday + "/" + currentHabit.dayFrequency + "</strong> for today!";
+        } else {
+	        newMessage = "Completed <strong>" + currentHabit.dayFrequency + "/" + currentHabit.dayFrequency + "</strong> goal + <strong>" + (currentHabit.completedToday-currentHabit.dayFrequency) +" More!</strong>" ;        
+	    }
+        
     }
     else{
         currentHabit.completedToday = 0;
