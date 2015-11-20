@@ -66,3 +66,15 @@ function JacobKeifer(){
     - helped migrate our app from using local storage to using Firebase, wrote parts of some of the Firebase accessing methods
     - discussed the ideas for features and implementation of app.
 }
+
+var PeterYao = function() {
+    - CSS/JS animations & page transitions for all pages.
+    - Worked with Jacob on Firebase implementation:
+        - Migrate from localstorage to Firebase
+        - Getting habits
+        - Updating habits
+        - Deleting habits
+    - Added animated preloaders during Firebase AJAX calls to show loading.
+    - Serve site from a live web server (DigitalOcean).
+    - Facilitate team task tracking with Trello.
+}
