@@ -78,3 +78,12 @@ var PeterYao = function() {
     - Serve site from a live web server (DigitalOcean).
     - Facilitate team task tracking with Trello.
 }
+
+var AmrKahhaleh function() {
+	- Mainly worked on list.js, list.html, and list.css
+	- Re-designing and styling almost all the elements on list.html (desktop and mobile)
+	- wrote js for dynamically handling the habits displayed to user on list.html
+	- added new header to list.html that includes functionality to navigate between different weekdays to view different tasks
+	- wrote js to handle progress bar/message behavior based on user habits
+	- Collaborated and met with teammates every week to closely consider the details of how the app looks, feels, and behaves. 
+}
