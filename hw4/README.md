@@ -1,5 +1,7 @@
 # Homework 4
 
+View the app here to receive push notifications: http://peyao.me/yumbums/hw4/src/welcome.html
+
 ## XSS
 
 The only text input fields we give to the user are for the habit title and daily frequency. Daily frequency will not
@@ -99,4 +101,12 @@ var AmrKahhaleh function() {
 	- added new header to list.html that includes functionality to navigate between different weekdays to view different tasks
 	- wrote js to handle progress bar/message behavior based on user habits
 	- Collaborated and met with teammates every week to closely consider the details of how the app looks, feels, and behaves. 
+}
+
+var ZarniWang = function() {
+	- Worked on the Notifications system
+	- Mostly on notification.js, server.js, and onesignal.js
+	- Made contributions to vv-firebase.js and list.js to retrieve all habits stored in firebase and filter them by day
+	- Integrated OneSignal and Notification.js to handle push notifications and web notifications
+	- Collaborated with team to determine the workflow for notifications and how the app will look and function
 }
