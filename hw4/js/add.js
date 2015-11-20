@@ -40,6 +40,10 @@ function uncheckradio() {
     }
 }
 
+function clearOther() {
+    document.getElementById("others").value = null;
+}
+
 function addHabitInStorage(callback){
     var currentDate = new Date();
     currentDate.setHours(0);
@@ -185,17 +189,6 @@ function validateForm() {
         orphan.removeChild(orphan.childNodes[1]);
     }
 
-    if (!dailyOther.match(/^0?[1-9]\d?$/ ) ){
-        document.getElementById("others").value = null;
-        dailyOther = null;
-        if(document.getElementById("hDaily").childNodes[1]){
-            orphan = document.getElementById("hDaily");
-            orphan.removeChild(orphan.childNodes[1]);
-        }
-        document.getElementById("hDaily").appendChild(invalidMess(efield));
-        invalidFlag = true;
-    }
-
     // validation check
     if(invalidFlag) {
         return false;
@@ -204,6 +197,14 @@ function validateForm() {
     addHabitInStorage(function() {
         pageTransitionOut('list.html');
     });
+}
+
+function isInt(num){
+    if(num % 1 === 0){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 document.body.onunload = function() {
