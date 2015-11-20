@@ -106,7 +106,7 @@ body{
 #addHabit:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
 #addHabit:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
 #addHabit:focus{outline-style:none;}
-#noHabitsDisplay{display: none; font-size: 20px; color: red; text-align: center; font-weight: bold;}
+#noHabitsDisplay{display: none; font-size: 20px; color: grey; text-align: center; font-weight: bold;}
 
 /* phone */
 @media only screen

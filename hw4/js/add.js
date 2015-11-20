@@ -13,6 +13,7 @@ function setIcon() {
         document.getElementById('icon3').src = url;
         document.getElementById('icon3').setAttribute("class","icon");
         document.getElementById('icon3').setAttribute("onclick", "selectImage('icon3')");
+        selectImage('icon3');
     };
 }
 

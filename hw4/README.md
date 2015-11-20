@@ -56,3 +56,13 @@ function JohnWishon(){
     - created delete habit confirmation check.
     - collaborated with teammates at weekly team meetings to discuss our direction with project.
 }
+
+function JacobKeifer(){
+    - wrote js that creates all of the habits in the DOM of list.html based off the data fetched from the database, not the animations
+    - added functionality for completing and failing a habit, along with keeping track of the daily streaks
+    - added functionality that set default values for form elements in edit.html based off the current habit being edited.
+    - added code functionality for deleting habit, not the animation though
+    - created message in list.html telling user to add habits if they don't have any.
+    - helped migrate our app from using local storage to using Firebase, wrote parts of some of the Firebase accessing methods
+    - discussed the ideas for features and implementation of app.
+}
