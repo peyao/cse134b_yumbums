@@ -188,6 +188,12 @@ div label input {
 	top:-100%;
 }
 
+#ck-button label {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
 #ck-button input:checked + span {
 	background-color:#9c9696;
 	border-radius:5px;
@@ -207,6 +213,9 @@ div label input {
 	background-color:#EFEFEF;
 	float:left;
 	width:2.0em;
+    display: block;
+    position: relative;
+    overflow: hidden;
 }
 
 span#times{
