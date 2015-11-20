@@ -13,7 +13,7 @@ body{
 }
 
 #habit-list{list-style: none; padding:0;}
-#habit-list>li{position:relative; height: 240px;padding:5%; background:rgba(255,255,255,1); border:1px solid rgba(255, 255, 255, 0.3); border-radius:5px; margin:5px; padding:0;}
+#habit-list>li{position:relative; height: 220px;padding:5%; background:rgba(255,255,255,1); border:1px solid rgba(255, 255, 255, 0.3); border-radius:5px; margin:5px; padding:0;}
 
 /* habit info */
 .habit-info{padding:0;margin-left:20px;}
@@ -23,30 +23,31 @@ body{
 .habit-icon{margin:0; border-radius:5px;width:100px; height:100px;}
 
 /* edit/delete (for a existing habit) */
-.edit-delete{float: right; display:inline-block; padding: 20px; margin: 0 auto;}
-.smallOp{width:30px; height:30px; border-radius: 50%; box-shadow: 0 0 3px gray; padding: 5px; margin-left:5px}
+.edit-delete{float: right; display:inline-block; padding-top: 12px; margin: 0 auto;}
+.smallOp{width:30px; height:30px; border-radius: 50%; box-shadow: 0 0 3px gray; padding: 5px;}
 .smallOp:hover{box-shadow: 0 0 1px gray;}
 .smallOp:active{box-shadow: 0 0 2px gray;}
 .smallOp:focus{outline-style:none;}
 
 .message{position:absolute; display:inline-block; visibility: hidden; text-align:center; color:#888;}
+.message-today{display:block; margin-top: -15px;}
 .message-total{visibility: visible;}
 .message-total>svg{margin: 15px auto;}
 
 /* operations (for a existing habit) */
-.habit-op{position:absolute; right:5px;display:inline-block; height: 100%; line-height: 60px;width:100%;text-align:center;top:170px;margin:0 auto;}
+.habit-op{position:absolute; right:5px; display:inline-block; height: 100%; line-height: 60px;width:100%;text-align:center; top:150px; margin: auto;}
 .habit-op img{height: 90%;}
-.op{width:60px; height:60px;margin-right:5px;border-radius: 50%; box-shadow: 0 0 3px gray; padding: 5px; vertical-align: middle;}
+.op{width:60px; height:60px;margin-right:10px;border-radius: 50%; box-shadow: 0 0 3px gray; padding: 5px; vertical-align: middle;}
 .op:hover{box-shadow: 0 0 5px gray;}
 .op:active{box-shadow: 0 0 10px gray;}
 .op:focus{outline-style:none;}
 .op::-moz-focus-inner{border: 0;}
 
-.op-done{background:rgba(0, 177, 106, 0.8); border:2px solid rgba(0, 128, 0, 0.3);}
+.op-done{display:inline; margin-left: 33%; background:rgba(0, 177, 106, 0.8); border:2px solid rgba(0, 128, 0, 0.3);}
 .op-done:hover{background:#00B16A;}
 .op-done:active{background:#00B16A; border:2px solid green;}
 
-.op-failed{background:rgba(80, 57, 57, 0.8); border:2px solid rgba(128, 0, 16, 0.3);}
+.op-failed{display:inline-block; background:rgba(80, 57, 57, 0.8); border:2px solid rgba(128, 0, 16, 0.3);}
 .op-failed:hover{background:#533a3a;}
 .op-failed:active{background:#523939; border:2px solid grey;}
 
@@ -54,7 +55,7 @@ body{
 .op-edit:hover{background:#F7CA18;}
 .op-edit:active{background:#F7CA18; border:2px solid yellow;}
 
-.op-del{background:rgba(242, 38, 19, 0.7); border:2px solid rgba(255,0,0,0.3);}
+.op-del{background:rgba(242, 38, 19, 0.7); border:2px solid rgba(255,0,0,0.3); margin-left:10px;}
 .op-del:hover{background:#F22613;}
 .op-del:active{background:#F22613; border:2px solid red;}
 
@@ -114,7 +115,8 @@ body{
 	    #leftDaySelectorButton {width: 35%; visibility: visible;}
 	    #rightDaySelectorButton {visibility: visible;}
 	    #daySelector {width: 27%}
-	    #addHabit{left: calc(100%/2 + 25px);}
+	    #addHabit{left: calc(100%/2 + 110px);}
+	    .op-done{ margin-left: 43%;}
         section{width:350px;margin: 0 auto;}
         .message{right:5px;bottom:80px;font-size: small;}
 }

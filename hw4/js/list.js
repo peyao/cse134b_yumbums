@@ -169,7 +169,7 @@ function createMessageTotalSpan(currentHabit){
 
     var NS = "http://www.w3.org/2000/svg";
     var svg = document.createElementNS(NS, "svg");
-    svg.setAttribute("width", 150);
+    svg.setAttribute("width", 180);
     svg.setAttribute("height", 25);
     var topLine = document.createElementNS(NS, "line");
     topLine.setAttribute("x1", 0);
@@ -181,7 +181,7 @@ function createMessageTotalSpan(currentHabit){
     var bottomLine = document.createElementNS(NS, "line");
     bottomLine.setAttribute("x1", shadeWidth);
     bottomLine.setAttribute("y1", 0);
-    bottomLine.setAttribute("x2", 150);
+    bottomLine.setAttribute("x2", 180);
     bottomLine.setAttribute("y2", 0);
     bottomLine.setAttribute('stroke', "rgba(171,171,171,0.6)");
     bottomLine.setAttribute('stroke-width', 25);
@@ -444,9 +444,9 @@ function getHabitsForDay(today, callback) {
 function calculateShadeWidth(currentHabit){
 
     var percentageCompleted = currentHabit.completedToday/currentHabit.dayFrequency;
-    var shadeWidth = Math.floor(percentageCompleted * 150);
-    if(shadeWidth > 150){
-        shadeWidth = 150;
+    var shadeWidth = Math.floor(percentageCompleted * 180);
+    if(shadeWidth > 180){
+        shadeWidth = 180;
     }
     return shadeWidth;
 }
