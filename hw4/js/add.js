@@ -157,6 +157,19 @@ function validateForm() {
     }
 
     // set daily frequency variable
+    
+    if(!selectedradio && !dailyOther) {
+        if(document.getElementById("hDaily").childNodes[1]){
+            orphan = document.getElementById("hDaily");
+            orphan.removeChild(orphan.childNodes[1]);
+        }
+        document.getElementById("hDaily").appendChild(invalidMess(rfield));
+        invalidFlag = true;
+    }
+    else if(document.getElementById("hDaily").childNodes[1]){
+        orphan = document.getElementById("hDaily");
+        orphan.removeChild(orphan.childNodes[1]);
+    }
     if(!selectedradio && dailyOther){
         if(isNaN(dailyOther) || !isInt(dailyOther) || dailyOther < 1 || dailyOther > 99){
             document.getElementById("others").value = null;
@@ -171,30 +184,6 @@ function validateForm() {
             dayFreq = parseInt(dailyOther);
         }
     }
-    
-    else if(!selectedradio && !dailyOther) {
-        if(document.getElementById("hDaily").childNodes[1]){
-            orphan = document.getElementById("hDaily");
-            orphan.removeChild(orphan.childNodes[1]);
-        }
-        document.getElementById("hDaily").appendChild(invalidMess(rfield));
-        invalidFlag = true;
-    }
-    else if(document.getElementById("hDaily").childNodes[1]){
-        orphan = document.getElementById("hDaily");
-        orphan.removeChild(orphan.childNodes[1]);
-    }
-
-    if (!dailyOther.match(/^0?[1-9]\d?$/ ) ){
-        document.getElementById("others").value = null;
-        dailyOther = null;
-        if(document.getElementById("hDaily").childNodes[1]){
-            orphan = document.getElementById("hDaily");
-            orphan.removeChild(orphan.childNodes[1]);
-        }
-        document.getElementById("hDaily").appendChild(invalidMess(efield));
-        invalidFlag = true;
-    }
 
     // validation check
     if(invalidFlag) {
@@ -204,6 +193,14 @@ function validateForm() {
     addHabitInStorage(function() {
         pageTransitionOut('list.html');
     });
+}
+
+function isInt(num){
+    if(num % 1 === 0){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 document.body.onunload = function() {
