@@ -161,7 +161,6 @@ function validateForm() {
     }
 
     // set daily frequency variable
-    
     if(!selectedradio && !dailyOther) {
         if(document.getElementById("hDaily").childNodes[1]){
             orphan = document.getElementById("hDaily");

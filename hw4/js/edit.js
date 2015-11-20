@@ -141,6 +141,19 @@ function validateForm() {
     }
 
     // set daily frequency variable
+    if(!selectedradio && !dailyOther) {
+        if(document.getElementById("hDaily").childNodes[1]){
+            orphan = document.getElementById("hDaily");
+            orphan.removeChild(orphan.childNodes[1]);
+        }
+        document.getElementById("hDaily").appendChild(invalidMess(rfield));
+        invalidFlag = true;
+    }
+    else if(document.getElementById("hDaily").childNodes[1]){
+        orphan = document.getElementById("hDaily");
+        orphan.removeChild(orphan.childNodes[1]);
+    }
+
     if(!selectedradio && dailyOther){
         if(isNaN(dailyOther) || !isInt(dailyOther) || dailyOther < 1 || dailyOther > 99){
             document.getElementById("others").value = null;
@@ -154,19 +167,6 @@ function validateForm() {
         }else{
             dayFreq = parseInt(dailyOther);
         }
-    }
-    
-    else if(!selectedradio && !dailyOther) {
-        if(document.getElementById("hDaily").childNodes[1]){
-            orphan = document.getElementById("hDaily");
-            orphan.removeChild(orphan.childNodes[1]);
-        }
-        document.getElementById("hDaily").appendChild(invalidMess(rfield));
-        invalidFlag = true;
-    }
-    else if(document.getElementById("hDaily").childNodes[1]){
-        orphan = document.getElementById("hDaily");
-        orphan.removeChild(orphan.childNodes[1]);
     }
 
     // validation check
