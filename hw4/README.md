@@ -59,6 +59,7 @@ multiple browsers and platforms from the server side.
 
 5) We changed the message that displays for when a user completes a habit.  We made it so that if the user completed a habit more times in a day than they specified as their goal when creating a habit, they would get a message indicating how many more times above their goal they achieved for the day.  We did this because it can be more satisfactory to a user to see how much they are overachieving instead of just saying they reached their goal.  Even though this is a little thing, it can make the user feel happier with themselves and encourage them to keep completing their habits.  Also, the message disappears after 3 seconds because we decided that it doesn't make sense to leave congratulatory messages on the page especially if the user leaves the browser tab open for long periods of time.  For example, if a user completed a habit but left their browser tab open, they would still see the message the next day when they view it, which is misleading because the new day resets the daily completed values.
 
+6) We shifted the Check and X buttons to be centered with the progress bar. We felt like their initial location was a little weird and the connection to the progress bar didn't feel so intuitive. Centering them under the progress bar would automatically strengthen their relationship and purpose in the user's head.
 
 ##Individual Contributions
 function JohnWishon(){
