@@ -91,7 +91,7 @@ function validateForm() {
     var orphan;
     var invalidFlag = false;
     var rfield = " *required field";
-    var efield = " *enter a number (1-99)";
+    var efield = " *enter an integer (1-99)";
 
     // title validation
     if(!document.getElementById("title").value){
@@ -157,12 +157,22 @@ function validateForm() {
     }
 
     // set daily frequency variable
-    if(!selectedradio){
-        if(dailyOther) {
-            dayFreq = dailyOther;
+    if(!selectedradio && dailyOther){
+        if(isNaN(dailyOther) || !isInt(dailyOther) || dailyOther < 1 || dailyOther > 99){
+            document.getElementById("others").value = null;
+            dailyOther = null;
+            if(document.getElementById("hDaily").childNodes[1]){
+                orphan = document.getElementById("hDaily");
+                orphan.removeChild(orphan.childNodes[1]);
+            }
+            document.getElementById("hDaily").appendChild(invalidMess(efield));
+            invalidFlag = true;
+        }else{
+            dayFreq = parseInt(dailyOther);
         }
     }
-    if(!selectedradio && !dailyOther) {
+    
+    else if(!selectedradio && !dailyOther) {
         if(document.getElementById("hDaily").childNodes[1]){
             orphan = document.getElementById("hDaily");
             orphan.removeChild(orphan.childNodes[1]);
@@ -175,17 +185,6 @@ function validateForm() {
         orphan.removeChild(orphan.childNodes[1]);
     }
 
-    if (!dailyOther.match(/^[1-9][0-9]?/) ){
-        document.getElementById("others").value = null;
-        dailyOther = null;
-        if(document.getElementById("hDaily").childNodes[1]){
-            orphan = document.getElementById("hDaily");
-            orphan.removeChild(orphan.childNodes[1]);
-        }
-        document.getElementById("hDaily").appendChild(invalidMess(efield));
-        invalidFlag = true;
-    }
-
     // validation check
     if(invalidFlag){
         return false;
@@ -194,6 +193,14 @@ function validateForm() {
     addHabitInStorage(function() {
         pageTransitionOut('list.html');
     });
+}
+
+function isInt(num){
+    if(num % 1 === 0){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 document.body.onunload = function() {
