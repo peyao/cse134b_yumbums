@@ -282,6 +282,9 @@ function createHabitOpElement(currentHabit){
 * Function that generates the contents for a single habit
 */
 function createHabitElement(currentHabit, habitKey, index){
+    if(index > 4){
+        index = 4;
+    }
     var habit = document.createElement("LI");
     habit.setAttribute("class", "anim-slide-in-right-" + (index+1));
     habit.setAttribute("data-key", habitKey);
@@ -318,7 +321,7 @@ function getWeekday() {
  * Function that takes an object containing the habits to put on the page
  * for the current day and prints them to the page.
 */
-function createHabitList(habits /*,fromWhichMethod*/){
+function createHabitList(habits){
     //var deletedFlag = false;
     if(habits){
         var i = 0;

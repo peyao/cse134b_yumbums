@@ -40,6 +40,10 @@ function uncheckradio() {
     }
 }
 
+function clearOther() {
+    document.getElementById("others").value = null;
+}
+
 function addHabitInStorage(callback){
     var currentDate = new Date();
     currentDate.setHours(0);
@@ -170,6 +174,7 @@ function validateForm() {
         orphan = document.getElementById("hDaily");
         orphan.removeChild(orphan.childNodes[1]);
     }
+
     if(!selectedradio && dailyOther){
         if(isNaN(dailyOther) || !isInt(dailyOther) || dailyOther < 1 || dailyOther > 99){
             document.getElementById("others").value = null;
@@ -184,6 +189,7 @@ function validateForm() {
             dayFreq = parseInt(dailyOther);
         }
     }
+
 
     // validation check
     if(invalidFlag) {

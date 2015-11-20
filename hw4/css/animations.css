@@ -96,6 +96,18 @@
         slide-in-right 0.7s 1.0s cubic-bezier(0.14, 0.25, 0.52, 1.56) forwards;
 }
 
+.anim-slide-in-right-4 {
+    transform: translateX(300%);
+    animation:
+        slide-in-right 0.7s 1.2s cubic-bezier(0.14, 0.25, 0.52, 1.56) forwards;
+}
+
+.anim-slide-in-right-5 {
+    transform: translateX(300%);
+    animation:
+        slide-in-right 0.7s 1.4s cubic-bezier(0.14, 0.25, 0.52, 1.56) forwards;
+}
+
 .anim-slide-out-right {
     animation: slide-out-right 1s;
 }
