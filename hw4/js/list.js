@@ -2,9 +2,10 @@
                             Function Definitions
 **************************************************************************************/
 var allHabits = {};
-var lastHabitKey;  //variable needed for adding habits to the bottom of the page as user scrolls
+//var lastHabitKey;  //variable needed for adding habits to the bottom of the page as user scrolls
 var habitsForDay = {};
 var currentDayIndex = 0;
+
 /*
  * Function that gets called when clicking the complete habit button, updates
  * the html on the page and also the values in the local storage
@@ -54,12 +55,16 @@ function updateMessageDiv(msgElement, messageType, habitKey, callback){
     $firebase.updateHabit(currentHabit, habitKey, callback);
 }
 
-function hideMessageAfter3Secs(element, habitKey){
+function hideMessageAfter3Secs(element){
 	var listElement = element.parentNode.parentNode;
 	var msgElement = (listElement.getElementsByClassName("message"))[0];
     msgElement.style.visibility="hidden";
 }
 
+/*
+* function that displays a message containing their current daily streak
+* after the user completes or fails a habit.
+*/
 function showMsg(element, messageType) {
     var listElement = element.parentNode.parentNode;
     var habitKey = listElement.getAttribute("data-key");
@@ -69,7 +74,7 @@ function showMsg(element, messageType) {
     var msgElement = (listElement.getElementsByClassName("message"))[0];
     updateMessageDiv(msgElement, messageType, habitKey, function() {
         msgElement.style.visibility="visible";
-        setTimeout(function () {hideMessageAfter3Secs(element, habitKey);}, 3000);
+        setTimeout(function () {hideMessageAfter3Secs(element);}, 3000);
     });
 }
 
@@ -89,12 +94,12 @@ function deleteHabit(element) {
             parent.removeChild(child);
 
             //reset the value of lastHabitKey if the last habit in the list was deleted
-            var habitListElements = document.getElementById("habit-list").children;
+            /*var habitListElements = document.getElementById("habit-list").children;
             if(habitListElements.length === 0){
                 lastHabitKey = null;
             }else{
                 lastHabitKey = habitListElements[habitListElements.length - 1].getAttribute("data-key");
-            }
+            }*/
         });
     });
 }
@@ -318,8 +323,12 @@ function getWeekday() {
     }
 }
 
-function createHabitList(habits, fromWhichMethod){
-    var deletedFlag = false;
+/*
+ * Function that takes an object containing the habits to put on the page
+ * for the current day and prints them to the page.
+*/
+function createHabitList(habits /*,fromWhichMethod*/){
+    //var deletedFlag = false;
     if(habits){
         var i = 0;
         for (var h in habits) {
@@ -336,10 +345,10 @@ function createHabitList(habits, fromWhichMethod){
             //extra result from the database.  This extra habit is the same habit as the last habit
             //on the page before the user scrolled.  This basically skips over the extra habit so it
             //is not put on the page twice
-            if(!deletedFlag && fromWhichMethod === "next"){
+            /*if(!deletedFlag && fromWhichMethod === "next"){
                 deletedFlag = true;
                 continue;
-            }
+            }*/
 
             var currentHabit = habits[h];
             var currentDate = new Date();
@@ -359,18 +368,15 @@ function createHabitList(habits, fromWhichMethod){
             createHabitElement(currentHabit, h, i);
 
             i = i + 1;
-            allHabits[h] = habits[h]; //add habit to list of all habits
         }
 
-        lastHabitKey = h; //set last habit key equal to the last habit iterated over
+        //lastHabitKey = h; //set last habit key equal to the last habit iterated over
     }
 }
 
 /*
-* Function that generates the list of habits on the page on load
+* Function that calls other functions for retrieving and printing the habits on the page
 */
-
-////////////////////////PAGINATION//////////////////////////////
 function listHabits(day, callback){
     getHabitsForDay(day, function() {
         if(Object.keys(habitsForDay).length === 0) {
@@ -383,39 +389,49 @@ function listHabits(day, callback){
     });
 }
 
-function getNextHabits(callback){
+/*function getNextHabits(callback){
     if(!lastHabitKey){
         return;
     }
     
     
-    /*$firebase.getNextHabits(function(habits) {
+    $firebase.getNextHabits(function(habits) {
         createHabitList(habits, "next");
         callback();
-    }, lastHabitKey);*/
-}
+    }, lastHabitKey);
+}*/
 
-function doSomething(habits, today, callback){
+/*
+ * function that uses takes an input an object containing habits and
+ * creates an object containing the habits corresponding to the current day
+ * and creates an object containing habits for all days. 
+*/
+function createLocalHabitObjects(habits, today, callback){
     habitsForDay = {};
-        for(h in habits) {
-            var habit = habits[h];
-            for(i in habit.weekFrequency) {
-                if(today.toLowerCase() === habit.weekFrequency[i].toLowerCase()) {
-                    habitsForDay[h] = habit;
-                }
+    for(h in habits) {
+        var habit = habits[h];
+        for(i in habit.weekFrequency) {
+            if(today.toLowerCase() === habit.weekFrequency[i].toLowerCase()) {
+                habitsForDay[h] = habit;
             }
-            allHabits[h] = habit;
         }
-        callback();
+        allHabits[h] = habit;
+    }
+    callback();
 }
 
+/*
+* Function that retrieves all habits for the current user from the database or a local
+* object.  On page load, the habits will be retrieved from Firebase, but afterwards
+* the habits will be retrieved from the local object allHabits
+*/
 function getHabitsForDay(today, callback) {
     if(Object.keys(allHabits).length === 0){
         $firebase.getAllHabits(function(habits) {
-            doSomething(habits, today, callback);
+            createLocalHabitObjects(habits, today, callback);
         });
     }else{
-        doSomething(allHabits, today, callback);
+        createLocalHabitObjects(allHabits, today, callback);
     }
     
 }
@@ -483,7 +499,7 @@ function attachClickListeners(){
         removeHabitsFromPage();
         listHabits(dayText(nextDayIndex), function() {
             attachClickListeners();
-            window.onscroll = scrollListener;
+            //window.onscroll = scrollListener;
         });
     };
     
@@ -495,11 +511,16 @@ function attachClickListeners(){
         removeHabitsFromPage();
         listHabits(dayText(previousDayIndex), function() {
             attachClickListeners();
-            window.onscroll = scrollListener;
+            //window.onscroll = scrollListener;
         });
     };
 }
 
+/*
+* function that clears out all of the habits on the page, this is uded
+* when selecting a different day to view habits for because the page
+* needs to remove the current habits before it can put the new ones on.
+*/
 function removeHabitsFromPage(){
     var habitPageList = document.querySelectorAll("#habit-list > li");
     var listLength = habitPageList.length;
@@ -546,6 +567,7 @@ function getNextDay(currentDay){
     }
 }
 
+//function that converts an integer value into a string representaion of the day
 function dayText(dayIndex){
 	switch (dayIndex) {
         case 6:
@@ -585,7 +607,7 @@ function prefixedEvent(element, type, callback) {
 //listener attached to window that fires every time user scrolls.  Basically checks if the
 //user has scrolled to the bottom of the page or not and retrieves the next 3 habits from the
 //database if this is true.
-function scrollListener(){
+/*function scrollListener(){
     var bodyElement = document.body,
     htmlElement = document.documentElement;
 
@@ -602,7 +624,7 @@ function scrollListener(){
     if(scrollHeight + window.innerHeight >= documentHeight){
         getNextHabits(attachClickListeners, lastHabitKey);
     }
-}
+}*/
 
 function printJson(s){
     console.log(JSON.stringify(s));
@@ -619,5 +641,5 @@ updateListHeaderWithDay(checkDay());
 
 listHabits(checkDay(), function() {
     attachClickListeners();
-    window.onscroll = scrollListener;
+    //window.onscroll = scrollListener;
 });

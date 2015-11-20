@@ -25,7 +25,7 @@ function selectImage(name) {
     document.getElementById('icon3').style.border = "none";
     //imageSelect = null;
     var image = document.getElementById(name);
-    image.style.border = "5px solid #42A5F5";
+    image.style.border = "2px solid #42A5F5";
     imageSelect = image.getAttribute("src");
 }
 
@@ -46,7 +46,7 @@ function updateHabit(callback){
         icon: imageSelect,
         weekFrequency: weeklySchedule,
         dayFrequency: dayFreq,
-        notification: currentHabit.notification,
+        notification: document.getElementById("selectNotification").value,
         currentStreak: currentHabit.currentStreak,
         bestStreak: currentHabit.bestStreak,
         completedToday: currentHabit.completedToday,
