@@ -570,6 +570,10 @@ function printJson(s){
 /**************************************************************************************
                             Executed On Load of Page
 **************************************************************************************/
+document.body.onload = function(){
+    mixpanel.track('Page Loaded', {'Page Name': 'ListHabit Page'});
+}
+
 document.body.onunload = function() {
     location.reload(true);
 };

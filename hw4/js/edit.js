@@ -271,6 +271,10 @@ function isInt(num){
 }
 
 /********************** functions called on load of page ***************/
+document.body.onload = function(){
+    mixpanel.track('Page Loaded', {'Page Name': 'EditHabit Page'});
+}
+
 document.body.onunload = function() {
     location.reload(true);
 };

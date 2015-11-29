@@ -207,7 +207,9 @@ function isInt(num){
         return false;
     }
 }
-
+document.body.onload = function(){
+    mixpanel.track('Page Loaded', {'Page Name': 'AddHabit Page'});
+}
 document.body.onunload = function() {
     location.reload(true);
 };
