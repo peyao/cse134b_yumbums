@@ -60,6 +60,9 @@ function addHabitInStorage(callback){
         timeCheck: startOfDay
     };
 
+    mixpanel.track("Weekly Frequency", {"Days":weeklySchedule});
+    mixpanel.track("Daily Frequency", {"Times per day": dayFreq});
+
     $firebase.addHabit(habit);
     callback();
 }
@@ -207,9 +210,13 @@ function isInt(num){
         return false;
     }
 }
+
 document.body.onload = function(){
     mixpanel.track('Page Loaded', {'Page Name': 'AddHabit Page'});
 }
+
+
+
 document.body.onunload = function() {
     location.reload(true);
 };
