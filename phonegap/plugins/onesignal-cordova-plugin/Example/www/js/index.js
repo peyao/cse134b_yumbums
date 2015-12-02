@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+ 
 var app = {
     // Application Constructor
     initialize: function() {
@@ -26,31 +27,13 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
-        //document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.addEventListener('deviceready', function() {
-            console.log('DEVICE IS READY!');
-
-            var notificationOpenedCallback = function(jsonData) {
-                console.log('didReceiveNotificationCallback: ' + JSON.stringify(jsonData));
-            };
-
-            window.plugins.OneSignal.init("1f8dad4e-4d83-45ce-9a42-73434eee9182",
-                {googleProjectNumber: "623734894206",
-                 autoRegister: true},
-                notificationOpenedCallback);
-
-            window.plugins.OneSignal.registerForPushNotifications();
-
-            // Show an alert box if a notification comes in when the user is in your app.
-            window.plugins.OneSignal.enableInAppAlertNotification(true);
-        }, false);
+        document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        console.log('DEVICE IS READY!');
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
@@ -63,17 +46,27 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+        
+        // Enable to debug issues.
+        // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
 
-        console.log('DEVICE IS READY!');
-        var notificationOpenedCallback = function(jsonData) {
-            console.log('didReceiveNotificationCallback: ' + JSON.stringify(jsonData));
-        };
-
-        window.plugins.OneSignal.init("1f8dad4e-4d83-45ce-9a42-73434eee9182",
-            {googleProjectNumber: "623734894206"},
-            notificationOpenedCallback);
-
-        // Show an alert box if a notification comes in when the user is in your app.
-        window.plugins.OneSignal.enableInAppAlertNotification(true);
+        window.plugins.OneSignal.init( "5eb5a37e-b458-11e3-ac11-000c2940e62c",
+                                        {googleProjectNumber: "703322744261"},
+                                        app.didReceiveRemoteNotificationCallBack);
+    },
+    didReceiveRemoteNotificationCallBack : function(jsonData) {
+        alert("Notification received:\n" + JSON.stringify(jsonData));
+        console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
     }
 };
+
+function sendTag() {
+    window.plugins.OneSignal.sendTag("PhoneGapKey", "PhoneGapValue");
+}
+function getIds() {
+    window.plugins.OneSignal.getIds(function(ids) {
+        document.getElementById("OneSignalUserId").innerHTML = "UserId: " + ids.userId;
+        document.getElementById("OneSignalPushToken").innerHTML = "PushToken: " + ids.pushToken;
+        console.log('getIds: ' + JSON.stringify(ids));
+    });
+}

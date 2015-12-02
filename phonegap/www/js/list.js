@@ -22,9 +22,9 @@ function updateMessageDiv(msgElement, messageType, habitKey, callback){
         if (currentHabit.completedToday <= currentHabit.dayFrequency){
 	        newMessage = "Completed <strong>" + currentHabit.completedToday + "/" + currentHabit.dayFrequency + "</strong> for today!";
         } else {
-	        newMessage = "Completed <strong>" + currentHabit.dayFrequency + "/" + currentHabit.dayFrequency + "</strong> goal + <strong>" + (currentHabit.completedToday-currentHabit.dayFrequency) +" More!</strong>" ;        
+	        newMessage = "Completed <strong>" + currentHabit.dayFrequency + "/" + currentHabit.dayFrequency + "</strong> goal + <strong>" + (currentHabit.completedToday-currentHabit.dayFrequency) +" More!</strong>" ;
 	    }
-        
+
     }
     else{
         currentHabit.completedToday = 0;
@@ -366,7 +366,7 @@ function listHabits(day, callback){
 /*
  * function that uses takes an input an object containing habits and
  * creates an object containing the habits corresponding to the current day
- * and creates an object containing habits for all days. 
+ * and creates an object containing habits for all days.
 */
 function createLocalHabitObjects(habits, today, callback){
     habitsForDay = {};
@@ -395,7 +395,7 @@ function getHabitsForDay(today, callback) {
     }else{
         createLocalHabitObjects(allHabits, today, callback);
     }
-    
+
 }
 
 /*
@@ -451,7 +451,7 @@ function attachClickListeners(){
             showMsg(this, "failed");
         }
     }
-    
+
     var nextDayButton = document.getElementById("rightDaySelectorButton");
     nextDayButton.onclick = function(){
         var nextDayIndex = getNextDay(currentDayIndex);
@@ -462,7 +462,7 @@ function attachClickListeners(){
             attachClickListeners();
         });
     };
-    
+
     var previousDayButton = document.getElementById("leftDaySelectorButton");
     previousDayButton.onclick = function(){
         var previousDayIndex = getPreviousDay(currentDayIndex);
