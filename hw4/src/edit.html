@@ -4,11 +4,11 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Edit a habit</title>
-        
+
         <!-- build:css ../css/combinedEdit.min.css -->
 		<link rel="stylesheet" type="text/css" href="../css/forms.css">
 	    <link rel="stylesheet" type="text/css" href="../css/animations.css">
-        <link rel="stylesheet" type="text/css" href="/test/sprite.css">
+        <link rel="stylesheet" type="text/css" href="../test/sprite.css">
         <!-- endbuild -->
 	</head>
 	<body>
@@ -27,20 +27,20 @@
 				<div id="image-button">
 					<label>
 						<input id="imgRadio1" type="radio" name="imgRadio">
-						<img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/virtue.png" alt="virtue image"/>
+						<span id="icon1" class="icon spriteIcon spriteIcon-virtue" onclick="selectImage('icon1');"></span>
 					</label>
 					<label>
 						<input id="imgRadio2" type="radio" name="imgRadio">
-						<img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/greyvice.png" alt="vice image"/>
+						<span id="icon2" class="icon spriteIcon spriteIcon-greyvice" onclick="selectImage('icon2');"></span>
 					</label>
 					<label>
 						<input id="imgRadio3" type="radio" name="imgRadio">
-                        <div id="icon3div" class="nIcon spriteIcon spriteIcon-hollow"></div>
-                        <img id="icon3" class="nIcon" onclick="selectImage('icon3')" src="../img/hollow.png" alt="choose image" style="display:none"/>
+						<span id="icon3div" class="nIcon spriteIcon spriteIcon-hollow"></span>
+						<img id="icon3" class="nIcon" onclick="selectImage('icon3')" src="../img/hollow.png" alt="choose image" style="display:none"/>
 					</label>
 					<label>
-						<input id="iconFile" type="file" accept=".png, .gif, .jpg" onclick="setIcon()">
-						<img id="icon4" class="icon" src="../img/add.png" alt="find an image"/>
+						<input id="iconFile" type="file" accept="image/*" onclick="setIcon()">
+						<span id="icon4" class="icon spriteIcon spriteIcon-add"></span>
 					</label>
 				</div>
 				<p><label id="hWeekly">Weekly Frequency</label></p>
