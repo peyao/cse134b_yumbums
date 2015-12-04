@@ -189,4 +189,34 @@ body {
 	cursor: pointer;
 }
 
+.login .loginForm .changePasswprdButton {
+  -webkit-appearance:none;
+	width: 100%;
+	display: inline-block;
+	margin: 0;
+	padding: 15px;
+	background:none;
+	background-color: #214864;
+  border:none;
+  color:white;
+  -webkit-border-radius: 5px; /*For Safari, etc. */
+  -moz-border-radius: 5px; /* For Mozilla, etc. */
+  border-radius: 5px; /* CSS3 Feature */
+  opacity: 1.0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.login .loginForm .changePasswprdButton {
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.login .loginForm .changePasswprdButton:hover {
+	opacity: 0.75;
+	cursor: pointer;
+}
 

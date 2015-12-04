@@ -71,15 +71,15 @@ function onClickSignIn() {
 			switch (error.code) {
 			case "INVALID_EMAIL":
 				console.log("The specified user account email is invalid.");
-				signUpText.innerHTML = "The specified user account email is invalid.";
+				signUpText.innerHTML = "Invalid email format. Please enter a valid email address.";
 				break;
 			case "INVALID_PASSWORD":
 				console.log("The specified user account password is incorrect.");
-				signUpText.innerHTML = "The specified user account password is incorrect.";
+				signUpText.innerHTML = "The password you entered is incorrect. Please try again.";
 				break;
 			case "INVALID_USER":
 				console.log("The specified user account does not exist.");
-				signUpText.innerHTML = "The specified user account does not exist.";
+				signUpText.innerHTML = "This email account does not exist. Please enter a differnet email.";
 				break;
 			default:
 				console.log("Error logging user in:", error);
@@ -95,10 +95,70 @@ function onClickSignIn() {
                 lastLogin: Date.now()
             });
             
-  			window.location.href = 'list.html';
+            if (authData.password.isTemporaryPassword) {
+	            window.location.href = 'changePassword.html';
+			} else {
+            	window.location.href = 'list.html';
+        	}
   		}
   	}, {
 	  	remember: "sessionOnly"
+	});
+}
+function onClickResetPassword(){
+	var usermail = document.getElementById("usermail").value;
+	firebaseRef.resetPassword({
+	  email: usermail
+	}, function(error) {
+	  if (error) {
+		var signUpText = document.getElementById("signInMessage");
+	    switch (error.code) {
+	      case "INVALID_USER":
+	        console.log("The specified user account does not exist.");
+	        signUpText.innerHTML = "This email account does not exist. Please enter a differnet email.";
+	        break;
+	      default:
+	        console.log("Error resetting password:", error);
+	    }
+	    signUpText.style.display = "block";
+	  } else {
+	    console.log("Password reset email sent successfully!");
+	    var signUpText = document.getElementById("signInMessage");
+		signUpText.innerHTML = "You'll recieve an email with a new temporary password to login.";
+		signUpText.style.display = "block";
+	  }
+	});
+}
+
+function onClickChangePassword(){
+	var usermail = document.getElementById("usermail").value;
+	var tempPassword = document.getElementById("tempPassword").value;
+	var password = document.getElementById("password").value;
+	console.log('password: ' + password);
+	
+	firebaseRef.changePassword({
+	  email: usermail,
+	  oldPassword: tempPassword,
+	  newPassword: password
+	}, function(error) {
+	  if (error) {
+	    switch (error.code) {
+	      case "INVALID_PASSWORD":
+	        console.log("The specified user account password is incorrect.");
+	        break;
+	      case "INVALID_USER":
+	        console.log("The specified user account does not exist.");
+	        break;
+	      default:
+	        console.log("Error changing password:", error);
+	    }
+	  } else {
+	    console.log("User password changed successfully!");
+	    var userObj = {email: usermail, password:password};
+	  	firebaseRef.authWithPassword(userObj, function(logInError, authData){
+		  	window.location.href = 'list.html';
+	  	});
+	  }
 	});
 }
 
