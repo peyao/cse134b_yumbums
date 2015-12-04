@@ -113,3 +113,12 @@ var ZarniWang = function() {
 	- Integrated OneSignal and Notification.js to handle push notifications and web notifications
 	- Collaborated with team to determine the workflow for notifications and how the app will look and function
 }
+
+
+#Homework 5
+
+#Minification, Bundling
+We use gulp as a task runner that does all of the minification and bundling of our application through gulp plugins.  It is automated pretty well and all it requires is to run the command 'gulp' in the hw4 directory.  This command runs all of the tasks in 'gulpfile.js' and outputs the new files in a folder called 'dist' that mimics the directory structure of the rest of our application.  This was pretty easy for the most part, the only challenge came with the fact that we weren't always consistent with using relative or abolute paths in our code, so sometimes the code ended up accessing files from the un-optimized code and not from the dist folder.  This was fixed by making all of the paths to be consistently relative.
+
+#Image Spriting
+The first step of image spriting is also done using a gulp plugin, and this plugin basically takes all of the .png and .jpg files in our img folder and generates a sprite.png file out of them and also a sprite.css file for us to use in our code.  Image spriting turned out to be pretty difficult to implement in our code because fitting the sprite images exactly inside the habit icons was a challenge and also getting them to look good as the page got resized was a challenge as well.  We had to change the size of some of the images before we created sprites out of them in order to get a sprite grid that was easier to deal with.
