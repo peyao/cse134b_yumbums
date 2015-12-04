@@ -44,9 +44,6 @@
     <gap:plugin name="onesignal-cordova-plugin-pgb-compat" source="npm" />
     <gap:plugin name="cordova-plugin-googleplayservices" source="npm" />
     <gap:plugin name="cordova-plugin-android-support-v4" source="npm" />
-
-
-
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/icon/android/icon-36-ldpi.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="www/res/icon/android/icon-48-mdpi.png" />
@@ -87,4 +84,5 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <engine name="android" spec="~4.1.1" />
 </widget>
