@@ -571,6 +571,10 @@ function printJson(s){
                             Executed On Load of Page
 **************************************************************************************/
 document.body.onload = function(){
+	var userId = localStorage.getItem('userId');
+	if (userId === null){
+		window.location.href = 'login.html';
+	}
     mixpanel.track('Page Loaded', {'Page Name': 'ListHabit Page'});
 }
 
