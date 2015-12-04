@@ -128,11 +128,7 @@ function createHabitIconListElement(currentHabit){
     var habitIconListElement = document.createElement("LI");
     var habitIconImage = document.createElement("IMG");
     habitIconImage.setAttribute("class", "habit-icon");
-    if (currentHabit.iconBase64) {
-        habitIconImage.setAttribute("src", currentHabit.iconBase64);
-    } else {
-        habitIconImage.setAttribute("src", currentHabit.icon);
-    }
+    habitIconImage.setAttribute("src", currentHabit.icon);
     habitIconImage.setAttribute("alt", "Habit Icon");
     habitIconListElement.appendChild(habitIconImage);
     return habitIconListElement;

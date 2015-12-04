@@ -10,20 +10,18 @@ function setIcon() {
     document.getElementById('iconFile').click();
     document.getElementById('iconFile').onchange = function() {
         var file = this.files[0];
-        var url = window.URL.createObjectURL(file);
         var reader = new FileReader();
 
         reader.onloadend = function() {
             iconBase64 = reader.result;
+            document.getElementById("icon3div").style.display = "none";
+            document.getElementById("icon3").style.display = "inline-block";
+            document.getElementById('icon3').src = iconBase64;
+            document.getElementById('icon3').setAttribute("class","icon");
+            document.getElementById('icon3').setAttribute("onclick", "selectImage('icon3')");
+            selectImage('icon3');
         };
         reader.readAsDataURL(file);
-
-        document.getElementById("icon3").style.display = "inline-block";
-        document.getElementById("icon3div").style.display = "none";
-        document.getElementById('icon3').src = url;
-        document.getElementById('icon3').setAttribute("class","icon");
-        document.getElementById('icon3').setAttribute("onclick", "selectImage('icon3')");
-        selectImage('icon3');
     };
 }
 
@@ -34,20 +32,15 @@ function selectImage(name) {
     document.getElementById('icon3').style.border = "none";
     var image = document.getElementById(name);
     if(name == "icon1"){
-        var img = new Image("url(sprite.png) -0px -240px");
-        imageSelect = img;
+        imageSelect = "../img/virtue.png";
     }
     else if(name == "icon2"){
-        var img = new Image("url(sprite.png) -0px -80px");
-        imageSelect = img;
+        imageSelect = "../img/greyvice.png";
     }
     else{
         imageSelect = image.getAttribute("src");
     }
-    /*object.style.borderImage="url(border.png) 30 round"*/
     image.style.border = "2px solid #42A5F5";
-    console.log(imageSelect);
-   /* imageSelect = image.getAttribute("src");*/
 
 }
 
@@ -74,7 +67,6 @@ function addHabitInStorage(callback){
     var habit = {
         title: document.getElementById("title").value,
         icon: imageSelect,
-        iconBase64: iconBase64,
         weekFrequency: weeklySchedule,
         dayFrequency: dayFreq,
         notification: document.getElementById("selectNotification").value,
@@ -84,6 +76,8 @@ function addHabitInStorage(callback){
         timeCheck: startOfDay
     };
 
+    console.log(JSON.stringify(habit));
+    
     mixpanel.track("Weekly Frequency", {"Days":weeklySchedule});
     mixpanel.track("Daily Frequency", {"Times per day": dayFreq});
 
