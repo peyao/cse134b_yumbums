@@ -49,7 +49,7 @@ multiple browsers and platforms from the server side.
     - Firefox / Firefox Mobile
     - Internet Explorer (requires pinned sites)
     - Safari Mobile
-    
+
 ## General Changes to Previous Design
 1) Added an X button next to the green complete button for a habit that represents not completing a habit.  The functionality of what this button was supposed to do was a little vague so our team decided on the following functionality.  When clicked, the daily amount of times that a habit had been completed for the day gets set back to 0.  Also, it resets the user's current streak for that habit back to 0, so if they had completed the habit 4 days in a row but then clicked the X button, then their current streak goes back to 0.
 
@@ -103,7 +103,7 @@ var AmrKahhaleh function() {
 	- wrote js for dynamically handling the habits displayed to user on list.html
 	- added new header to list.html that includes functionality to navigate between different weekdays to view different tasks
 	- wrote js to handle progress bar/message behavior based on user habits
-	- Collaborated and met with teammates every week to closely consider the details of how the app looks, feels, and behaves. 
+	- Collaborated and met with teammates every week to closely consider the details of how the app looks, feels, and behaves.
 }
 
 var ZarniWang = function() {
@@ -128,3 +128,9 @@ We are using TrackJs service to handle error reporting because it is very easy t
 
 ## Chrome App
 We managed to successfully create a simple Chrome app, but we couldn't implement our habit app as a Chrome app because we have to either take one of two routes in our implementation. The first implementation is the easier one where we just link the Chrome app to open the hosted version of our app, but we couldn't implement this because of Chrome's security policy that doesn't let us open a remote page. The second implementation is to build a custom UI for the Chrome app and implement all of our habit app's functionality within the Chrome app. The second option would take too much time to implement and meet the deadline.
+
+## Native OS Support Using Electron (W10, OSX, Linux)
+We use Electron to package our application so that it runs like a native program on W10, OSX, and Linux. This was a fairly straightforward process that was mostly figuring out how to structure our files to allow for easy packaging. Once that was figured out, the packaging process is the same for packaging to each of the three systems. The output packages are pretty large so they cannot be sent through email. Their packages will be included in the /release folder.
+
+## Phonegap
+We use Phonegap to package our webapp for iOS and Android. We ran into some issues with notifications, but the rest is working fine. Another problem we encountered was uploading images on Android, our original code was not opening the Android filepicker. Changing our <input> element to accept all content-types with image/, we were able to get the Android filepicker to open.
