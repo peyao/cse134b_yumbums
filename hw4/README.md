@@ -134,3 +134,6 @@ We use Electron to package our application so that it runs like a native program
 
 ## Phonegap
 We use Phonegap to package our webapp for iOS and Android. We ran into some issues with notifications, but the rest is working fine. Another problem we encountered was uploading images on Android, our original code was not opening the Android filepicker. Changing our <input> element to accept all content-types with image/, we were able to get the Android filepicker to open.
+
+## Image Uploads
+With the implementation of user accounts, we had to find a solution for saving images on a server. We decided to simply convert images to base64 strings and store them on Firebase as a data URI. When we grab habits, Firebase will send us back the habit with the base64 string.
