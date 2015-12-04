@@ -115,10 +115,16 @@ var ZarniWang = function() {
 }
 
 
-#Homework 5
+# Homework 5
 
-#Minification, Bundling
+## Minification, Bundling
 We use gulp as a task runner that does all of the minification and bundling of our application through gulp plugins.  It is automated pretty well and all it requires is to run the command 'gulp' in the hw4 directory.  This command runs all of the tasks in 'gulpfile.js' and outputs the new files in a folder called 'dist' that mimics the directory structure of the rest of our application.  This was pretty easy for the most part, the only challenge came with the fact that we weren't always consistent with using relative or abolute paths in our code, so sometimes the code ended up accessing files from the un-optimized code and not from the dist folder.  This was fixed by making all of the paths to be consistently relative.
 
-#Image Spriting
+## Image Spriting
 The first step of image spriting is also done using a gulp plugin, and this plugin basically takes all of the .png and .jpg files in our img folder and generates a sprite.png file out of them and also a sprite.css file for us to use in our code.  Image spriting turned out to be pretty difficult to implement in our code because fitting the sprite images exactly inside the habit icons was a challenge and also getting them to look good as the page got resized was a challenge as well.  We had to change the size of some of the images before we created sprites out of them in order to get a sprite grid that was easier to deal with.
+
+## Error Reporting
+We are using TrackJs service to handle error reporting because it is very easy to setup. We configure TrackJs to catch every error so that we don't have to modify code from hw4. For hw5 specific code, we specifically use TrackJs's console.error() methods to track errors and user behavior. Specifically in user authentication when a user tries to log in multiple times in succession. Despite TrackJs's claim that they also log network errors and XHR messages, we haven't been able to log error messages from OneSignal.
+
+## Chrome App
+We managed to successfully create a simple Chrome app, but we couldn't implement our habit app as a Chrome app because we have to either take one of two routes in our implementation. The first implementation is the easier one where we just link the Chrome app to open the hosted version of our app, but we couldn't implement this because of Chrome's security policy that doesn't let us open a remote page. The second implementation is to build a custom UI for the Chrome app and implement all of our habit app's functionality within the Chrome app. The second option would take too much time to implement and meet the deadline.
