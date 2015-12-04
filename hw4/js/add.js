@@ -32,10 +32,10 @@ function selectImage(name) {
     document.getElementById('icon1').style.border = "none";
     document.getElementById('icon2').style.border = "none";
     document.getElementById('icon3').style.border = "none";
-    //imageSelect = null;
     var image = document.getElementById(name);
     image.style.border = "2px solid #42A5F5";
     imageSelect = image.getAttribute("src");
+
 }
 
 function uncheckradio() {
