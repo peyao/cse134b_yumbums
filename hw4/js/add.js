@@ -2,6 +2,7 @@
 var imageSelect;
 var weeklySchedule = [];
 var dayFreq = 0;
+var iconBase64;
 
 //upload personal image
 function setIcon() {
@@ -10,6 +11,13 @@ function setIcon() {
     document.getElementById('iconFile').onchange = function() {
         var file = this.files[0];
         var url = window.URL.createObjectURL(file);
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            iconBase64 = reader.result;
+        };
+        reader.readAsDataURL(file);
+
         document.getElementById("icon3").style.display = "inline-block";
         document.getElementById("icon3div").style.display = "none";
         document.getElementById('icon3').src = url;
@@ -53,6 +61,7 @@ function addHabitInStorage(callback){
     var habit = {
         title: document.getElementById("title").value,
         icon: imageSelect,
+        iconBase64: iconBase64,
         weekFrequency: weeklySchedule,
         dayFrequency: dayFreq,
         notification: document.getElementById("selectNotification").value,
@@ -65,8 +74,9 @@ function addHabitInStorage(callback){
     mixpanel.track("Weekly Frequency", {"Days":weeklySchedule});
     mixpanel.track("Daily Frequency", {"Times per day": dayFreq});
 
-    $firebase.addHabit(habit);
-    callback();
+    $firebase.addHabit(habit, function() {
+        callback();
+    });
 }
 
 function pageTransitionOut(location) {
@@ -91,7 +101,7 @@ function invalidMess(message){
     var aElement = document.createElement("ALERT");
     aElement.setAttribute("style", "color:red; font-size:small;");
     aElement.appendChild(aMessage);
-    return aElement
+    return aElement;
 }
 
 function validateForm() {
@@ -205,7 +215,7 @@ function validateForm() {
     });
 }
 
-function isInt(num){
+function isInt(num) {
     if(num % 1 === 0){
         return true;
     }else{
@@ -213,11 +223,9 @@ function isInt(num){
     }
 }
 
-document.body.onload = function(){
+document.body.onload = function() {
     mixpanel.track('Page Loaded', {'Page Name': 'AddHabit Page'});
-}
-
-
+};
 
 document.body.onunload = function() {
     location.reload(true);

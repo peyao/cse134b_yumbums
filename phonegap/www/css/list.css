@@ -103,7 +103,7 @@ body{
 
 
 /* add habit */
-#addHabit{display:inline-block; position:fixed; margin-top:7px; background:rgba(33, 72, 100, 1); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray; z-index: 10;}
+#addHabit{display:inline-block; margin-top:7px; position: absolute; background:rgba(33, 72, 100, 1); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray; z-index: 10;}
 #addHabit:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
 #addHabit:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
 #addHabit:focus{outline-style:none;}
@@ -119,6 +119,11 @@ body{
 	    .op-done{ margin-left: 43%;}
         section{width:350px;margin: 0 auto;}
         .message{right:5px;bottom:80px;font-size: small;}
+		body {
+			position: relative;
+			overflow-x: hidden;
+			overflow-y: scroll;
+		}
 }
 
 /* desktop, tablet */

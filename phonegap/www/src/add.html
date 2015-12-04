@@ -3,6 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+-->
 	<title>Add a habit</title>
     <!-- build:css ../css/combinedAdd.min.css -->
 	<link rel="stylesheet" type="text/css" href="../css/forms.css">
@@ -36,7 +39,7 @@
 						<img id="icon3" class="nIcon" onclick="" src="../img/hollow.png" alt="choose image"/>
 					</label>
 					<label>
-						<input id="iconFile" type="file" accept=".png, .gif, .jpg" onclick="setIcon()">
+						<input id="iconFile" type="file" accept="image/*" onclick="setIcon()">
 						<img id="icon4" class="icon" src="../img/add.png" alt="find an image"/>
 					</label>
 				</div>

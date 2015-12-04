@@ -18,15 +18,33 @@
  */
 var app = {
     // Application Constructor
-    initialize: function() {
-        this.bindEvents();
+    initialize: function(cb) {
+        this.bindEvents(cb);
     },
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+    bindEvents: function(cb) {
+        //document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('deviceready', function() {
+            console.log('DEVICE IS READY!');
+
+            var notificationOpenedCallback = function(jsonData) {
+                console.log('didReceiveNotificationCallback: ' + JSON.stringify(jsonData));
+            };
+
+            window.plugins.OneSignal.init("1f8dad4e-4d83-45ce-9a42-73434eee9182",
+                {googleProjectNumber: "623734894206",
+                 autoRegister: true},
+                notificationOpenedCallback);
+
+            window.plugins.OneSignal.registerForPushNotifications();
+
+            // Show an alert box if a notification comes in when the user is in your app.
+            window.plugins.OneSignal.enableInAppAlertNotification(true);
+        }, false);
+        cb();
     },
     // deviceready Event Handler
     //
@@ -43,7 +61,5 @@ var app = {
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
     }
 };
