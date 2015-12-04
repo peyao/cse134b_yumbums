@@ -4,108 +4,102 @@ var PAGINATION_VALUE = 3;
 
 // Firebase
 var $firebase = {
-    setUser: function(callback) {
+    createUser: function(callback) {
         $loader.show();
 
         var userId = localStorage.getItem('userId');
 
         if (userId === null) {
-            var usersRef = firebaseRef.child('users');
-            var pushRef = usersRef.push({
-                created: Date.now()
-            });
-            userId = pushRef.key();
-            localStorage.setItem('userId', userId);
-
-            console.log('userId created: ' + userId);
+	        window.location.href = 'login.html';
         }
-
-        $loader.hide();
-        return callback(userId);
+        
+        var userRef = firebaseRef.child('users/' + userId);
+        userRef.push({'created': Date.now()}, function(){
+	        $loader.hide();
+	        return callback(userId);
+        });  
     },
+    
     addHabit: function(habit, callback) {
         $loader.show();
-        this.setUser(function(userId) {
-            var habitsRef = firebaseRef.child('users/' + userId + '/habits');
+        
+        var userId = localStorage.getItem('userId');
+        var habitsRef = firebaseRef.child('users/' + userId + '/habits');
 
-            habit.created = Date.now();
-            var pushRef = habitsRef.push(habit);
+        habit.created = Date.now();
+        var pushRef = habitsRef.push(habit);
 
-            return pushRef.key();
-        });
+        return pushRef.key();
         $loader.hide();
     },
     getHabit: function(habitKey, callback) {
         $loader.show();
-        this.setUser(function(userId) {
-            var habitRef = firebaseRef.child('users/' + userId + '/habits/' + habitKey);
-            habitRef.once('value', function(snapshot) {
+        
+        var userId = localStorage.getItem('userId');
+        var habitRef = firebaseRef.child('users/' + userId + '/habits/' + habitKey);
+        habitRef.once('value', function(snapshot) {
+            callback(snapshot.val());
+        }, function(err) {
+            console.log("Err: " + err);
+        });
+        $loader.hide();
+    },
+   
+    getAllHabits: function(callback) {
+        $loader.show();
+        var userId = localStorage.getItem('userId');
+        var habitsRef = firebaseRef.child('users/' + userId + '/habits');
+        habitsRef.orderByKey()
+            .once('value', function(snapshot) {
+                callback(snapshot.val());
+            }, function(err) {
+                console.log('Err: ' + err);
+            });
+    $loader.hide();
+    },
+    getFirstHabits: function(callback) {
+        $loader.show();
+        var userId = localStorage.getItem('userId');
+        var habitsRef = firebaseRef.child('users/' + userId + '/habits');
+        habitsRef.orderByKey()
+            .limitToFirst(PAGINATION_VALUE)
+            .once('value', function(snapshot) {
                 callback(snapshot.val());
             }, function(err) {
                 console.log("Err: " + err);
             });
-        });
-        $loader.hide();
-    },
-    getAllHabits: function(callback) {
-        $loader.show();
-        this.setUser(function(userId) {
-            var habitsRef = firebaseRef.child('users/' + userId + '/habits');
-            habitsRef.orderByKey()
-                .once('value', function(snapshot) {
-                    callback(snapshot.val());
-                }, function(err) {
-                    console.log('Err: ' + err);
-                });
-        });
-        $loader.hide();
-    },
-    getFirstHabits: function(callback) {
-        $loader.show();
-        this.setUser(function(userId) {
-            var habitsRef = firebaseRef.child('users/' + userId + '/habits');
-            habitsRef.orderByKey()
-                .limitToFirst(PAGINATION_VALUE)
-                .once('value', function(snapshot) {
-                    callback(snapshot.val());
-                }, function(err) {
-                    console.log("Err: " + err);
-                });
-        });
         $loader.hide();
     },
     getNextHabits: function(callback, habitKey) {
         $loader.show();
         $loaderList.show();
-        this.setUser(function(userId) {
-            var habitsRef = firebaseRef.child('users/' + userId + '/habits');
-            habitsRef.orderByKey()
-                .startAt(habitKey)
-                .limitToFirst(PAGINATION_VALUE + 1)
-                .once('value', function(snapshot) {
-                    callback(snapshot.val());
-                }, function(err) {
-                    console.log("Err: " + err);
-                });
-        });
+        var userId = localStorage.getItem('userId');
+        var habitsRef = firebaseRef.child('users/' + userId + '/habits');
+        habitsRef.orderByKey()
+            .startAt(habitKey)
+            .limitToFirst(PAGINATION_VALUE + 1)
+            .once('value', function(snapshot) {
+                callback(snapshot.val());
+            }, function(err) {
+                console.log("Err: " + err);
+            });
         $loaderList.hide();
         $loader.hide();
     },
     updateHabit: function(habit, habitKey, callback) {
         $loader.show();
-        this.setUser(function(userId) {
-            var habitRef = firebaseRef.child('users/' + userId + '/habits/' + habitKey);
-            habitRef.set(habit, callback);
-        });
+        var userId = localStorage.getItem('userId');
+        var habitRef = firebaseRef.child('users/' + userId + '/habits/' + habitKey);
+        habitRef.set(habit, callback);
+
         $loader.hide();
     },
     deleteHabit: function(habitKey, callback) {
         $loader.show();
-        this.setUser(function(userId) {
-            console.log('deleteHabit():habitKey: ' + habitKey);
-            var habitRef = firebaseRef.child('users/' + userId + '/habits/' + habitKey);
-            habitRef.set(null, callback);
-        });
+        var userId = localStorage.getItem('userId');
+        console.log('deleteHabit():habitKey: ' + habitKey);
+        var habitRef = firebaseRef.child('users/' + userId + '/habits/' + habitKey);
+        habitRef.set(null, callback);
         $loader.hide();
     }
 };
