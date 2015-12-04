@@ -72,7 +72,11 @@ var JohnWishon = function(){
     - wrote js for adding a habit to local storage.
     - wrote css for add/edit form inputs, validation messages, and labels.
     - created delete habit confirmation check.
-    - collaborated with teammates at weekly team meetings to discuss our direction with project.
+    - Integrated Mixpanel analytics.
+    - Worked with Peter on Phonegap integration.
+    - Worked with Jacob on image sprites.
+    - collaborated with teammates at weekly team meetings to discuss our direction with project, and up to completion.
+    - YumBums rules!
 }
 
 var JacobKeifer = function(){
