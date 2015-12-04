@@ -17,7 +17,7 @@ body{
 
 /* habit info */
 .habit-info{padding:0;margin-left:20px;}
-.habit-info>li{list-style:none; height:100%; padding:0; margin-right:5px; vertical-align:central;}
+.habit-info>li{list-style:none; height:100%; padding:0; margin-right:5px; vertical-align:middle;}
 .habit-name{margin:0; padding:0; height:100%; display:inline-block; vertical-align: middle; line-height:60px;color:#888;font-size: 24px;}
 .habit-editOp{margin:0; padding:0; height:100%; display:inline-block;}
 .habit-icon{margin:0; border-radius:5px;width:100px; height:100px;}
@@ -103,7 +103,7 @@ body{
 
 
 /* add habit */
-#addHabit{display:inline-block; position:absolute; margin-top:7px; background:rgba(33, 72, 100, 1); width: 60px;height:60px; vertical-align: top; font-size:49px; font-weight:200; padding-bottom: 55px; line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray; z-index: 10;}
+#addHabit{display:inline-block; position:absolute; margin-top:7px; background:rgba(33, 72, 100, 1); width: 60px;height:60px; vertical-align: middle; font-size:49px; font-weight:200; padding-bottom: 55px; line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray; z-index: 10;}
 #addHabit:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
 #addHabit:active{border: 2px solid gray; background: rgb(33, 72, 100); box-shadow: 0 0 10px gray;}
 #addHabit:focus{outline-style:none;}
