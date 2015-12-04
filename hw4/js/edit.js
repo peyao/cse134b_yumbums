@@ -12,33 +12,36 @@ function setIcon() {
     document.getElementById('iconFile').click();
     document.getElementById('iconFile').onchange = function() {
         var file = this.files[0];
-        var url = window.URL.createObjectURL(file);
-        
         var reader = new FileReader();
 
         reader.onloadend = function() {
             iconBase64 = reader.result;
+            document.getElementById("icon3div").style.display = "none";
+            document.getElementById("icon3").style.display = "inline-block";
+            document.getElementById('icon3').src = iconBase64;
+            document.getElementById('icon3').setAttribute("class","icon");
+            document.getElementById('icon3').setAttribute("onclick", "selectImage('icon3')");
+            selectImage('icon3');
         };
         reader.readAsDataURL(file);
-        
-        document.getElementById("icon3").style.display = "inline-block";
-        document.getElementById("icon3div").style.display = "none";
-        document.getElementById('icon3').src = url;
-        document.getElementById('icon3').setAttribute("class","icon");
-        document.getElementById('icon3').setAttribute("onclick", "selectImage('icon3')");
-        selectImage('icon3');
     };
 }
 
 function selectImage(name) {
-    //Clear all the other effects
     document.getElementById('icon1').style.border = "none";
     document.getElementById('icon2').style.border = "none";
     document.getElementById('icon3').style.border = "none";
-    //imageSelect = null;
     var image = document.getElementById(name);
+    if(name == "icon1"){
+        imageSelect = "../img/virtue.png";
+    }
+    else if(name == "icon2"){
+        imageSelect = "../img/greyvice.png";
+    }
+    else{
+        imageSelect = image.getAttribute("src");
+    }
     image.style.border = "2px solid #42A5F5";
-    imageSelect = image.getAttribute("src");
 }
 
 function uncheckradio() {
@@ -56,7 +59,6 @@ function updateHabit(callback){
     var habit = {
         title: document.getElementById("title").value,
         icon: imageSelect,
-        iconBase64: iconBase64,
         weekFrequency: weeklySchedule,
         dayFrequency: dayFreq,
         notification: document.getElementById("selectNotification").value,
@@ -103,6 +105,7 @@ function validateForm() {
         orphan.removeChild(orphan.childNodes[1]);
     }
 
+    console.log("imageSelect is " + imageSelect);
     //icon select validation
     if(imageSelect == null){
         if(document.getElementById("hIcon").childNodes[1]){
@@ -206,6 +209,8 @@ function initializeFields(){
         selectImage('icon2');
     }else{
         document.getElementById('icon3').src = currentHabit.icon;
+        document.getElementById("icon3div").style.display = "none";
+        document.getElementById("icon3").style.display = "inline-block";
         selectImage('icon3');
     }
 
