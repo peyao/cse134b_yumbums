@@ -104,6 +104,7 @@ var AmrKahhaleh function() {
 	- added new header to list.html that includes functionality to navigate between different weekdays to view different tasks
 	- wrote js to handle progress bar/message behavior based on user habits
 	- Collaborated and met with teammates every week to closely consider the details of how the app looks, feels, and behaves.
+	- Did all user-authentication work in firebase and in login.js, login.html, login.css, changePassword.html, and the logout functionality on list.html
 }
 
 var ZarniWang = function() {
@@ -116,6 +117,9 @@ var ZarniWang = function() {
 
 
 # Homework 5
+
+## User Authentication
+We use firebase user authentication APIs to authenticate users and save their habits. At the login screen, users can either login or sign up with an email and password. If they sign up, they'll taken to the welcome page, and if they log in, they'll be taken right into the list page. On the list page, we added a logout button. If a user clicks on logout and try to go back to the list, they'll be redirected to the login page to login again. Habits are now tied to the user account rather than to the local storage, so users can access different habits from different user accounts on one computer. Finally, we added a "Reset password" functionality to the login screen. If a user forgets their password, we send them a temporary password to their account email. They can use that temporary password to login in the next 24 hours. As they login with the temporary password, they'll be redirected to "change password" page that allows them to choose a new password instead of that temporary one.
 
 ## Minification, Bundling
 We use gulp as a task runner that does all of the minification and bundling of our application through gulp plugins.  It is automated pretty well and all it requires is to run the command 'gulp' in the hw4 directory.  This command runs all of the tasks in 'gulpfile.js' and outputs the new files in a folder called 'dist' that mimics the directory structure of the rest of our application.  This was pretty easy for the most part, the only challenge came with the fact that we weren't always consistent with using relative or abolute paths in our code, so sometimes the code ended up accessing files from the un-optimized code and not from the dist folder.  This was fixed by making all of the paths to be consistently relative.
