@@ -1,0 +1,18 @@
+{
+  "name": "yumbums",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "ws"
+  },
+  "local-web-server": {
+    "port": 8080
+  },
+  "dependencies": {
+    "local-web-server": "~0.5.23",
+    "sprity": "^1.0.8"
+  },
+  "devDependencies": {
+    "gulp-minify-html": "^1.0.4",
+    "run-sequence": "^1.1.5"
+  }
+}
