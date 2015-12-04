@@ -33,8 +33,21 @@ function selectImage(name) {
     document.getElementById('icon2').style.border = "none";
     document.getElementById('icon3').style.border = "none";
     var image = document.getElementById(name);
+    if(name == "icon1"){
+        var img = new Image("url(sprite.png) -0px -240px");
+        imageSelect = img;
+    }
+    else if(name == "icon2"){
+        var img = new Image("url(sprite.png) -0px -80px");
+        imageSelect = img;
+    }
+    else{
+        imageSelect = image.getAttribute("src");
+    }
+    /*object.style.borderImage="url(border.png) 30 round"*/
     image.style.border = "2px solid #42A5F5";
-    imageSelect = image.getAttribute("src");
+    console.log(imageSelect);
+   /* imageSelect = image.getAttribute("src");*/
 
 }
 
