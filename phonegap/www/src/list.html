@@ -4,16 +4,10 @@
     <title>Virtue / Vice</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--
-	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
--->
-
     <!-- build:css ../css/combinedList.min.css -->
     <link rel="stylesheet" type="text/css" href="../css/list.css">
     <link rel="stylesheet" type="text/css" href="../css/animations.css">
     <!-- endbuild -->
-
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
 </head>
 <body>
     <div id="loader">
@@ -23,11 +17,12 @@
         <section>
             <div id="listHeader">
 	            <button id="addHabit" onclick="pageTransitionOut('add.html')" title="add habit">+</button>
+	            <img id="logOutButton" title="Log out" src="../img/logout10.svg" style="fill:white" onclick="logOutOnClick()">
 		        <h1>Habit List</h1>
 		        <div id="leftDaySelectorButton" title="previous day"> &#60;</div>
 				<div id="daySelector">
 		        </div>
-		        <div id="rightDaySelectorButton" title="next day"> &#62;</div>
+		        <div id="rightDaySelectorButton" title="next day"> &#62;</div> 
 	        </div>
             <ul id="habit-list">
                 <div id="noHabitsDisplay">
@@ -35,18 +30,21 @@
                 </div>
             </ul>
         </section>
-        <div id="loader-list" style="visibility: hidden;">
+        <div id="loader-list">
             <img src="../img/loader_list.svg" alt="loader">
         </div>
     </div>
     <!-- build:js ../js/combinedList.min.js -->
+    <script src="../js/trackerconfig.js"></script>
+    <script src="../vendors/tracker.js"></script>
     <script src="../vendors/firebase.js"></script>
     <script src="../vendors/libnotification.js"></script>
+    <script src="../vendors/OneSignalSDK.js"></script>
     <script src="../vendors/onesignal.js"></script>
     <script src="../js/mixpanel_monitor.js"></script>
     <script src="../js/vv-firebase.js"></script>
     <script src="../js/list.js"></script>
-    <script src="../js/server.js"></script>
+		<script src="../js/server.js"></script>
     <script src="../js/notification.js"></script>
     <!-- endbuild -->
 </body>

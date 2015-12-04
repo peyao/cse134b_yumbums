@@ -1,0 +1,30 @@
+.spriteIcon {
+  background-image: url(../img/sprite.png);   
+}
+.spriteIcon-add {
+  background-position: -0px -0px;
+  width: 80px;
+  height: 80px;
+}
+.spriteIcon-greyvice {
+  background-position: -0px -80px;
+  width: 80px;
+  height: 80px;
+}
+.spriteIcon-hollow {
+  background-position: -0px -160px;
+  width: 80px;
+  height: 80px;
+}
+.spriteIcon-virtue {
+  background-position: -0px -240px;
+  width: 80px;
+  height: 80px;
+}
+
+@media (max-width: 500px) {
+    .spriteIcon{
+        transform: scale(0.75);
+        -webkit-transform: scale(0.75);
+    }
+}

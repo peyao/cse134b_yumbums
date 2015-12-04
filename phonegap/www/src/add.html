@@ -3,58 +3,57 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--
-	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
--->
 	<title>Add a habit</title>
-    <!-- build:css ../css/combinedAdd.min.css -->
+	<!-- build:css ../css/combinedAdd.min.css -->
 	<link rel="stylesheet" type="text/css" href="../css/forms.css">
-    <link rel="stylesheet" type="text/css" href="../css/animations.css">
-    <!-- endbuild -->
+	<link rel="stylesheet" type="text/css" href="../css/animations.css">
+	<link rel="stylesheet" type="text/css" href="../css/sprite.css">
+	<!-- endbuild -->
 </head>
 <body>
-    <div id="loader">
-        <img src="../img/loader.svg" alt="loader">
-    </div>
-	<div id="anim-wrapper" class="forms anim-fade-in">
-			<div class=topHeader>
-				<button id="backButton" onclick="pageTransitionOut('list.html')" title="back">&lt;</button>
-				<h2>Add A Habit</h2>
-			</div>
-		<form id="formADD">
-			<p><label id="title_text" for="title">Habit Title</label></p>
-			    <input id="title" type="text" name="fullname" placeholder=" Enter habit here" required>
-			<p><label id="hIcon">Habit Icon</label></p>
-				<div id="image-button">
-					<label>
-						<input id="imgRadio1" type="radio" name="imgRadio">
-						<img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/virtue.png" alt="virtue image"/>
-					</label>
-					<label>
-						<input id="imgRadio2" type="radio" name="imgRadio">
-						<img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/greyvice.png" alt="vice image"/>
-					</label>
-					<label>
-						<input id="imgRadio3" type="radio" name="imgRadio">
-						<img id="icon3" class="nIcon" onclick="" src="../img/hollow.png" alt="choose image"/>
-					</label>
-					<label>
-						<input id="iconFile" type="file" accept="image/*" onclick="setIcon()">
-						<img id="icon4" class="icon" src="../img/add.png" alt="find an image"/>
-					</label>
-				</div>
-			<p><label id="hWeekly">Weekly Frequency</label></p>
-				<div id="ck-button">
-					<label> <input type="checkbox" name="date" value="sunday"><span>Sun</span></label>
-					<label> <input type="checkbox" name="date" value="monday"><span>Mon</span></label>
-					<label> <input type="checkbox" name="date" value="tuesday"><span>Tues</span></label>
-					<label> <input type="checkbox" name="date" value="wednesday"><span>Wed</span></label>
-					<label> <input type="checkbox" name="date" value="thursday"><span>Thur</span></label>
-					<label> <input type="checkbox" name="date" value="friday"><span>Fri</span></label>
-					<label> <input type="checkbox" name="date" value="saturday"><span>Sat</span></label>
-				</div>
-			<p><label id="hDaily">Daily Frequency</label></p>
-				<div id="radioCase">
+<div id="loader">
+	<img src="../img/loader.svg" alt="loader">
+</div>
+<div id="anim-wrapper" class="forms anim-fade-in">
+	<div class=topHeader>
+		<button id="backButton" onclick="pageTransitionOut('list.html')" title="back">&lt;</button>
+		<h2>Add A Habit</h2>
+	</div>
+	<form id="formADD">
+		<p><label id="title_text" for="title">Habit Title</label></p>
+		<input id="title" type="text" name="fullname" placeholder=" Enter habit here" required>
+		<p><label id="hIcon">Habit Icon</label></p>
+		<div id="image-button">
+			<label>
+				<input id="imgRadio1" type="radio" name="imgRadio">
+				<span id="icon1" class="icon spriteIcon spriteIcon-virtue" onclick="selectImage('icon1');"></span>
+			</label>
+			<label for="imgRadio2">
+				<input id="imgRadio2" type="radio" name="imgRadio">
+				<span id="icon2" class="icon spriteIcon spriteIcon-greyvice" onclick="selectImage('icon2');"></span>
+			</label>
+			<label >
+				<input id="imgRadio3" type="radio" name="imgRadio">
+				<span id="icon3div" class="nIcon spriteIcon spriteIcon-hollow"></span>
+				<img id="icon3" class="nIcon" onclick="selectImage('icon3')" src="../img/hollow.png" alt="choose image" style="display:none"/>
+			</label>
+			<label >
+				<input id="iconFile" type="file" accept="image/*" onclick="setIcon()">
+				<span id="icon4" class="icon spriteIcon spriteIcon-add"></span>
+			</label>
+		</div>
+		<p><label id="hWeekly">Weekly Frequency</label></p>
+		<div id="ck-button">
+			<label> <input type="checkbox" name="date" value="sunday"><span>Sun</span></label>
+			<label> <input type="checkbox" name="date" value="monday"><span>Mon</span></label>
+			<label> <input type="checkbox" name="date" value="tuesday"><span>Tues</span></label>
+			<label> <input type="checkbox" name="date" value="wednesday"><span>Wed</span></label>
+			<label> <input type="checkbox" name="date" value="thursday"><span>Thur</span></label>
+			<label> <input type="checkbox" name="date" value="friday"><span>Fri</span></label>
+			<label> <input type="checkbox" name="date" value="saturday"><span>Sat</span></label>
+		</div>
+		<p><label id="hDaily">Daily Frequency</label></p>
+		<div id="radioCase">
 
 					<span id="daily-button" >
 						<label> <input type="radio" name="day" value="1" onclick="clearOther()"><span>1</span></label>
@@ -67,34 +66,36 @@
 							<input id="others" type="text" name="day" placeholder=" Times per day" onclick="uncheckradio()">
 						</label>
 					</span>
-				</div>
+		</div>
 
-			<p><label>Notifications Frequency</label></p>
-				<div id="nt-list">
-					<label for="selectNotification"><span id="every">Every:</span>
-					<select id="selectNotification">
-						<option value="None" selected>None</option>
-						<option value="15">15 Minutes</option>
-						<option value="30">30 Minutes</option>
-						<option value="45">45 Minutes</option>
-						<option value="1"> 1 Hour</option>
-						<option value="2"> 2 Hours</option>
-						<option value="4"> 4 Hours</option>
-						<option value="8"> 8 Hours</option>
-						<option value="20" style="color:darkblue;">(20s - for grading)</option>
-					</select></label>
-				</div>
+		<p><label>Notifications Frequency</label></p>
+		<div id="nt-list">
+			<label for="selectNotification"><span id="every">Every:</span>
+				<select id="selectNotification">
+					<option value="None" selected>None</option>
+					<option value="15">15 Minutes</option>
+					<option value="30">30 Minutes</option>
+					<option value="45">45 Minutes</option>
+					<option value="1"> 1 Hour</option>
+					<option value="2"> 2 Hours</option>
+					<option value="4"> 4 Hours</option>
+					<option value="8"> 8 Hours</option>
+					<option value="20" style="color:darkblue;">(20s - for grading)</option>
+				</select></label>
+		</div>
 
-			<p id="save_p">
-				<input type="button" id="save" value="Save It" onclick="return validateForm()">
-			</p>
-		</form>
-	</div>
-    <!-- build:js ../js/combinedAdd.min.js -->
-    <script src="../vendors/firebase.js"></script>
-	<script src="../js/mixpanel_monitor.js"></script>
-    <script src="../js/vv-firebase.js"></script>
-	<script src="../js/add.js"></script>
-    <!-- endbuild -->
+		<p id="save_p">
+			<input type="button" id="save" value="Save It" onclick="return validateForm()">
+		</p>
+	</form>
+</div>
+<!-- build:js ../js/combinedAdd.min.js -->
+<script src="../js/trackerconfig.js"></script>
+<script src="../vendors/tracker.js"></script>
+<script src="../vendors/firebase.js"></script>
+<script src="../js/mixpanel_monitor.js"></script>
+<script src="../js/vv-firebase.js"></script>
+<script src="../js/add.js"></script>
+<!-- endbuild -->
 </body>
 </html>
