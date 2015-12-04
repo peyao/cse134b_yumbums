@@ -15,6 +15,7 @@ function setIcon() {
         document.getElementById('icon3').setAttribute("onclick", "selectImage('icon3')");
         selectImage('icon3');
     };
+    console.log('setIcon clicked.');
 }
 
 function selectImage(name) {
