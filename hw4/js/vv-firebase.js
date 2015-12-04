@@ -12,29 +12,30 @@ var $firebase = {
         if (userId === null) {
 	        window.location.href = 'login.html';
         }
-        
+
         var userRef = firebaseRef.child('users/' + userId);
         userRef.push({'created': Date.now()}, function(){
 	        $loader.hide();
 	        return callback(userId);
-        });  
+        });
     },
-    
+
     addHabit: function(habit, callback) {
         $loader.show();
-        
+
         var userId = localStorage.getItem('userId');
         var habitsRef = firebaseRef.child('users/' + userId + '/habits');
 
         habit.created = Date.now();
         var pushRef = habitsRef.push(habit);
 
-        return pushRef.key();
         $loader.hide();
+        callback();
+        return pushRef.key();
     },
     getHabit: function(habitKey, callback) {
         $loader.show();
-        
+
         var userId = localStorage.getItem('userId');
         var habitRef = firebaseRef.child('users/' + userId + '/habits/' + habitKey);
         habitRef.once('value', function(snapshot) {
@@ -44,7 +45,7 @@ var $firebase = {
         });
         $loader.hide();
     },
-   
+
     getAllHabits: function(callback) {
         $loader.show();
         var userId = localStorage.getItem('userId');

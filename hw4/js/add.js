@@ -2,6 +2,7 @@
 var imageSelect;
 var weeklySchedule = [];
 var dayFreq = 0;
+var iconBase64;
 
 //upload personal image
 function setIcon() {
@@ -13,9 +14,7 @@ function setIcon() {
         var reader = new FileReader();
 
         reader.onloadend = function() {
-            console.log(reader.result);
-            
-            //cb(reader.result);
+            iconBase64 = reader.result;
         };
         reader.readAsDataURL(file);
 
@@ -60,6 +59,7 @@ function addHabitInStorage(callback){
     var habit = {
         title: document.getElementById("title").value,
         icon: imageSelect,
+        iconBase64: iconBase64,
         weekFrequency: weeklySchedule,
         dayFrequency: dayFreq,
         notification: document.getElementById("selectNotification").value,
@@ -72,8 +72,9 @@ function addHabitInStorage(callback){
     mixpanel.track("Weekly Frequency", {"Days":weeklySchedule});
     mixpanel.track("Daily Frequency", {"Times per day": dayFreq});
 
-    $firebase.addHabit(habit);
-    callback();
+    $firebase.addHabit(habit, function() {
+        callback();
+    });
 }
 
 function pageTransitionOut(location) {
@@ -98,7 +99,7 @@ function invalidMess(message){
     var aElement = document.createElement("ALERT");
     aElement.setAttribute("style", "color:red; font-size:small;");
     aElement.appendChild(aMessage);
-    return aElement
+    return aElement;
 }
 
 function validateForm() {
@@ -211,46 +212,6 @@ function validateForm() {
         pageTransitionOut('list.html');
     });
 }
-
-/*
-function cloudinaryPost () {
-
-    var CLOUDINARY = 'https://api.cloudinary.com/v1_1/dt7vygsun/image/upload';
-
-    if (window.XMLHttpRequest) {
-        httpRequest = new XMLHttpRequest();
-    } else if (window.ActiveXObject) {
-        httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-    httpRequest.onreadystatechange = function() {
-        // process server response
-        if (httpRequest.status === 200) {
-            console.log(httpRequest.responseText);
-        } else {
-            console.error('There was a problem with the cloudinaryPost() request.');
-        }
-    };
-
-    httpRequest.open('POST', CLOUDINARY, true);
-    //httpRequest.setRequestHeader('Content-Type', 'image/*');
-    httpRequest.send();
-}
-*/
-
-function encodeImageFileAsURL(cb) {
-    return function() {
-        var file = this.files[0];
-        var reader = new FileReader();
-        reader.onloadend = function() {
-            console.log(reader.result);
-            cb(reader.result);
-        };
-        reader.readAsDataURL(file);
-    };
-}
-
-
 
 function isInt(num) {
     if(num % 1 === 0){
