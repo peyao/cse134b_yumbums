@@ -30,12 +30,7 @@
 
 #loader-list {
     visibility: hidden;
-    /*
     position: relative;
-    text-align: center;
-    */
-    position: relative;
-    left: 50%;
     margin-top: 20px;
     margin-left: -15px;
 }
