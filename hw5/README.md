@@ -2,6 +2,24 @@
 
 View the app here to receive push notifications: http://peyao.me/yumbums/hw4/src/welcome.html
 
+## Repository
+https://github.com/peyao/yumbums
+
+## Public Trello
+To see what each team member did:
+https://trello.com/b/cMPG2Ax2/cse134b-yumbums
+
+## Team Members
+    * Amr Kahhaleh
+    * Jacob Keifer
+    * John Wishon
+    * Peter Yao
+    * Zarni Wang
+
+
+## Releases
+Check the release/ folder for all the packaged binaries for different operating systems (including mobile).
+
 ## User Authentication
 We use firebase user authentication APIs to authenticate users and save their habits. At the login screen, users can either login or sign up with an email and password. If they sign up, they'll taken to the welcome page, and if they log in, they'll be taken right into the list page. On the list page, we added a logout button. If a user clicks on logout and try to go back to the list, they'll be redirected to the login page to login again. Habits are now tied to the user account rather than to the local storage, so users can access different habits from different user accounts on one computer. Finally, we added a "Reset password" functionality to the login screen. If a user forgets their password, we send them a temporary password to their account email. They can use that temporary password to login in the next 24 hours. As they login with the temporary password, they'll be redirected to "change password" page that allows them to choose a new password instead of that temporary one.
 
