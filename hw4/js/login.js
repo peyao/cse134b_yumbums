@@ -102,13 +102,6 @@ function onClickSignIn() {
 	});
 }
 
-function logOutOnClick(){
-	firebaseRef.unauth();
-	localStorage.removeItem('userId');
-	//alert("logging out");
-	pageTransitionOut('login.html');
-}
-
 document.body.onload = function(){
   mixpanel.track('Page Loaded', {'Page Name': 'Login Page'});
 }
