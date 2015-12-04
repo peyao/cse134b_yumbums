@@ -10,6 +10,15 @@ function setIcon() {
     document.getElementById('iconFile').onchange = function() {
         var file = this.files[0];
         var url = window.URL.createObjectURL(file);
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            console.log(reader.result);
+            
+            //cb(reader.result);
+        };
+        reader.readAsDataURL(file);
+
         document.getElementById('icon3').src = url;
         document.getElementById('icon3').setAttribute("class","icon");
         document.getElementById('icon3').setAttribute("onclick", "selectImage('icon3')");
@@ -203,7 +212,47 @@ function validateForm() {
     });
 }
 
-function isInt(num){
+/*
+function cloudinaryPost () {
+
+    var CLOUDINARY = 'https://api.cloudinary.com/v1_1/dt7vygsun/image/upload';
+
+    if (window.XMLHttpRequest) {
+        httpRequest = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    httpRequest.onreadystatechange = function() {
+        // process server response
+        if (httpRequest.status === 200) {
+            console.log(httpRequest.responseText);
+        } else {
+            console.error('There was a problem with the cloudinaryPost() request.');
+        }
+    };
+
+    httpRequest.open('POST', CLOUDINARY, true);
+    //httpRequest.setRequestHeader('Content-Type', 'image/*');
+    httpRequest.send();
+}
+*/
+
+function encodeImageFileAsURL(cb) {
+    return function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            console.log(reader.result);
+            cb(reader.result);
+        };
+        reader.readAsDataURL(file);
+    };
+}
+
+
+
+function isInt(num) {
     if(num % 1 === 0){
         return true;
     }else{
@@ -211,11 +260,9 @@ function isInt(num){
     }
 }
 
-document.body.onload = function(){
+document.body.onload = function() {
     mixpanel.track('Page Loaded', {'Page Name': 'AddHabit Page'});
-}
-
-
+};
 
 document.body.onunload = function() {
     location.reload(true);
