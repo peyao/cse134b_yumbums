@@ -4,9 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
 	<title>Welcome to Virtue/Vice!</title>
-
+    
     <!-- build:css ../css/combinedWelcome.min.css -->
 	<link rel="stylesheet" type="text/css" href="../css/welcome.css">
     <link rel="stylesheet" type="text/css" href="../css/animations.css">
@@ -27,7 +26,9 @@
 		</p>
 
 	</div>
-    <!-- build:js ../js/combinedWelcome.min.js -->
+  <!-- build:js ../js/combinedWelcome.min.js -->
+			<script src="../js/trackerconfig.js"></script>
+		<script src="../vendors/tracker.js"></script>
     <script src="../vendors/firebase.js"></script>
 	<script src="../js/mixpanel_monitor.js"></script>
     <script src="../js/vv-firebase.js"></script>

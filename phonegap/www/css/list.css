@@ -17,7 +17,7 @@ body{
 
 /* habit info */
 .habit-info{padding:0;margin-left:20px;}
-.habit-info>li{list-style:none; height:100%; padding:0; margin-right:5px; vertical-align: center;}
+.habit-info>li{list-style:none; height:100%; padding:0; margin-right:5px; vertical-align:central;}
 .habit-name{margin:0; padding:0; height:100%; display:inline-block; vertical-align: middle; line-height:60px;color:#888;font-size: 24px;}
 .habit-editOp{margin:0; padding:0; height:100%; display:inline-block;}
 .habit-icon{margin:0; border-radius:5px;width:100px; height:100px;}
@@ -103,11 +103,18 @@ body{
 
 
 /* add habit */
-#addHabit{display:inline-block; margin-top:7px; position: absolute; background:rgba(33, 72, 100, 1); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray; z-index: 10;}
+#addHabit{display:inline-block; position:absolute; margin-top:7px; background:rgba(33, 72, 100, 1); width: 60px;height:60px; vertical-align: top; font-size:49px; font-weight:200; padding-bottom: 55px; line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray; z-index: 10;}
 #addHabit:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
-#addHabit:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
+#addHabit:active{border: 2px solid gray; background: rgb(33, 72, 100); box-shadow: 0 0 10px gray;}
 #addHabit:focus{outline-style:none;}
 #noHabitsDisplay{display: none; font-size: 20px; color: grey; text-align: center; font-weight: bold;}
+
+/* Logout button*/
+#logOutButton{display: inline-block; position: absolute; margin-top:7px; margin-left: 7px; background:rgba(52, 57, 60, 1); width: 48px;height:48px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(84, 84, 84, 0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray; z-index: 10;}
+#logOutButton:hover{background: rgba(23, 31, 37, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
+#logOutButton:active{border: 2px solid gray; background: rgb(33, 72, 100); box-shadow: 0 0 10px gray;}
+#logOutButton:focus{outline-style:none;}
+#nologOutButtonDisplay{display: none; font-size: 20px; color: grey; text-align: center; font-weight: bold;}
 
 /* phone */
 @media only screen
@@ -119,11 +126,6 @@ body{
 	    .op-done{ margin-left: 43%;}
         section{width:350px;margin: 0 auto;}
         .message{right:5px;bottom:80px;font-size: small;}
-		body {
-			position: relative;
-			overflow-x: hidden;
-			overflow-y: scroll;
-		}
 }
 
 /* desktop, tablet */

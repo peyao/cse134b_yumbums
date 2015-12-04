@@ -1,3 +1,4 @@
+var firebaseRef = new Firebase("https://fiery-heat-9545.firebaseio.com/");
 /**************************************************************************************
                             Function Definitions
 **************************************************************************************/
@@ -567,10 +568,21 @@ function printJson(s){
     console.log(JSON.stringify(s), null, 2);
 }
 
+function logOutOnClick(){
+	firebaseRef.unauth();
+	localStorage.removeItem('userId');
+	//alert("logging out");
+	pageTransitionOut('login.html');
+}
+
 /**************************************************************************************
                             Executed On Load of Page
 **************************************************************************************/
 document.body.onload = function(){
+	var userId = localStorage.getItem('userId');
+	if (userId === null){
+		window.location.href = 'login.html';
+	}
     mixpanel.track('Page Loaded', {'Page Name': 'ListHabit Page'});
 }
 
