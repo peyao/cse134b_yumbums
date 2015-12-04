@@ -8,9 +8,8 @@
         <!-- build:css ../css/combinedEdit.min.css -->
 		<link rel="stylesheet" type="text/css" href="../css/forms.css">
 	    <link rel="stylesheet" type="text/css" href="../css/animations.css">
+        <link rel="stylesheet" type="text/css" href="/test/sprite.css">
         <!-- endbuild -->
-        
-		<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
 	</head>
 	<body>
 	    <div id="loader">
@@ -36,7 +35,8 @@
 					</label>
 					<label>
 						<input id="imgRadio3" type="radio" name="imgRadio">
-						<img id="icon3" class="nIcon" onclick="" src="../img/hollow.png" alt="choose image"/>
+                        <div id="icon3div" class="nIcon spriteIcon spriteIcon-hollow"></div>
+                        <img id="icon3" class="nIcon" onclick="selectImage('icon3')" src="../img/hollow.png" alt="choose image" style="display:none"/>
 					</label>
 					<label>
 						<input id="iconFile" type="file" accept=".png, .gif, .jpg" onclick="setIcon()">
@@ -95,6 +95,7 @@
 		<script src="../vendors/tracker.js"></script>
         <script src="../vendors/firebase.js"></script>
         <script src="../vendors/libnotification.js"></script>
+        <script src="../vendors/OneSignalSDK.js"></script>
         <script src="../vendors/onesignal.js"></script>
 		<script src="../js/mixpanel_monitor.js"></script>
 	    <script src="../js/vv-firebase.js"></script>

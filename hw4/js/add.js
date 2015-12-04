@@ -18,6 +18,8 @@ function setIcon() {
         };
         reader.readAsDataURL(file);
 
+        document.getElementById("icon3").style.display = "inline-block";
+        document.getElementById("icon3div").style.display = "none";
         document.getElementById('icon3').src = url;
         document.getElementById('icon3').setAttribute("class","icon");
         document.getElementById('icon3').setAttribute("onclick", "selectImage('icon3')");

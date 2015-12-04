@@ -4,6 +4,7 @@ var weeklySchedule = [];
 var dayFreq = 0;
 var currentKey = localStorage.getItem("currentKey");
 var currentHabit;
+var iconBase64;
 
 //upload personal image
 function setIcon() {
@@ -12,6 +13,16 @@ function setIcon() {
     document.getElementById('iconFile').onchange = function() {
         var file = this.files[0];
         var url = window.URL.createObjectURL(file);
+        
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            iconBase64 = reader.result;
+        };
+        reader.readAsDataURL(file);
+        
+        document.getElementById("icon3").style.display = "inline-block";
+        document.getElementById("icon3div").style.display = "none";
         document.getElementById('icon3').src = url;
         document.getElementById('icon3').setAttribute("class","icon");
         document.getElementById('icon3').setAttribute("onclick", "selectImage('icon3')");
@@ -45,6 +56,7 @@ function updateHabit(callback){
     var habit = {
         title: document.getElementById("title").value,
         icon: imageSelect,
+        iconBase64: iconBase64,
         weekFrequency: weeklySchedule,
         dayFrequency: dayFreq,
         notification: document.getElementById("selectNotification").value,

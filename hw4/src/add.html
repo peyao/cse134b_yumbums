@@ -7,6 +7,7 @@
     <!-- build:css ../css/combinedAdd.min.css -->
 	<link rel="stylesheet" type="text/css" href="../css/forms.css">
     <link rel="stylesheet" type="text/css" href="../css/animations.css">
+    <link rel="stylesheet" type="text/css" href="/test/sprite.css">
     <!-- endbuild -->
 </head>
 <body>
@@ -25,19 +26,25 @@
 				<div id="image-button">
 					<label>
 						<input id="imgRadio1" type="radio" name="imgRadio">
-						<img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/virtue.png" alt="virtue image"/>
+						<div id="icon1" class="icon spriteIcon spriteIcon-virtue" onclick="selectImage('icon1');"></div>
 					</label>
 					<label>
 						<input id="imgRadio2" type="radio" name="imgRadio">
-						<img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/greyvice.png" alt="vice image"/>
+                        <div id="icon2" class="icon spriteIcon spriteIcon-greyvice" onclick="selectImage('icon2');"></div>
 					</label>
 					<label>
 						<input id="imgRadio3" type="radio" name="imgRadio">
-						<img id="icon3" class="nIcon" onclick="" src="../img/hollow.png" alt="choose image"/>
+                        <div id="icon3div" class="nIcon spriteIcon spriteIcon-hollow"></div>
+                        <img id="icon3" class="nIcon" onclick="selectImage('icon3')" src="../img/hollow.png" alt="choose image" style="display:none"/>
 					</label>
 					<label>
+<<<<<<< HEAD
+						<input id="iconFile" type="file" accept=".png, .gif, .jpg" onclick="setIcon()">
+                        <div id="icon4" class="icon spriteIcon spriteIcon-add"></div>
+=======
 						<input id="iconFile" type="file" accept="image/*" onclick="setIcon()">
 						<img id="icon4" class="icon" src="../img/add.png" alt="find an image"/>
+>>>>>>> 4ad681d5ee9ecbe8e8a75dc48e669444b482a1e9
 					</label>
 				</div>
 			<p><label id="hWeekly">Weekly Frequency</label></p>
