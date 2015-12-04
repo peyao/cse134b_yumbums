@@ -41,7 +41,6 @@ function onClickSignUp() {
 	  			// Login user and then navigate to welcome page
 	  			var userObj = {email: usermail, password:password};
 	  			firebaseRef.authWithPassword(userObj, function(logInError, authData){
-		  			if(logInError){console.log}
 		  			window.location.href = 'welcome.html';
 	  			});
   			});
@@ -103,6 +102,12 @@ function onClickSignIn() {
 	});
 }
 
+function logOutOnClick(){
+	firebaseRef.unauth();
+	localStorage.removeItem('userId');
+	//alert("logging out");
+	pageTransitionOut('login.html');
+}
 
 document.body.onload = function(){
   mixpanel.track('Page Loaded', {'Page Name': 'Login Page'});
