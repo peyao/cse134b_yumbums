@@ -4,6 +4,8 @@ View the app here to receive push notifications: http://peyao.me/yumbums/hw4/src
 
 ## Login Credentials
 Firebase: yumbumsdev@gmail.com : yumbumsdev!
+Trackjs: yumbumsdev@gmail.com : yumbumsdev
+Mixpanel: yumbumsdev@gmail.com : yumbumsdev
 
 ## Repository
 https://github.com/peyao/yumbums
