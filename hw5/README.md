@@ -2,6 +2,9 @@
 
 View the app here to receive push notifications: http://peyao.me/yumbums/hw4/src/welcome.html
 
+## Login Credentials
+Firebase: yumbumsdev@gmail.com : yumbumsdev!
+
 ## Repository
 https://github.com/peyao/yumbums
 
@@ -46,3 +49,63 @@ With the implementation of user accounts, we had to find a solution for saving i
 
 ## Notifications
 Notifications work on All operating system using Electron, but we couldn't get OneSignal's Phonegap SDK to installation to work properly. Reading through OneSignal's documentation, they have a separate SDK for Phonegap with a different API. If we had managed to get it to work on Phonegap then, our implementation of it would be to build wrapper functions to handle checking the platform and using the appropriate API to handle receiving and pushing notifications.
+
+##Individual Contributions
+```
+var JohnWishon = function(){
+    - restructured the HTML for add/edit.html files
+    - wrote js for adding images to personal image icon field.
+    - designed custom default icons for the app.
+    - wrote js for in add/edit.js for form validations w/messages.
+    - wrote js for adding a habit to local storage.
+    - wrote css for add/edit form inputs, validation messages, and labels.
+    - created delete habit confirmation check.
+    - Integrated Mixpanel analytics.
+    - Worked with Peter on Phonegap integration.
+    - Worked with Jacob on image sprites.
+    - collaborated with teammates at weekly team meetings to discuss our direction with project, and up to completion.
+    - YumBums rules!
+}
+
+var JacobKeifer = function(){
+    - wrote js that creates all of the habits in the DOM of list.html based off the data fetched from the database, not the animations
+    - added functionality for completing and failing a habit, along with keeping track of the daily streaks
+    - added functionality that set default values for form elements in edit.html based off the current habit being edited.
+    - added code functionality for deleting habit, not the animation though
+    - created message in list.html telling user to add habits if they don't have any.
+    - helped migrate our app from using local storage to using Firebase, wrote parts of some of the Firebase accessing methods
+    - discussed the ideas for features and implementation of app.
+}
+
+var PeterYao = function() {
+    - CSS/JS animations & page transitions for all pages.
+    - Worked with Jacob on Firebase implementation:
+        - Migrate from localstorage to Firebase
+        - Getting habits
+        - Updating habits
+        - Deleting habits
+    - Added animated preloaders during Firebase AJAX calls to show loading.
+    - Serve site from a live web server (DigitalOcean).
+    - Facilitate team task tracking with Trello.
+    - Set up Electron and port to OSX, Win10, Linux.
+    - Set up Phonegap and port to Android and iOS.
+}
+
+var AmrKahhaleh function() {
+	- Mainly worked on list.js, list.html, and list.css
+	- Re-designing and styling almost all the elements on list.html (desktop and mobile)
+	- wrote js for dynamically handling the habits displayed to user on list.html
+	- added new header to list.html that includes functionality to navigate between different weekdays to view different tasks
+	- wrote js to handle progress bar/message behavior based on user habits
+	- Collaborated and met with teammates every week to closely consider the details of how the app looks, feels, and behaves.
+	- Did all user-authentication work in Firebase and in login.js, login.html, login.css, changePassword.html, and the logout functionality on list.html
+}
+
+var ZarniWang = function() {
+	- Worked on the Notifications system
+	- Mostly on notification.js, server.js, and onesignal.js
+	- Made contributions to vv-firebase.js and list.js to retrieve all habits stored in firebase and filter them by day
+	- Integrated OneSignal and Notification.js to handle push notifications and web notifications
+	- Collaborated with team to determine the workflow for notifications and how the app will look and function
+}
+```
